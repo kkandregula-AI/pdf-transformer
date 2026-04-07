@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PDF Transformer — Elegant Slides + Video</title>
+<title>PDF Transformer — Elegant Slides + Narrated Video</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -48,47 +48,37 @@ html, body {
   padding: 12px 20px;
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 }
-#api-banner .ab-label {
-  font-size: 12px; color: #d4a843; font-weight: 600; white-space: nowrap;
-}
+.ab-label { font-size:12px; color:#d4a843; font-weight:600; white-space:nowrap; }
 #api-key-input {
-  flex: 1; min-width: 200px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(212,168,67,0.25);
-  border-radius: 6px; padding: 8px 12px;
-  color: #e4e4e4; font-size: 12px;
-  font-family: 'Courier New', monospace;
-  outline: none; transition: border 0.2s;
+  flex:1; min-width:200px;
+  background:rgba(255,255,255,0.05); border:1px solid rgba(212,168,67,0.25);
+  border-radius:6px; padding:8px 12px;
+  color:#e4e4e4; font-size:12px; font-family:'Courier New',monospace;
+  outline:none; transition:border 0.2s;
 }
-#api-key-input:focus { border-color: #d4a843; }
-#api-key-input::placeholder { color: rgba(255,255,255,0.2); }
+#api-key-input:focus { border-color:#d4a843; }
+#api-key-input::placeholder { color:rgba(255,255,255,0.2); }
 #btn-save-key {
-  background: linear-gradient(135deg,#c49a35,#f0c55a);
-  border: none; border-radius: 6px;
-  color: #07080d; padding: 8px 16px;
-  cursor: pointer; font-size: 11px; font-weight: 700;
-  font-family: 'DM Sans', sans-serif; white-space: nowrap;
+  background:linear-gradient(135deg,#c49a35,#f0c55a);
+  border:none; border-radius:6px; color:#07080d;
+  padding:8px 16px; cursor:pointer;
+  font-size:11px; font-weight:700; font-family:'DM Sans',sans-serif;
 }
-#key-status {
-  font-size: 11px; white-space: nowrap;
-}
-#key-status.ok  { color: #6ee7a0; }
-#key-status.bad { color: #ff8080; }
-#api-note {
-  width: 100%;
-  font-size: 10px; color: rgba(255,255,255,0.28); line-height: 1.5;
-}
+#key-status { font-size:11px; white-space:nowrap; }
+#key-status.ok  { color:#6ee7a0; }
+#key-status.bad { color:#ff8080; }
+.api-note { width:100%; font-size:10px; color:rgba(255,255,255,0.28); margin-top:2px; line-height:1.5; }
 
 /* ── VIEWS ── */
-.view { display: none; }
-.view.active { display: flex; flex-direction: column; align-items: center; }
+.view { display:none; }
+.view.active { display:flex; flex-direction:column; align-items:center; }
 
 /* ── UPLOAD ── */
-#upload-view { gap: 22px; padding: 28px 20px 36px; }
-.hero { text-align: center; max-width: 580px; }
+#upload-view { gap:22px; padding:28px 20px 36px; }
+.hero { text-align:center; max-width:580px; }
 .hero h1 {
   font-family:'Playfair Display',serif;
-  font-size: clamp(22px,4vw,36px); font-weight:400;
+  font-size:clamp(22px,4vw,36px); font-weight:400;
   color:#e4e4e4; line-height:1.3; margin-bottom:12px;
 }
 .hero h1 em { color:#d4a843; font-style:italic; }
@@ -101,9 +91,7 @@ html, body {
   background:rgba(212,168,67,0.04);
   cursor:pointer; transition:all 0.2s;
 }
-#drop-zone.over, #drop-zone:hover {
-  border-color:#d4a843; background:rgba(212,168,67,0.09);
-}
+#drop-zone.over, #drop-zone:hover { border-color:#d4a843; background:rgba(212,168,67,0.09); }
 .dz-icon {
   width:68px; height:68px; border-radius:50%;
   background:rgba(212,168,67,0.1); border:1px solid rgba(212,168,67,0.22);
@@ -122,10 +110,7 @@ html, body {
 }
 #upload-error.show { display:block; }
 
-.feat-grid {
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:10px; width:100%; max-width:580px;
-}
+.feat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; width:100%; max-width:580px; }
 @media(max-width:520px){ .feat-grid { grid-template-columns:repeat(2,1fr); } }
 .fc { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:13px; }
 .fc .fi { font-size:19px; margin-bottom:7px; }
@@ -133,22 +118,15 @@ html, body {
 .fc .fd { font-size:10px; color:rgba(255,255,255,0.32); line-height:1.5; }
 
 /* ── PROCESSING ── */
-#processing-view {
-  justify-content:center; gap:20px;
-  padding:60px 20px; min-height:60vh;
-}
+#processing-view { justify-content:center; gap:20px; padding:60px 20px; min-height:60vh; }
 .spinner {
   width:76px; height:76px; border-radius:50%;
   border:2px solid rgba(212,168,67,0.14);
   border-top-color:#d4a843;
   animation:spin 1.1s linear infinite;
 }
-#proc-msg {
-  font-family:'Playfair Display',serif;
-  color:#d4a843; font-size:19px; text-align:center;
-  animation:pulse 2s ease-in-out infinite;
-}
-#proc-sub { color:rgba(255,255,255,0.28); font-size:12px; text-align:center; }
+#proc-msg { font-family:'Playfair Display',serif; color:#d4a843; font-size:19px; text-align:center; animation:pulse 2s ease-in-out infinite; }
+#proc-sub  { color:rgba(255,255,255,0.28); font-size:12px; text-align:center; }
 
 /* ── SLIDES ── */
 #slides-view {
@@ -167,8 +145,20 @@ html, body {
   border-radius:10px; overflow:hidden;
   box-shadow:0 22px 56px rgba(0,0,0,0.82), 0 0 0 1px rgba(212,168,67,0.12);
 }
-#slide-canvas {
-  position:absolute; inset:0; width:100%; height:100%;
+#slide-canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+/* Narration box under slide */
+#narration-box {
+  display:none; width:100%;
+  background:rgba(212,168,67,0.06); border:1px solid rgba(212,168,67,0.18);
+  border-radius:8px; padding:12px 16px;
+  font-size:12px; color:rgba(220,230,240,0.65);
+  font-style:italic; line-height:1.6;
+}
+#narration-box.show { display:block; }
+#narration-box .nb-label {
+  font-size:10px; color:#d4a843; font-weight:600; letter-spacing:1px;
+  margin-bottom:5px; font-style:normal;
 }
 
 #nav-row { display:flex; align-items:center; justify-content:center; gap:12px; }
@@ -213,18 +203,92 @@ button:disabled { opacity:0.4 !important; cursor:wait !important; transform:none
   align-items:center; gap:10px; justify-content:center; flex-wrap:wrap;
 }
 #video-banner.show { display:flex; }
-#video-banner .vbt { color:#e0e0e0; font-size:13px; }
+.vbt { color:#e0e0e0; font-size:13px; }
 .dl-btn {
   background:linear-gradient(135deg,#c49a35,#f0c55a); color:#060709;
   padding:7px 15px; border-radius:5px; text-decoration:none;
   font-size:11px; font-weight:700; display:inline-flex; align-items:center; gap:4px;
 }
+
 #slides-error {
   display:none; color:#ff8080; font-size:12px;
   background:rgba(220,60,60,0.07); border:1px solid rgba(220,60,60,0.2);
   border-radius:7px; padding:9px 15px; width:100%; text-align:center;
 }
 #slides-error.show { display:block; }
+
+/* ── AUDIO MODAL ── */
+#audio-modal {
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(0,0,0,0.82); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:20px;
+}
+#audio-modal.show { display:flex; }
+.modal-box {
+  background:#0e111a; border:1px solid rgba(212,168,67,0.28);
+  border-radius:14px; padding:28px 24px; max-width:420px; width:100%;
+  box-shadow:0 24px 60px rgba(0,0,0,0.7);
+}
+.modal-box h3 {
+  font-family:'Playfair Display',serif; color:#d4a843;
+  font-size:18px; font-weight:700; margin-bottom:14px;
+}
+.modal-box p { color:rgba(220,230,240,0.72); font-size:13px; line-height:1.7; margin-bottom:14px; }
+.modal-steps {
+  background:rgba(212,168,67,0.06); border:1px solid rgba(212,168,67,0.15);
+  border-radius:8px; padding:14px 16px; margin-bottom:20px;
+}
+.modal-steps .step {
+  display:flex; gap:10px; align-items:flex-start;
+  font-size:12px; color:#e0e0e0; margin-bottom:8px; line-height:1.5;
+}
+.modal-steps .step:last-child { margin-bottom:0; }
+.modal-steps .step .sn {
+  background:#d4a843; color:#07080d; border-radius:50%;
+  width:18px; height:18px; font-size:10px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+.modal-row { display:flex; gap:10px; flex-wrap:wrap; }
+.modal-btn-primary {
+  flex:1; background:linear-gradient(135deg,#c49a35,#f0c55a);
+  border:none; border-radius:7px; color:#07080d; padding:11px 18px;
+  cursor:pointer; font-size:13px; font-weight:700; font-family:'DM Sans',sans-serif;
+}
+.modal-btn-secondary {
+  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);
+  border-radius:7px; color:rgba(255,255,255,0.5); padding:11px 18px;
+  cursor:pointer; font-size:12px; font-family:'DM Sans',sans-serif;
+}
+
+/* ── VIDEO PROGRESS OVERLAY ── */
+#vid-progress {
+  display:none; position:fixed; inset:0; z-index:400;
+  background:rgba(0,0,0,0.88); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; flex-direction:column;
+  gap:18px; padding:24px;
+}
+#vid-progress.show { display:flex; }
+.vp-spinner {
+  width:64px; height:64px; border-radius:50%;
+  border:2px solid rgba(212,168,67,0.14);
+  border-top-color:#d4a843;
+  animation:spin 1s linear infinite;
+}
+#vp-slide-msg {
+  font-family:'Playfair Display',serif; color:#d4a843;
+  font-size:18px; text-align:center; animation:pulse 2s ease-in-out infinite;
+}
+#vp-narr-text {
+  max-width:480px; text-align:center;
+  font-size:13px; color:rgba(220,230,240,0.6);
+  font-style:italic; line-height:1.6;
+}
+.vp-bar-wrap {
+  width:100%; max-width:400px;
+  background:rgba(212,168,67,0.1); border-radius:4px; height:4px; overflow:hidden;
+}
+#vp-bar { height:100%; background:#d4a843; transition:width 0.3s ease; width:0%; }
+#vp-hint { font-size:11px; color:rgba(255,255,255,0.25); text-align:center; }
 
 @keyframes spin   { to { transform:rotate(360deg); } }
 @keyframes pulse  { 0%,100%{opacity:.5} 50%{opacity:1} }
@@ -239,31 +303,30 @@ button:disabled { opacity:0.4 !important; cursor:wait !important; transform:none
   <div id="logo-icon">✦</div>
   <div>
     <div class="logo-title">PDF Transformer</div>
-    <div class="logo-sub">NOISY PDF → ELEGANT SLIDES + VIDEO</div>
+    <div class="logo-sub">NOISY PDF → ELEGANT SLIDES + NARRATED VIDEO</div>
   </div>
   <button id="btn-new" onclick="resetApp()">↺ New PDF</button>
 </div>
 
 <!-- API KEY BANNER -->
 <div id="api-banner">
-  <div class="ab-label">🔑 Anthropic API Key</div>
+  <div class="ab-label">🔑 API Key</div>
   <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off"/>
   <button id="btn-save-key" onclick="saveKey()">Save Key</button>
   <span id="key-status"></span>
-  <div class="api-note" style="width:100%;font-size:10px;color:rgba(255,255,255,0.28);margin-top:2px;line-height:1.5;">
-    Your key is stored only in this browser session and never sent anywhere except Anthropic's API.
-    Get your key at <a href="https://console.anthropic.com" target="_blank" style="color:#d4a843;">console.anthropic.com</a>
+  <div class="api-note">
+    Stored in this browser session only. Get your key at
+    <a href="https://console.anthropic.com" target="_blank" style="color:#d4a843;">console.anthropic.com</a>
   </div>
 </div>
 
 <!-- UPLOAD VIEW -->
 <div id="upload-view" class="view active fadein">
   <div class="hero">
-    <h1>Turn a Messy PDF into an<br><em>Elegant Presentation</em></h1>
+    <h1>Turn a Messy PDF into an<br><em>Elegant Narrated Video</em></h1>
     <p>Upload any noisy document — reports, research, textbooks.<br>
-    Claude AI extracts insights, builds polished slides &amp; creates a summary video.</p>
+    Claude AI extracts insights, builds polished slides &amp; narrates a video with voice audio.</p>
   </div>
-
   <div id="drop-zone"
     onclick="document.getElementById('file-input').click()"
     ondragover="onDragOver(event)"
@@ -274,14 +337,12 @@ button:disabled { opacity:0.4 !important; cursor:wait !important; transform:none
     <div class="dz-sub">Reports, research papers, textbooks — up to 30 pages</div>
   </div>
   <input type="file" id="file-input" accept="application/pdf" style="display:none" onchange="handleFile(event)"/>
-
   <div id="upload-error"></div>
-
   <div class="feat-grid">
     <div class="fc"><div class="fi">🧹</div><div class="ft">Noise Removal</div><div class="fd">Strips headers, footers &amp; OCR noise</div></div>
     <div class="fc"><div class="fi">🤖</div><div class="ft">AI Structuring</div><div class="fd">Claude distills content into clean slides</div></div>
     <div class="fc"><div class="fi">📑</div><div class="ft">Elegant PDF</div><div class="fd">Dark luxury 1280×720 export</div></div>
-    <div class="fc"><div class="fi">🎬</div><div class="ft">Summary Video</div><div class="fd">WebM with cinematic fade transitions</div></div>
+    <div class="fc"><div class="fi">🔊</div><div class="ft">Voice Narration</div><div class="fd">AI-generated audio summary per slide</div></div>
   </div>
 </div>
 
@@ -299,14 +360,19 @@ button:disabled { opacity:0.4 !important; cursor:wait !important; transform:none
     <div id="slide-count-lbl">0 slides</div>
   </div>
   <div id="slide-wrap"><canvas id="slide-canvas"></canvas></div>
+  <div id="narration-box">
+    <div class="nb-label">🔊 SLIDE NARRATION</div>
+    <span id="narration-text"></span>
+  </div>
   <div id="nav-row">
     <button class="nav-btn" id="btn-prev" onclick="navigate(-1)">&#8249;</button>
     <div id="dots"></div>
     <button class="nav-btn" id="btn-next" onclick="navigate(1)">&#8250;</button>
   </div>
   <div id="action-row">
-    <button class="btn-outline" id="btn-pdf" onclick="exportPDF()">⬇ Export Elegant PDF</button>
-    <button class="btn-gold"    id="btn-vid" onclick="generateVideo()">▶ Generate Video</button>
+    <button class="btn-outline" id="btn-pdf" onclick="exportPDF()">⬇ Export PDF</button>
+    <button class="btn-outline" id="btn-preview-narr" onclick="previewNarration()">🔊 Preview Narration</button>
+    <button class="btn-gold"    id="btn-vid" onclick="startVideoFlow()">▶ Generate Video</button>
   </div>
   <div id="video-banner">
     <span style="color:#d4a843;font-size:15px">✔</span>
@@ -314,6 +380,32 @@ button:disabled { opacity:0.4 !important; cursor:wait !important; transform:none
     <a id="vb-dl" class="dl-btn" href="#" download="summary.webm">⬇ Download .webm</a>
   </div>
   <div id="slides-error"></div>
+</div>
+
+<!-- AUDIO MODAL -->
+<div id="audio-modal">
+  <div class="modal-box">
+    <h3>🔊 Include Voice Narration?</h3>
+    <p>To record narration audio into the video, Chrome needs to capture this tab's audio while it speaks each slide aloud.</p>
+    <div class="modal-steps">
+      <div class="step"><div class="sn">1</div><div>A "Share screen" dialog will appear — select <strong style="color:#d4a843">This Tab</strong> from the tab list</div></div>
+      <div class="step"><div class="sn">2</div><div>Check <strong style="color:#d4a843">Share tab audio</strong> at the bottom of the dialog</div></div>
+      <div class="step"><div class="sn">3</div><div>Click <strong style="color:#d4a843">Share</strong> — the video will render automatically</div></div>
+    </div>
+    <div class="modal-row">
+      <button class="modal-btn-primary"   onclick="startVideoWithAudio()">🔊 Include Audio</button>
+      <button class="modal-btn-secondary" onclick="startVideoNoAudio()">Video Only</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO PROGRESS OVERLAY -->
+<div id="vid-progress">
+  <div class="vp-spinner"></div>
+  <div id="vp-slide-msg">Rendering slide 1…</div>
+  <div id="vp-narr-text"></div>
+  <div class="vp-bar-wrap"><div id="vp-bar"></div></div>
+  <div id="vp-hint">Keep this tab active during recording</div>
 </div>
 
 <canvas id="render-canvas" style="display:none"></canvas>
@@ -326,75 +418,51 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 let slides = [], current = 0, docTitle = 'Presentation';
 let apiKey = sessionStorage.getItem('pdf_tf_key') || '';
 
-// ── Boot ──────────────────────────────────────────────────────────
 (function init() {
-  if (apiKey) {
-    document.getElementById('api-key-input').value = apiKey;
-    showKeyStatus(true);
-  }
+  if (apiKey) { document.getElementById('api-key-input').value = apiKey; showKeyStatus(true); }
 })();
 
 // ── API Key ───────────────────────────────────────────────────────
 function saveKey() {
-  const val = document.getElementById('api-key-input').value.trim();
-  if (!val.startsWith('sk-ant-')) {
-    showKeyStatus(false, 'Key must start with sk-ant-'); return;
-  }
-  apiKey = val;
-  sessionStorage.setItem('pdf_tf_key', apiKey);
-  showKeyStatus(true);
+  const v = document.getElementById('api-key-input').value.trim();
+  if (!v.startsWith('sk-ant-')) { showKeyStatus(false,'Key must start with sk-ant-'); return; }
+  apiKey = v; sessionStorage.setItem('pdf_tf_key', apiKey); showKeyStatus(true);
 }
-
 function showKeyStatus(ok, msg) {
   const el = document.getElementById('key-status');
   el.className = ok ? 'ok' : 'bad';
-  el.textContent = ok ? '✔ Key saved' : ('✘ ' + (msg || 'Invalid key'));
+  el.textContent = ok ? '✔ Key saved' : ('✘ ' + (msg||'Invalid key'));
 }
 
 // ── Helpers ───────────────────────────────────────────────────────
-const $    = id => document.getElementById(id);
+const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-function showErrUpload(msg) {
-  const e = $('upload-error');
-  e.innerHTML = '⚠ ' + msg; e.classList.add('show');
-}
-function showErrSlides(msg) {
-  const e = $('slides-error');
-  e.textContent = '⚠ ' + msg; e.classList.add('show');
-}
-function clearErr() {
-  $('upload-error').classList.remove('show');
-  $('slides-error').classList.remove('show');
-}
+function showErrUpload(msg) { const e=$('upload-error'); e.innerHTML='⚠ '+msg; e.classList.add('show'); }
+function showErrSlides(msg) { const e=$('slides-error'); e.textContent='⚠ '+msg; e.classList.add('show'); }
+function clearErr() { $('upload-error').classList.remove('show'); $('slides-error').classList.remove('show'); }
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   $('slides-view').classList.remove('active');
   $('btn-new').style.display = 'none';
-  if (name === 'slides') {
-    $('slides-view').classList.add('active');
-    $('btn-new').style.display = 'flex';
-  } else {
-    const el = $(name + '-view');
-    if (el) { el.classList.add('active'); el.classList.add('fadein'); }
-  }
+  if (name === 'slides') { $('slides-view').classList.add('active'); $('btn-new').style.display='flex'; }
+  else { const el=$(name+'-view'); if(el){ el.classList.add('active'); el.classList.add('fadein'); } }
 }
+function setProc(msg) { $('proc-msg').textContent = msg; }
 
 function resetApp() {
-  slides = []; current = 0;
-  clearErr();
+  slides=[]; current=0; clearErr();
   $('video-banner').classList.remove('show');
+  $('narration-box').classList.remove('show');
   showView('upload');
 }
 
-function setProc(msg) { $('proc-msg').textContent = msg; }
-
-// ── Drag / Drop ───────────────────────────────────────────────────
+// ── Drag / Drop / File ────────────────────────────────────────────
 function onDragOver(e)  { e.preventDefault(); $('drop-zone').classList.add('over'); }
 function onDragLeave()  { $('drop-zone').classList.remove('over'); }
 function onDrop(e)      { e.preventDefault(); $('drop-zone').classList.remove('over'); processFile(e.dataTransfer.files[0]); }
-function handleFile(e)  { processFile(e.target.files[0]); e.target.value = ''; }
+function handleFile(e)  { processFile(e.target.files[0]); e.target.value=''; }
 
 // ── PDF Text Extraction ───────────────────────────────────────────
 async function extractPDFText(file) {
@@ -405,28 +473,25 @@ async function extractPDFText(file) {
   for (let i = 1; i <= max; i++) {
     const page = await pdf.getPage(i);
     const tc   = await page.getTextContent();
-    const pt   = tc.items.map(it => it.str || '').join(' ').replace(/\s+/g,' ').trim();
-    if (pt) text += '\n=== PAGE ' + i + ' ===\n' + pt;
+    const pt   = tc.items.map(it => it.str||'').join(' ').replace(/\s+/g,' ').trim();
+    if (pt) text += '\n=== PAGE '+i+' ===\n'+pt;
   }
   return text;
 }
 
-// ── Robust JSON Extractor ─────────────────────────────────────────
+// ── JSON Extractor ────────────────────────────────────────────────
 function extractJSON(raw) {
-  if (!raw) throw new Error('Empty response from API');
+  if (!raw) throw new Error('Empty API response');
   let s = raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
   try { return JSON.parse(s); } catch(_) {}
-  const a = s.indexOf('{'), b = s.lastIndexOf('}');
-  if (a !== -1 && b > a) {
-    try { return JSON.parse(s.slice(a, b+1)); } catch(_) {}
-  }
-  throw new Error('Could not parse JSON from response. Preview: ' + raw.substring(0,120));
+  const a=s.indexOf('{'), b=s.lastIndexOf('}');
+  if (a!==-1 && b>a) { try { return JSON.parse(s.slice(a,b+1)); } catch(_) {} }
+  throw new Error('Could not parse JSON from response. Preview: '+raw.substring(0,150));
 }
 
-// ── Claude API Call ───────────────────────────────────────────────
+// ── Claude API ────────────────────────────────────────────────────
 async function callClaude(rawText) {
-  if (!apiKey) throw new Error('Please enter your Anthropic API key at the top of the page.');
-
+  if (!apiKey) throw new Error('Please enter and save your Anthropic API key at the top.');
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -437,45 +502,41 @@ async function callClaude(rawText) {
     },
     body: JSON.stringify({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 4096,
-      system: `You are a presentation designer. Transform raw noisy PDF text into a JSON object for elegant slides.
-OUTPUT ONLY VALID JSON — no markdown fences, no explanation, just the raw JSON object.
+      max_tokens: 5000,
+      system: `You are a presentation designer and narrator. Transform raw noisy PDF text into a JSON object for elegant slides with voice narration.
+OUTPUT ONLY VALID RAW JSON — no markdown fences, no explanation, just the JSON object.
 
-JSON structure to return:
+JSON structure:
 {
   "title": "document title",
   "subtitle": "short tagline or author",
   "slides": [
-    { "type": "title",   "heading": "string", "subheading": "string" },
-    { "type": "section", "heading": "string" },
-    { "type": "content", "heading": "string", "body": "one sentence", "bullets": ["max 12 words each"], "highlight": "powerful quote or stat (optional)" },
-    { "type": "closing", "heading": "string", "subheading": "string" }
+    {
+      "type": "title|section|content|closing",
+      "heading": "string",
+      "subheading": "string (title/closing only)",
+      "body": "one sentence (content only)",
+      "bullets": ["max 12 words each"],
+      "highlight": "powerful quote or stat (optional)",
+      "narration": "2-3 natural spoken sentences summarising this slide for a voice-over. Write as if speaking to an audience. Do NOT mention slide numbers."
+    }
   ]
 }
 
 Rules:
-- 8 to 12 slides total
-- First slide must be type "title"
-- Last slide must be type "closing"
-- "section" slides: only a heading, no bullets
-- "content" slides: max 5 bullets each, each bullet max 12 words
-- Remove ALL noise: page numbers, headers, footers, broken words, garbled OCR
-- Omit "highlight" if nothing stands out
-- Return ONLY the JSON object, nothing else`,
-      messages: [{
-        role: 'user',
-        content: 'Transform this PDF into presentation JSON:\n\n' + rawText.substring(0, 8000)
-      }]
+- 8 to 12 slides total. First = type title. Last = type closing.
+- section type: heading only, no bullets
+- content type: max 5 bullets each
+- narration field is REQUIRED on every slide — natural, engaging, 2-3 sentences, 30-50 words
+- STRIP all noise: page numbers, headers, footers, broken words, garbled OCR
+- Return ONLY the JSON object`,
+      messages: [{ role:'user', content:'Transform this PDF into narrated presentation JSON:\n\n'+rawText.substring(0,8000) }]
     })
   });
-
   if (!res.ok) {
-    let errMsg = 'HTTP ' + res.status;
-    try {
-      const j = await res.json();
-      errMsg = j.error?.message || JSON.stringify(j);
-    } catch(_) { errMsg += ' ' + await res.text(); }
-    throw new Error('API Error: ' + errMsg);
+    let msg='HTTP '+res.status;
+    try { const j=await res.json(); msg=j.error?.message||JSON.stringify(j); } catch(_) {}
+    throw new Error('API Error: '+msg);
   }
   return res.json();
 }
@@ -484,36 +545,29 @@ Rules:
 async function processFile(file) {
   if (!file) return;
   if (!apiKey) { showErrUpload('Please enter and save your Anthropic API key at the top first.'); return; }
-  if (file.type !== 'application/pdf') { showErrUpload('Please upload a valid PDF file.'); return; }
-
+  if (file.type!=='application/pdf') { showErrUpload('Please upload a valid PDF file.'); return; }
   clearErr();
   showView('processing');
-
   try {
     setProc('Reading PDF content…');
     const rawText = await extractPDFText(file);
-    if (!rawText.trim()) throw new Error('Could not extract text — PDF may be image-based or encrypted.');
-
-    setProc('Claude AI is crafting your slides…');
+    if (!rawText.trim()) throw new Error('Could not extract text — PDF may be image-based.');
+    setProc('Claude AI is crafting your slides &amp; narration…');
     const data = await callClaude(rawText);
-    if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
-
+    if (data.error) throw new Error(data.error.message||JSON.stringify(data.error));
     const rawJSON = data.content?.[0]?.text;
     if (!rawJSON) throw new Error('No content in API response.');
-
     const parsed = extractJSON(rawJSON);
-    if (!parsed.slides?.length) throw new Error('No slides were generated — please try again.');
-
+    if (!parsed.slides?.length) throw new Error('No slides generated — please try again.');
     slides   = parsed.slides;
     docTitle = parsed.title || file.name.replace(/\.pdf$/i,'');
     current  = 0;
-
     $('doc-title-lbl').textContent  = docTitle;
-    $('slide-count-lbl').textContent = slides.length + ' slides';
+    $('slide-count-lbl').textContent = slides.length+' slides';
     buildDots();
     renderCurrentSlide();
+    showNarration();
     showView('slides');
-
   } catch(err) {
     console.error('PDF Transformer error:', err);
     showView('upload');
@@ -521,31 +575,192 @@ async function processFile(file) {
   }
 }
 
-// ── Canvas Render ─────────────────────────────────────────────────
+// ── Narration Preview ─────────────────────────────────────────────
+function showNarration() {
+  const s = slides[current];
+  if (s?.narration) {
+    $('narration-text').textContent = s.narration;
+    $('narration-box').classList.add('show');
+  } else {
+    $('narration-box').classList.remove('show');
+  }
+}
+
+function previewNarration() {
+  const s = slides[current];
+  if (!s?.narration) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(s.narration);
+  u.rate = 0.92; u.pitch = 1.0; u.volume = 1.0;
+  // Pick a good voice if available
+  const voices = speechSynthesis.getVoices();
+  const preferred = voices.find(v => /en[-_]?(GB|AU|IN)/i.test(v.lang) && !v.localService)
+    || voices.find(v => /en/i.test(v.lang));
+  if (preferred) u.voice = preferred;
+  speechSynthesis.speak(u);
+}
+
+// ── Speech Synthesis Promise ──────────────────────────────────────
+function speakAndWait(text, rate) {
+  return new Promise(resolve => {
+    speechSynthesis.cancel();
+    if (!text) { setTimeout(resolve, 100); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = rate || 0.92; u.pitch = 1.0; u.volume = 1.0;
+    const voices = speechSynthesis.getVoices();
+    const preferred = voices.find(v => /en[-_]?(GB|AU|IN)/i.test(v.lang) && !v.localService)
+      || voices.find(v => /en/i.test(v.lang));
+    if (preferred) u.voice = preferred;
+    u.onend   = resolve;
+    u.onerror = resolve;
+    speechSynthesis.speak(u);
+    // Safety timeout — max 60s per slide
+    setTimeout(resolve, 60000);
+  });
+}
+
+// ── Video Flow ────────────────────────────────────────────────────
+function startVideoFlow() {
+  clearErr();
+  $('video-banner').classList.remove('show');
+  $('audio-modal').classList.add('show');
+}
+
+async function startVideoWithAudio() {
+  $('audio-modal').classList.remove('show');
+  let audioTrack = null;
+  try {
+    const displayStream = await navigator.mediaDevices.getDisplayMedia({
+      video: { displaySurface: 'browser' },
+      audio: { suppressLocalAudioPlayback: false, echoCancellation: false, noiseSuppression: false },
+      preferCurrentTab: true,
+      selfBrowserSurface: 'include'
+    });
+    // Keep only the audio track; stop the unwanted video track
+    displayStream.getVideoTracks().forEach(t => t.stop());
+    audioTrack = displayStream.getAudioTracks()[0] || null;
+  } catch(e) {
+    console.warn('Tab audio capture failed:', e.message);
+    showErrSlides('Tab audio capture was cancelled or not supported. Generating video-only instead.');
+  }
+  await renderVideo(audioTrack);
+}
+
+async function startVideoNoAudio() {
+  $('audio-modal').classList.remove('show');
+  await renderVideo(null);
+}
+
+async function renderVideo(audioTrack) {
+  $('vid-progress').classList.add('show');
+  const allBtns = document.querySelectorAll('button');
+  allBtns.forEach(b => b.disabled = true);
+
+  try {
+    const W = 1280, H = 720;
+    const cv  = $('render-canvas');
+    cv.width  = W; cv.height = H;
+    const ctx = cv.getContext('2d');
+
+    const canvasStream = cv.captureStream(30);
+    const tracks = [...canvasStream.getVideoTracks()];
+    if (audioTrack) tracks.push(audioTrack);
+    const combined = new MediaStream(tracks);
+
+    const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+                   ? 'video/webm;codecs=vp9' : 'video/webm';
+    const recorder = new MediaRecorder(combined, { mimeType: mime, videoBitsPerSecond: 5_000_000 });
+    const chunks = [];
+    recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
+    recorder.onstop = () => {
+      if (audioTrack) audioTrack.stop();
+      const url = URL.createObjectURL(new Blob(chunks, { type:'video/webm' }));
+      $('vb-dl').href     = url;
+      $('vb-dl').download = docTitle.replace(/[^a-z0-9]/gi,'_')+'_narrated.webm';
+      $('vb-msg').textContent = 'Narrated video ready — '+slides.length+' slides';
+      $('video-banner').classList.add('show');
+      $('vid-progress').classList.remove('show');
+      allBtns.forEach(b => b.disabled = false);
+    };
+
+    recorder.start(200);
+
+    const FADE = 20, PAUSE = 500;
+
+    for (let i = 0; i < slides.length; i++) {
+      const s   = slides[i];
+      const pct = Math.round(((i+1)/slides.length)*100);
+
+      // Progress UI
+      $('vp-slide-msg').textContent = `Slide ${i+1} of ${slides.length} — "${s.heading||''}"`;
+      $('vp-narr-text').textContent = s.narration || '';
+      $('vp-bar').style.width = pct+'%';
+      $('vp-hint').textContent = audioTrack
+        ? '🔊 Narrating… keep this tab active'
+        : 'Keep this tab active during recording';
+
+      // Fade IN
+      for (let f = 0; f <= FADE; f++) {
+        renderSlide(ctx, s, W, H, i, slides.length);
+        ctx.globalAlpha = 1 - f/FADE;
+        ctx.fillStyle = '#000'; ctx.fillRect(0,0,W,H);
+        ctx.globalAlpha = 1;
+        await sleep(14);
+      }
+
+      // Render clean slide
+      renderSlide(ctx, s, W, H, i, slides.length);
+
+      // Narration (speak + hold for its duration)
+      if (s.narration) {
+        await speakAndWait(s.narration, 0.88);
+        await sleep(PAUSE);
+      } else {
+        await sleep(3500);
+      }
+
+      // Fade OUT
+      for (let f = 0; f <= FADE; f++) {
+        renderSlide(ctx, s, W, H, i, slides.length);
+        ctx.globalAlpha = f/FADE;
+        ctx.fillStyle = '#000'; ctx.fillRect(0,0,W,H);
+        ctx.globalAlpha = 1;
+        await sleep(14);
+      }
+    }
+
+    recorder.stop();
+
+  } catch(err) {
+    console.error('Video render error:', err);
+    if (audioTrack) try { audioTrack.stop(); } catch(_) {}
+    $('vid-progress').classList.remove('show');
+    allBtns.forEach(b => b.disabled = false);
+    showErrSlides('Video generation failed: '+err.message);
+  }
+}
+
+// ── Canvas Rendering ──────────────────────────────────────────────
 function wrapText(ctx, text, x, y, maxW, lh) {
   if (!text) return y;
   const words = String(text).split(' ');
-  let line = '', cy = y;
+  let line='', cy=y;
   for (const w of words) {
-    const t = line + w + ' ';
-    if (ctx.measureText(t).width > maxW && line) {
-      ctx.fillText(line.trim(), x, cy); line = w + ' '; cy += lh;
-    } else line = t;
+    const t = line+w+' ';
+    if (ctx.measureText(t).width > maxW && line) { ctx.fillText(line.trim(),x,cy); line=w+' '; cy+=lh; }
+    else line=t;
   }
-  if (line.trim()) ctx.fillText(line.trim(), x, cy);
-  return cy + lh;
+  if (line.trim()) ctx.fillText(line.trim(),x,cy);
+  return cy+lh;
 }
 
 function renderSlide(ctx, slide, W, H, idx, total) {
   ctx.clearRect(0,0,W,H);
   const bg = ctx.createLinearGradient(0,0,W,H);
-  if (slide.type==='title'||slide.type==='closing') {
-    bg.addColorStop(0,'#0c1520'); bg.addColorStop(1,'#1a2d42');
-  } else if (slide.type==='section') {
-    bg.addColorStop(0,'#160f24'); bg.addColorStop(1,'#0c1520');
-  } else {
-    bg.addColorStop(0,'#0e1823'); bg.addColorStop(1,'#0a1218');
-  }
+  if (slide.type==='title'||slide.type==='closing') { bg.addColorStop(0,'#0c1520'); bg.addColorStop(1,'#1a2d42'); }
+  else if (slide.type==='section')                  { bg.addColorStop(0,'#160f24'); bg.addColorStop(1,'#0c1520'); }
+  else                                               { bg.addColorStop(0,'#0e1823'); bg.addColorStop(1,'#0a1218'); }
   ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
 
   const G='#d4a843', isTit=slide.type==='title'||slide.type==='closing', isSec=slide.type==='section';
@@ -557,19 +772,19 @@ function renderSlide(ctx, slide, W, H, idx, total) {
     });
     ctx.textAlign='center'; ctx.fillStyle=G;
     ctx.font=`bold ${Math.round(H*0.076)}px 'Playfair Display',Georgia,serif`;
-    const ty=wrapText(ctx,slide.heading||'Untitled',W/2,H*0.38,W-200,H*0.09)+H*0.022;
+    const ty=wrapText(ctx,slide.heading||'Untitled',W/2,H*0.36,W-200,H*0.09)+H*0.022;
     ctx.fillStyle=G; ctx.fillRect(W/2-60,ty,120,2);
     if (slide.subheading) {
       ctx.fillStyle='rgba(220,235,248,0.7)';
-      ctx.font=`italic ${Math.round(H*0.032)}px 'Playfair Display',serif`;
+      ctx.font=`italic ${Math.round(H*0.032)}px 'Playfair Display',Georgia,serif`;
       wrapText(ctx,slide.subheading,W/2,ty+H*0.04,W-200,H*0.042);
     }
   } else if (isSec) {
     ctx.textAlign='center'; ctx.fillStyle=G;
-    ctx.font=`${Math.round(H*0.052)}px serif`; ctx.fillText('◆',W/2,H*0.42);
+    ctx.font=`${Math.round(H*0.052)}px serif`; ctx.fillText('◆',W/2,H*0.41);
     ctx.fillStyle='#e0eaf4'; ctx.font=`bold ${Math.round(H*0.064)}px 'Playfair Display',serif`;
-    wrapText(ctx,slide.heading||'',W/2,H*0.5,W-200,H*0.076);
-    ctx.fillStyle='rgba(212,168,67,0.3)'; ctx.fillRect(W/2-80,H*0.74,160,1);
+    wrapText(ctx,slide.heading||'',W/2,H*0.49,W-200,H*0.076);
+    ctx.fillStyle='rgba(212,168,67,0.3)'; ctx.fillRect(W/2-80,H*0.73,160,1);
   } else {
     const barG=ctx.createLinearGradient(0,H*0.12,0,H*0.88);
     barG.addColorStop(0,G); barG.addColorStop(1,'rgba(212,168,67,0.1)');
@@ -577,19 +792,18 @@ function renderSlide(ctx, slide, W, H, idx, total) {
     ctx.fillStyle='rgba(212,168,67,0.18)'; ctx.fillRect(W*0.058,H*0.1,W*0.9,1);
     const lx=W*0.07; ctx.textAlign='left';
     ctx.fillStyle=G; ctx.font=`bold ${Math.round(H*0.056)}px 'Playfair Display',serif`;
-    let y=wrapText(ctx,slide.heading||'',lx,H*0.172,W-lx*2.4,H*0.068)+H*0.015;
+    let y=wrapText(ctx,slide.heading||'',lx,H*0.17,W-lx*2.4,H*0.068)+H*0.014;
     if (slide.body) {
       ctx.fillStyle='rgba(200,218,234,0.72)';
       ctx.font=`italic ${Math.round(H*0.032)}px 'Playfair Display',serif`;
-      y=wrapText(ctx,slide.body,lx,y,W-lx*2.4,H*0.042)+H*0.018;
+      y=wrapText(ctx,slide.body,lx,y,W-lx*2.4,H*0.042)+H*0.016;
     }
     if (Array.isArray(slide.bullets)) {
       slide.bullets.slice(0,5).forEach(b=>{
         if (y>H*0.8) return;
-        ctx.fillStyle=G; ctx.font=`bold ${Math.round(H*0.028)}px sans-serif`;
-        ctx.fillText('▸',lx,y);
+        ctx.fillStyle=G; ctx.font=`bold ${Math.round(H*0.028)}px sans-serif`; ctx.fillText('▸',lx,y);
         ctx.fillStyle='#dce9f5'; ctx.font=`${Math.round(H*0.032)}px sans-serif`;
-        y=wrapText(ctx,String(b),lx+W*0.026,y,W-lx*2.4-W*0.026,H*0.042)+H*0.008;
+        y=wrapText(ctx,String(b),lx+W*0.026,y,W-lx*2.4-W*0.026,H*0.042)+H*0.007;
       });
     }
     if (slide.highlight) {
@@ -603,25 +817,24 @@ function renderSlide(ctx, slide, W, H, idx, total) {
 
   ctx.fillStyle='rgba(212,168,67,0.08)'; ctx.fillRect(0,H*0.936,W,H*0.064);
   ctx.fillStyle=G; ctx.fillRect(0,H*0.936,W*((idx+1)/total),2);
-  ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.font=`${Math.round(H*0.022)}px 'Courier New',monospace`;
-  ctx.textAlign='right';
+  ctx.fillStyle='rgba(255,255,255,0.25)';
+  ctx.font=`${Math.round(H*0.022)}px 'Courier New',monospace`; ctx.textAlign='right';
   ctx.fillText(String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0'),W-W*0.03,H*0.973);
 }
 
-// ── Display ───────────────────────────────────────────────────────
+// ── Display / Navigation ──────────────────────────────────────────
 function renderCurrentSlide() {
-  const c=document.getElementById('slide-canvas'), wrap=$('slide-wrap');
+  const c=$('slide-canvas'), wrap=$('slide-wrap');
   const W=wrap.clientWidth||640, H=Math.round(W*9/16);
   c.width=W; c.height=H; c.style.width='100%'; c.style.height='100%';
   if (slides[current]) renderSlide(c.getContext('2d'),slides[current],W,H,current,slides.length);
   updateNav();
 }
-
 function buildDots() {
   const d=$('dots'); d.innerHTML='';
   slides.forEach((_,i)=>{
     const b=document.createElement('button'); b.className='dot'+(i===current?' active':'');
-    b.onclick=()=>{current=i;renderCurrentSlide();};
+    b.onclick=()=>{ current=i; renderCurrentSlide(); showNarration(); };
     d.appendChild(b);
   });
 }
@@ -629,19 +842,21 @@ function updateNav() {
   $('btn-prev').disabled=current===0; $('btn-next').disabled=current===slides.length-1;
   document.querySelectorAll('.dot').forEach((d,i)=>{ d.className='dot'+(i===current?' active':''); });
 }
-function navigate(dir) { current=Math.max(0,Math.min(slides.length-1,current+dir)); renderCurrentSlide(); }
+function navigate(dir) {
+  current=Math.max(0,Math.min(slides.length-1,current+dir));
+  renderCurrentSlide(); showNarration();
+}
 window.addEventListener('resize',()=>{ if(slides.length) renderCurrentSlide(); });
 
 // ── Export PDF ────────────────────────────────────────────────────
 async function exportPDF() {
-  if (!window.jspdf) { showErrSlides('jsPDF not loaded yet — refresh and try again.'); return; }
+  if (!window.jspdf) { showErrSlides('jsPDF not loaded yet.'); return; }
   clearErr();
   const btn=$('btn-pdf'); btn.disabled=true; btn.textContent='⏳ Exporting…';
   try {
     const {jsPDF}=window.jspdf;
     const W=1280,H=720, doc=new jsPDF({orientation:'l',unit:'px',format:[W,H]});
-    const cv=$('render-canvas'); cv.width=W; cv.height=H;
-    const ctx=cv.getContext('2d');
+    const cv=$('render-canvas'); cv.width=W; cv.height=H; const ctx=cv.getContext('2d');
     for (let i=0;i<slides.length;i++) {
       btn.textContent=`⏳ ${i+1}/${slides.length}…`;
       if (i>0) doc.addPage([W,H],'l');
@@ -650,43 +865,7 @@ async function exportPDF() {
     }
     doc.save(docTitle.replace(/[^a-z0-9]/gi,'_')+'_elegant.pdf');
   } catch(e) { showErrSlides('PDF export failed: '+e.message); }
-  btn.disabled=false; btn.textContent='⬇ Export Elegant PDF';
-}
-
-// ── Generate Video ────────────────────────────────────────────────
-async function generateVideo() {
-  clearErr();
-  $('video-banner').classList.remove('show');
-  const btn=$('btn-vid'); btn.disabled=true; btn.textContent='⏳ Starting…';
-  try {
-    const W=1280,H=720, cv=$('render-canvas');
-    cv.width=W; cv.height=H;
-    const ctx=cv.getContext('2d');
-    const mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
-    const stream=cv.captureStream(30);
-    const recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4_000_000});
-    const chunks=[];
-    recorder.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
-    recorder.onstop=()=>{
-      const url=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
-      $('vb-dl').href=url; $('vb-dl').download=docTitle.replace(/[^a-z0-9]/gi,'_')+'_summary.webm';
-      $('vb-msg').textContent='Video ready — '+slides.length+' slides';
-      $('video-banner').classList.add('show');
-      btn.disabled=false; btn.textContent='▶ Generate Video';
-    };
-    recorder.start(100);
-    const F=22, HOLD=3800;
-    for (let i=0;i<slides.length;i++) {
-      btn.textContent=`⏳ Slide ${i+1}/${slides.length}…`;
-      for(let f=0;f<=F;f++){renderSlide(ctx,slides[i],W,H,i,slides.length);ctx.globalAlpha=1-f/F;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;await sleep(16);}
-      renderSlide(ctx,slides[i],W,H,i,slides.length); await sleep(HOLD);
-      for(let f=0;f<=F;f++){renderSlide(ctx,slides[i],W,H,i,slides.length);ctx.globalAlpha=f/F;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;await sleep(16);}
-    }
-    recorder.stop();
-  } catch(e) {
-    showErrSlides('Video failed: '+e.message);
-    btn.disabled=false; btn.textContent='▶ Generate Video';
-  }
+  btn.disabled=false; btn.textContent='⬇ Export PDF';
 }
 </script>
 </body>
