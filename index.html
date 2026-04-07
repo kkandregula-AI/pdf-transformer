@@ -11,17 +11,15 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* HEADER */
 #header{position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:12px;padding:13px 20px;background:#0a0b10;border-bottom:1px solid rgba(212,168,67,0.22)}
 #logo-icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#d4a843,#f0c55a);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(212,168,67,0.32);font-size:18px;flex-shrink:0}
 .logo-title{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;font-weight:700;line-height:1}
 .logo-sub{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:3px}
 #btn-new{margin-left:auto;display:none;background:transparent;border:1px solid rgba(212,168,67,0.28);color:#d4a843;padding:6px 13px;border-radius:5px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif}
 
-/* API KEY BANNER */
 #api-banner{background:#0e1018;border-bottom:1px solid rgba(212,168,67,0.15);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .ab-label{font-size:12px;color:#d4a843;font-weight:600;white-space:nowrap}
-#api-key-input{flex:1;min-width:180px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,67,0.25);border-radius:6px;padding:8px 12px;color:#e4e4e4;font-size:12px;font-family:'Courier New',monospace;outline:none;transition:border 0.2s}
+#api-key-input{flex:1;min-width:180px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,67,0.25);border-radius:6px;padding:8px 12px;color:#e4e4e4;font-size:12px;font-family:'Courier New',monospace;outline:none;transition:border .2s}
 #api-key-input:focus{border-color:#d4a843}
 #api-key-input::placeholder{color:rgba(255,255,255,0.2)}
 #btn-save-key{background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:6px;color:#07080d;padding:8px 16px;cursor:pointer;font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif}
@@ -30,17 +28,15 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 #key-status.bad{color:#ff8080}
 .api-note{width:100%;font-size:10px;color:rgba(255,255,255,0.28);margin-top:2px;line-height:1.5}
 
-/* VIEWS */
 .view{display:none}
 .view.active{display:flex;flex-direction:column;align-items:center}
 
-/* UPLOAD */
 #upload-view{gap:22px;padding:28px 20px 36px}
 .hero{text-align:center;max-width:580px}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,36px);font-weight:400;color:#e4e4e4;line-height:1.3;margin-bottom:12px}
 .hero h1 em{color:#d4a843;font-style:italic}
 .hero p{color:rgba(255,255,255,0.36);font-size:13px;line-height:1.75}
-#drop-zone{width:100%;max-width:580px;padding:48px 32px;border-radius:14px;text-align:center;border:2px dashed rgba(212,168,67,0.3);background:rgba(212,168,67,0.04);cursor:pointer;transition:all 0.2s}
+#drop-zone{width:100%;max-width:580px;padding:48px 32px;border-radius:14px;text-align:center;border:2px dashed rgba(212,168,67,0.3);background:rgba(212,168,67,0.04);cursor:pointer;transition:all .2s}
 #drop-zone.over,#drop-zone:hover{border-color:#d4a843;background:rgba(212,168,67,0.09)}
 .dz-icon{width:68px;height:68px;border-radius:50%;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.22);display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:26px}
 .dz-main{font-size:15px;font-weight:500;color:#e0e0e0;margin-bottom:6px}
@@ -55,13 +51,11 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 .fc .ft{font-size:11px;color:#d4a843;font-weight:600;margin-bottom:3px}
 .fc .fd{font-size:10px;color:rgba(255,255,255,0.32);line-height:1.5}
 
-/* PROCESSING */
 #processing-view{justify-content:center;gap:20px;padding:60px 20px;min-height:60vh}
 .spinner{width:76px;height:76px;border-radius:50%;border:2px solid rgba(212,168,67,0.14);border-top-color:#d4a843;animation:spin 1.1s linear infinite}
 #proc-msg{font-family:'Playfair Display',serif;color:#d4a843;font-size:19px;text-align:center;animation:pulse 2s ease-in-out infinite}
 #proc-sub{color:rgba(255,255,255,0.28);font-size:12px;text-align:center}
 
-/* SLIDES */
 #slides-view{display:none;flex-direction:column;align-items:center;gap:14px;padding:20px 16px 30px;max-width:960px;margin:0 auto;width:100%}
 #slides-view.active{display:flex}
 .smeta{display:flex;align-items:center;gap:10px;width:100%}
@@ -70,59 +64,66 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 #slide-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;box-shadow:0 22px 56px rgba(0,0,0,0.82),0 0 0 1px rgba(212,168,67,0.12)}
 #slide-canvas{position:absolute;inset:0;width:100%;height:100%}
 
-/* Narration box */
 #narration-box{display:none;width:100%;background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.18);border-radius:8px;padding:12px 16px;font-size:12px;color:rgba(220,230,240,0.65);font-style:italic;line-height:1.6}
 #narration-box.show{display:block}
-.nb-label{font-size:10px;color:#d4a843;font-weight:600;letter-spacing:1px;margin-bottom:5px;font-style:normal;display:flex;align-items:center;gap:6px}
-#nb-audio-status{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:600;letter-spacing:0.5px}
-#nb-audio-status.fetched{background:rgba(110,231,160,0.15);color:#6ee7a0}
-#nb-audio-status.missing{background:rgba(255,128,128,0.12);color:#ff9090}
+.nb-label{font-size:10px;color:#d4a843;font-weight:600;letter-spacing:1px;margin-bottom:5px;font-style:normal;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+#nb-status{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:.5px}
+#nb-status.ok   {background:rgba(110,231,160,.15);color:#6ee7a0;border:1px solid rgba(110,231,160,.2)}
+#nb-status.fetch{background:rgba(212,168,67,.15);color:#d4a843;border:1px solid rgba(212,168,67,.2)}
+#nb-status.fail {background:rgba(255,128,128,.12);color:#ff9090;border:1px solid rgba(255,128,128,.2)}
+#nb-source{font-size:9px;color:rgba(255,255,255,.28);margin-left:auto}
 
-/* Nav */
 #nav-row{display:flex;align-items:center;justify-content:center;gap:12px}
-.nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,168,67,0.2);background:rgba(212,168,67,0.08);color:#d4a843;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
-.nav-btn:disabled{opacity:0.2;cursor:default}
-.nav-btn:not(:disabled):hover{background:rgba(212,168,67,0.18)}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,168,67,.2);background:rgba(212,168,67,.08);color:#d4a843;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn:not(:disabled):hover{background:rgba(212,168,67,.18)}
 #dots{display:flex;gap:5px;align-items:center}
-.dot{height:6px;border-radius:3px;background:rgba(255,255,255,0.12);border:none;cursor:pointer;padding:0;transition:all 0.2s}
+.dot{height:6px;border-radius:3px;background:rgba(255,255,255,.12);border:none;cursor:pointer;padding:0;transition:all .2s}
 .dot.active{background:#d4a843;width:20px !important}
 .dot:not(.active){width:6px}
 
-/* Action row */
 #action-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;width:100%}
-.btn-outline{background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.3);border-radius:7px;color:#d4a843;padding:10px 18px;cursor:pointer;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all 0.15s}
-.btn-outline:hover{background:rgba(212,168,67,0.15)}
-.btn-gold{background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:7px;color:#080a0d;padding:10px 22px;cursor:pointer;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(212,168,67,0.28);transition:all 0.15s}
+.btn-outline{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.3);border-radius:7px;color:#d4a843;padding:10px 18px;cursor:pointer;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s}
+.btn-outline:hover{background:rgba(212,168,67,.15)}
+.btn-gold{background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:7px;color:#080a0d;padding:10px 22px;cursor:pointer;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(212,168,67,.28);transition:all .15s}
 .btn-gold:hover{transform:translateY(-1px)}
-button:disabled{opacity:0.4 !important;cursor:wait !important;transform:none !important}
+button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !important}
 
-#video-banner{display:none;width:100%;background:rgba(212,168,67,0.07);border:1px solid rgba(212,168,67,0.26);border-radius:9px;padding:12px 18px;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
+#video-banner{display:none;width:100%;background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.26);border-radius:9px;padding:12px 18px;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
 #video-banner.show{display:flex}
 .vbt{color:#e0e0e0;font-size:13px}
 .dl-btn{background:linear-gradient(135deg,#c49a35,#f0c55a);color:#060709;padding:7px 15px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
-#slides-error{display:none;color:#ff8080;font-size:12px;background:rgba(220,60,60,0.07);border:1px solid rgba(220,60,60,0.2);border-radius:7px;padding:9px 15px;width:100%;text-align:center}
+#slides-error{display:none;color:#ff8080;font-size:12px;background:rgba(220,60,60,.07);border:1px solid rgba(220,60,60,.2);border-radius:7px;padding:9px 15px;width:100%;text-align:center}
 #slides-error.show{display:block}
 
-/* VIDEO PROGRESS OVERLAY */
-#vid-progress{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,0.9);backdrop-filter:blur(4px);align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:24px}
-#vid-progress.show{display:flex}
-.vp-spinner{width:60px;height:60px;border-radius:50%;border:2px solid rgba(212,168,67,0.14);border-top-color:#d4a843;animation:spin 1s linear infinite}
-#vp-title{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;text-align:center}
-#vp-slide-msg{font-size:13px;color:rgba(220,230,240,0.7);text-align:center;max-width:400px}
-#vp-narr-text{font-size:12px;color:rgba(180,200,220,0.5);font-style:italic;text-align:center;max-width:460px;line-height:1.6}
-.vp-bar-wrap{width:100%;max-width:380px;background:rgba(212,168,67,0.1);border-radius:4px;height:4px;overflow:hidden}
-#vp-bar{height:100%;background:#d4a843;transition:width 0.4s ease;width:0%}
-#vp-step{font-size:11px;color:rgba(255,255,255,0.3);text-align:center}
+/* TTS diagnostic panel */
+#tts-panel{display:none;width:100%;max-width:580px;background:#0e111a;border:1px solid rgba(212,168,67,.15);border-radius:9px;padding:14px 18px;margin-top:-6px}
+#tts-panel.show{display:block}
+.tts-panel-title{font-size:11px;color:#d4a843;font-weight:600;letter-spacing:.8px;margin-bottom:10px}
+.tts-source-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:11px}
+.tts-src-name{flex:1;color:rgba(255,255,255,.5);font-family:'Courier New',monospace}
+.tts-src-status{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700;white-space:nowrap}
+.tts-src-status.ok   {background:rgba(110,231,160,.15);color:#6ee7a0}
+.tts-src-status.fail {background:rgba(255,128,128,.12);color:#ff9090}
+.tts-src-status.try  {background:rgba(212,168,67,.15);color:#d4a843}
+.tts-src-status.idle {background:rgba(255,255,255,.05);color:rgba(255,255,255,.3)}
 
-/* Audio badge */
-.audio-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;letter-spacing:0.5px}
-.audio-badge.ok{background:rgba(110,231,160,0.12);color:#6ee7a0;border:1px solid rgba(110,231,160,0.2)}
-.audio-badge.warn{background:rgba(255,180,60,0.12);color:#ffb43c;border:1px solid rgba(255,180,60,0.2)}
+/* Progress overlay */
+#vid-progress{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.92);backdrop-filter:blur(4px);align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:24px}
+#vid-progress.show{display:flex}
+.vp-spinner{width:60px;height:60px;border-radius:50%;border:2px solid rgba(212,168,67,.14);border-top-color:#d4a843;animation:spin 1s linear infinite}
+#vp-title{font-family:'Playfair Display',serif;color:#d4a843;font-size:17px;text-align:center}
+#vp-slide-msg{font-size:13px;color:rgba(220,230,240,.7);text-align:center;max-width:420px}
+#vp-narr-text{font-size:12px;color:rgba(180,200,220,.5);font-style:italic;text-align:center;max-width:460px;line-height:1.6;min-height:36px}
+.vp-bar-wrap{width:100%;max-width:380px;background:rgba(212,168,67,.1);border-radius:4px;height:5px;overflow:hidden}
+#vp-bar{height:100%;background:#d4a843;transition:width .35s ease;width:0%}
+#vp-step{font-size:11px;color:rgba(255,255,255,.3);text-align:center;max-width:400px}
+#vp-audio-log{font-size:10px;color:rgba(110,231,160,.6);font-family:'Courier New',monospace;text-align:center;max-width:460px;line-height:1.6;min-height:16px}
 
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.fadein{animation:fadein 0.35s ease forwards}
+.fadein{animation:fadein .35s ease forwards}
 </style>
 </head>
 <body>
@@ -142,7 +143,7 @@ button:disabled{opacity:0.4 !important;cursor:wait !important;transform:none !im
   <button id="btn-save-key" onclick="saveKey()">Save Key</button>
   <span id="key-status"></span>
   <div class="api-note">
-    Stored in session only · Get your key at
+    Session-only · Get your key at
     <a href="https://console.anthropic.com" target="_blank" style="color:#d4a843">console.anthropic.com</a>
   </div>
 </div>
@@ -166,7 +167,7 @@ button:disabled{opacity:0.4 !important;cursor:wait !important;transform:none !im
     <div class="fc"><div class="fi">🧹</div><div class="ft">Noise Removal</div><div class="fd">Strips headers, footers &amp; OCR noise</div></div>
     <div class="fc"><div class="fi">🤖</div><div class="ft">AI Structuring</div><div class="fd">Claude distills content into clean slides</div></div>
     <div class="fc"><div class="fi">📑</div><div class="ft">Elegant PDF</div><div class="fd">Dark luxury 1280×720 export</div></div>
-    <div class="fc"><div class="fi">🔊</div><div class="ft">Real Audio</div><div class="fd">TTS voice narration captured into video</div></div>
+    <div class="fc"><div class="fi">🔊</div><div class="ft">Voice Narration</div><div class="fd">Real TTS audio baked into WebM</div></div>
   </div>
 </div>
 
@@ -182,23 +183,35 @@ button:disabled{opacity:0.4 !important;cursor:wait !important;transform:none !im
     <div id="slide-count-lbl">0 slides</div>
   </div>
   <div id="slide-wrap"><canvas id="slide-canvas"></canvas></div>
+
   <div id="narration-box">
     <div class="nb-label">
       🔊 SLIDE NARRATION
-      <span id="nb-audio-status"></span>
+      <span id="nb-status" class="fetch">⏳ Fetching…</span>
+      <span id="nb-source"></span>
     </div>
     <span id="narration-text"></span>
   </div>
+
   <div id="nav-row">
     <button class="nav-btn" id="btn-prev" onclick="navigate(-1)">&#8249;</button>
     <div id="dots"></div>
     <button class="nav-btn" id="btn-next" onclick="navigate(1)">&#8250;</button>
   </div>
+
   <div id="action-row">
     <button class="btn-outline" id="btn-pdf"     onclick="exportPDF()">⬇ Export PDF</button>
     <button class="btn-outline" id="btn-preview" onclick="previewNarration()">▶ Preview Audio</button>
+    <button class="btn-outline" id="btn-tts-test" onclick="toggleTTSPanel()">🔧 TTS Status</button>
     <button class="btn-gold"    id="btn-vid"     onclick="startVideo()">🎬 Generate Video</button>
   </div>
+
+  <!-- TTS diagnostic panel -->
+  <div id="tts-panel">
+    <div class="tts-panel-title">TTS SOURCE STATUS</div>
+    <div id="tts-rows"></div>
+  </div>
+
   <div id="video-banner">
     <span style="color:#d4a843;font-size:16px">✔</span>
     <span class="vbt" id="vb-msg">Narrated video ready</span>
@@ -207,14 +220,14 @@ button:disabled{opacity:0.4 !important;cursor:wait !important;transform:none !im
   <div id="slides-error"></div>
 </div>
 
-<!-- VIDEO PROGRESS -->
 <div id="vid-progress">
   <div class="vp-spinner"></div>
   <div id="vp-title">Generating Narrated Video…</div>
-  <div id="vp-slide-msg">Fetching narration audio…</div>
+  <div id="vp-slide-msg">Preparing…</div>
   <div id="vp-narr-text"></div>
   <div class="vp-bar-wrap"><div id="vp-bar"></div></div>
   <div id="vp-step">Keep this tab active</div>
+  <div id="vp-audio-log"></div>
 </div>
 
 <canvas id="render-canvas" style="display:none"></canvas>
@@ -225,23 +238,63 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 let slides = [], current = 0, docTitle = 'Presentation';
 let apiKey = sessionStorage.getItem('pdf_tf_key') || '';
-// Cache: audioBuffers[i] = AudioBuffer for slide i (pre-fetched)
-let audioBuffers = [];
+let audioBuffers  = [];   // AudioBuffer per slide
+let audioSources  = [];   // which TTS source succeeded per slide
+let ttsStatusMap  = {};   // source name → 'ok'|'fail'|'idle'
+let sharedAudioCtx = null;
 
+// ── TTS Sources ────────────────────────────────────────────────────
+// Tried in order for every slide; first one that returns valid audio wins
+function buildTTSSources(text) {
+  const enc = encodeURIComponent(text.slice(0, 350));
+  return [
+    // 1. StreamElements — free, no key, supports CORS
+    {
+      name: 'StreamElements (Brian)',
+      url : `https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${enc}`
+    },
+    {
+      name: 'StreamElements (Amy)',
+      url : `https://api.streamelements.com/kappa/v2/speech?voice=Amy&text=${enc}`
+    },
+    // 2. corsproxy.io wrapping StreamElements
+    {
+      name: 'StreamElements via corsproxy.io',
+      url : `https://corsproxy.io/?${encodeURIComponent(`https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${enc}`)}`
+    },
+    // 3. Google Translate TTS (unofficial, sometimes blocked)
+    {
+      name: 'Google Translate TTS',
+      url : `https://translate.google.com/translate_tts?ie=UTF-8&q=${enc}&tl=en-US&client=tw-ob`
+    },
+    // 4. Google TTS via corsproxy.io
+    {
+      name: 'Google TTS via corsproxy.io',
+      url : `https://corsproxy.io/?${encodeURIComponent(`https://translate.google.com/translate_tts?ie=UTF-8&q=${enc}&tl=en-US&client=tw-ob`)}`
+    },
+    // 5. allorigins proxy wrapping StreamElements
+    {
+      name: 'StreamElements via allorigins',
+      url : `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${enc}`)}`
+    }
+  ];
+}
+
+// ── Init ──────────────────────────────────────────────────────────
 (function init() {
   if (apiKey) { document.getElementById('api-key-input').value = apiKey; showKeyStatus(true); }
 })();
 
-// ── API Key ───────────────────────────────────────────────────────
+// ── Key ───────────────────────────────────────────────────────────
 function saveKey() {
   const v = document.getElementById('api-key-input').value.trim();
-  if (!v.startsWith('sk-ant-')) { showKeyStatus(false, 'Must start with sk-ant-'); return; }
+  if (!v.startsWith('sk-ant-')) { showKeyStatus(false,'Must start with sk-ant-'); return; }
   apiKey = v; sessionStorage.setItem('pdf_tf_key', apiKey); showKeyStatus(true);
 }
 function showKeyStatus(ok, msg) {
   const el = document.getElementById('key-status');
   el.className = ok ? 'ok' : 'bad';
-  el.textContent = ok ? '✔ Saved' : ('✘ ' + (msg || 'Invalid'));
+  el.textContent = ok ? '✔ Saved' : ('✘ '+(msg||'Invalid'));
 }
 
 // ── Helpers ───────────────────────────────────────────────────────
@@ -250,7 +303,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 function showErrUpload(m) { const e=$('upload-error'); e.innerHTML='⚠ '+m; e.classList.add('show'); }
 function showErrSlides(m) { const e=$('slides-error'); e.textContent='⚠ '+m; e.classList.add('show'); }
-function clearErr()       { $('upload-error').classList.remove('show'); $('slides-error').classList.remove('show'); }
+function clearErr() { $('upload-error').classList.remove('show'); $('slides-error').classList.remove('show'); }
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -261,9 +314,11 @@ function showView(name) {
 }
 function setProc(m) { $('proc-msg').textContent = m; }
 function resetApp() {
-  slides=[]; current=0; audioBuffers=[]; clearErr();
-  $('video-banner').classList.remove('show');
-  $('narration-box').classList.remove('show');
+  slides=[]; current=0; audioBuffers=[]; audioSources=[]; ttsStatusMap={};
+  if (sharedAudioCtx && sharedAudioCtx.state !== 'closed') sharedAudioCtx.close().catch(()=>{});
+  sharedAudioCtx = null;
+  clearErr(); $('video-banner').classList.remove('show'); $('narration-box').classList.remove('show');
+  $('tts-panel').classList.remove('show');
   showView('upload');
 }
 
@@ -312,7 +367,7 @@ async function callClaude(rawText) {
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 5000,
       system: `You are a presentation designer and narrator. Transform raw noisy PDF text into structured JSON for elegant slides with voice narration.
-OUTPUT ONLY VALID RAW JSON — no markdown, no explanation, just the JSON object.
+OUTPUT ONLY VALID RAW JSON — no markdown fences, no explanation, just the JSON object.
 
 Schema:
 {
@@ -324,20 +379,16 @@ Schema:
       "heading": "string",
       "subheading": "string (title/closing only)",
       "body": "string (one sentence, content only)",
-      "bullets": ["max 12 words each (content only)"],
-      "highlight": "string (powerful quote or stat, optional)",
-      "narration": "string — 2 to 3 natural spoken sentences, 30 to 50 words, written for a voice-over. Engaging and clear. No slide numbers."
+      "bullets": ["max 12 words each (content only, max 5)"],
+      "highlight": "string (optional powerful stat or quote)",
+      "narration": "string — 2 natural spoken sentences, 25 to 40 words maximum, clear voice-over style, no slide numbers"
     }
   ]
 }
 
-Rules:
-- 8 to 12 slides. First = title. Last = closing.
-- section: heading only, no bullets
-- content: max 5 bullets
-- narration is REQUIRED on every single slide
-- Strip all noise: page numbers, headers, footers, broken words, garbled OCR
-- Return ONLY the JSON object`,
+Rules: 8-12 slides total. First = title. Last = closing. section type has no bullets.
+narration is REQUIRED on every slide — keep it SHORT (under 40 words) for TTS reliability.
+Strip all noise: page numbers, headers, footers, broken words. Return ONLY JSON.`,
       messages: [{ role:'user', content:'Transform this PDF into narrated presentation JSON:\n\n'+rawText.substring(0,8000) }]
     })
   });
@@ -352,7 +403,7 @@ Rules:
 // ── Process File ──────────────────────────────────────────────────
 async function processFile(file) {
   if (!file) return;
-  if (!apiKey) { showErrUpload('Please enter and save your Anthropic API key at the top first.'); return; }
+  if (!apiKey) { showErrUpload('Please enter and save your Anthropic API key first.'); return; }
   if (file.type !== 'application/pdf') { showErrUpload('Please upload a valid PDF file.'); return; }
   clearErr(); showView('processing');
   try {
@@ -370,11 +421,15 @@ async function processFile(file) {
     docTitle = parsed.title || file.name.replace(/\.pdf$/i,'');
     current = 0;
     audioBuffers = new Array(slides.length).fill(null);
+    audioSources = new Array(slides.length).fill(null);
+    ttsStatusMap = {};
     $('doc-title-lbl').textContent  = docTitle;
     $('slide-count-lbl').textContent = slides.length+' slides';
     buildDots(); renderCurrentSlide(); showNarration();
     showView('slides');
-    // Kick off background audio prefetch after showing slides
+    // Init shared AudioContext then prefetch
+    sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    initTTSPanel();
     prefetchAllAudio();
   } catch(err) {
     console.error(err);
@@ -383,61 +438,98 @@ async function processFile(file) {
   }
 }
 
-// ── TTS Fetch via StreamElements (free, no key, CORS-enabled) ────
-// Fallback voices tried in order if primary fails
-const TTS_VOICES = ['Matthew', 'Brian', 'Amy', 'Joey'];
+// ── TTS Panel ─────────────────────────────────────────────────────
+const TTS_SOURCE_NAMES = [
+  'StreamElements (Brian)',
+  'StreamElements (Amy)',
+  'StreamElements via corsproxy.io',
+  'Google Translate TTS',
+  'Google TTS via corsproxy.io',
+  'StreamElements via allorigins'
+];
 
-async function fetchTTSBlob(text) {
-  const encoded = encodeURIComponent(text.substring(0, 450));
-  for (const voice of TTS_VOICES) {
-    try {
-      const url = `https://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${encoded}`;
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) continue;
-      const blob = await res.blob();
-      if (blob.size > 1000) return blob; // valid audio
-    } catch (_) { /* try next voice */ }
-  }
-  return null; // all voices failed
+function initTTSPanel() {
+  const rows = $('tts-rows'); rows.innerHTML = '';
+  TTS_SOURCE_NAMES.forEach(name => {
+    ttsStatusMap[name] = 'idle';
+    const row = document.createElement('div');
+    row.className = 'tts-source-row';
+    row.id = 'tts-row-'+name.replace(/\W+/g,'_');
+    row.innerHTML = `<span class="tts-src-name">${name}</span><span class="tts-src-status idle" id="tts-st-${name.replace(/\W+/g,'_')}">— idle</span>`;
+    rows.appendChild(row);
+  });
 }
 
+function updateTTSStatus(name, status) {
+  ttsStatusMap[name] = status;
+  const el = document.getElementById('tts-st-'+name.replace(/\W+/g,'_'));
+  if (!el) return;
+  el.className = 'tts-src-status '+status;
+  el.textContent = status === 'ok' ? '✔ working' : status === 'fail' ? '✘ failed' : status === 'try' ? '⏳ trying…' : '— idle';
+}
+
+function toggleTTSPanel() {
+  $('tts-panel').classList.toggle('show');
+}
+
+// ── Fetch TTS Buffer ──────────────────────────────────────────────
 async function fetchTTSBuffer(audioCtx, text) {
-  const blob = await fetchTTSBlob(text);
-  if (!blob) return null;
-  try {
-    const arrayBuf = await blob.arrayBuffer();
-    return await audioCtx.decodeAudioData(arrayBuf);
-  } catch(e) {
-    console.warn('decodeAudioData failed:', e);
-    return null;
+  const sources = buildTTSSources(text);
+  for (const src of sources) {
+    updateTTSStatus(src.name, 'try');
+    try {
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 8000); // 8s timeout per source
+      const res = await fetch(src.url, {
+        signal: controller.signal,
+        headers: { 'Accept': 'audio/mpeg, audio/*, */*' }
+      });
+      clearTimeout(tid);
+      if (!res.ok) { updateTTSStatus(src.name, 'fail'); continue; }
+      const blob = await res.blob();
+      if (blob.size < 1500) { updateTTSStatus(src.name, 'fail'); continue; } // too small = error page
+      const arrayBuf = await blob.arrayBuffer();
+      const audioBuf = await audioCtx.decodeAudioData(arrayBuf);
+      updateTTSStatus(src.name, 'ok');
+      console.log(`✔ TTS OK: ${src.name} (${audioBuf.duration.toFixed(1)}s)`);
+      return { buffer: audioBuf, sourceName: src.name };
+    } catch(e) {
+      updateTTSStatus(src.name, 'fail');
+      console.warn(`✘ TTS fail: ${src.name} — ${e.message}`);
+    }
   }
+  return null; // all sources failed
 }
 
-// Prefetch all audio in the background (non-blocking)
+// ── Prefetch All Audio in Background ─────────────────────────────
 async function prefetchAllAudio() {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
   for (let i = 0; i < slides.length; i++) {
     if (!slides[i].narration) continue;
     try {
-      audioBuffers[i] = await fetchTTSBuffer(ctx, slides[i].narration);
-    } catch(_) { audioBuffers[i] = null; }
-    // Update UI if this is the current slide
-    if (i === current) showNarration();
+      const result = await fetchTTSBuffer(sharedAudioCtx, slides[i].narration);
+      if (result) {
+        audioBuffers[i] = result.buffer;
+        audioSources[i] = result.sourceName;
+      }
+    } catch(_) {}
+    if (i === current) showNarration(); // refresh badge for current slide
   }
-  await ctx.close();
+  if (i === current) showNarration();
 }
 
-// ── Narration Preview ─────────────────────────────────────────────
+// ── Narration Display ─────────────────────────────────────────────
 function showNarration() {
   const s = slides[current];
   if (!s?.narration) { $('narration-box').classList.remove('show'); return; }
   $('narration-text').textContent = s.narration;
   $('narration-box').classList.add('show');
-  const st = $('nb-audio-status');
+  const st = $('nb-status'), src = $('nb-source');
   if (audioBuffers[current]) {
-    st.className = 'fetched'; st.textContent = '✔ Audio ready';
+    st.className = 'ok'; st.textContent = '✔ Audio ready';
+    src.textContent = audioSources[current] ? '('+audioSources[current]+')' : '';
   } else {
-    st.className = 'missing'; st.textContent = '⏳ Fetching…';
+    st.className = 'fetch'; st.textContent = '⏳ Fetching…';
+    src.textContent = '';
   }
 }
 
@@ -446,10 +538,10 @@ function previewNarration() {
   if (!s?.narration) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(s.narration);
-  u.rate=0.92; u.pitch=1.0; u.volume=1.0;
+  u.rate=0.9; u.pitch=1.0; u.volume=1.0;
   const voices = speechSynthesis.getVoices();
   const pref = voices.find(v=>/en[-_]?(GB|US)/i.test(v.lang)) || voices.find(v=>/en/i.test(v.lang));
-  if (pref) u.voice = pref;
+  if (pref) u.voice=pref;
   speechSynthesis.speak(u);
 }
 
@@ -457,258 +549,254 @@ function previewNarration() {
 async function startVideo() {
   clearErr(); $('video-banner').classList.remove('show');
   $('vid-progress').classList.add('show');
-  document.querySelectorAll('button').forEach(b => b.disabled = true);
+  document.querySelectorAll('button').forEach(b => b.disabled=true);
 
   try {
     const W=1280, H=720;
     const cv=$('render-canvas'); cv.width=W; cv.height=H;
     const ctx = cv.getContext('2d');
 
-    // AudioContext for capturing TTS into MediaRecorder
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    await audioCtx.resume();
+    // Use or create AudioContext
+    if (!sharedAudioCtx || sharedAudioCtx.state==='closed') {
+      sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    await sharedAudioCtx.resume();
+    const audioCtx  = sharedAudioCtx;
     const audioDest = audioCtx.createMediaStreamDestination();
 
-    // Always keep a silent node connected so the audio track stays active
-    const silentOsc = audioCtx.createOscillator();
-    const silentGain = audioCtx.createGain();
-    silentGain.gain.value = 0.0001; // near-silent, keeps stream alive
-    silentOsc.connect(silentGain); silentGain.connect(audioDest);
-    silentOsc.start();
+    // Silence node to keep audio stream alive
+    const silentOsc  = audioCtx.createOscillator();
+    const silentGain = audioCtx.createGain(); silentGain.gain.value = 0.00001;
+    silentOsc.connect(silentGain); silentGain.connect(audioDest); silentOsc.start();
 
-    // Fetch any missing audio now (synchronous pre-fetch before recording)
-    $('vp-title').textContent = 'Fetching Narration Audio…';
-    for (let i = 0; i < slides.length; i++) {
-      if (!audioBuffers[i] && slides[i].narration) {
-        setVidStep(`Fetching audio ${i+1}/${slides.length}…`);
-        $('vp-bar').style.width = Math.round((i/slides.length)*50)+'%';
-        audioBuffers[i] = await fetchTTSBuffer(audioCtx, slides[i].narration);
+    // Fetch missing audio
+    $('vp-title').textContent='Fetching Narration Audio…';
+    let fetchedCount=0, failedCount=0;
+    for (let i=0; i<slides.length; i++) {
+      if (audioBuffers[i]) { fetchedCount++; continue; }
+      if (!slides[i].narration) continue;
+      $('vp-slide-msg').textContent=`Fetching audio ${i+1}/${slides.length}…`;
+      $('vp-narr-text').textContent=slides[i].narration;
+      $('vp-bar').style.width=Math.round((i/slides.length)*40)+'%';
+      const result = await fetchTTSBuffer(audioCtx, slides[i].narration);
+      if (result) {
+        audioBuffers[i]=result.buffer; audioSources[i]=result.sourceName; fetchedCount++;
+        $('vp-audio-log').textContent='✔ '+result.sourceName;
+      } else {
+        failedCount++;
+        $('vp-audio-log').textContent='✘ All TTS sources failed for slide '+(i+1);
       }
     }
 
-    const audioReady  = audioBuffers.filter(Boolean).length;
-    const audioMissed = slides.length - audioReady;
-    setVidStep(`Audio: ${audioReady}/${slides.length} slides ready. Starting render…`);
-    if (audioMissed > 0) console.warn(`${audioMissed} slides will use speech fallback`);
+    const audioOk = fetchedCount > 0;
+    if (!audioOk) {
+      // Warn but continue — video will be silent
+      $('vp-audio-log').textContent = '⚠ All TTS sources blocked — video will be silent';
+      await sleep(1800);
+    } else {
+      $('vp-audio-log').textContent = `✔ ${fetchedCount}/${slides.length} slides have audio`;
+      await sleep(400);
+    }
 
-    await sleep(400);
-    $('vp-title').textContent = 'Recording Video…';
+    $('vp-title').textContent='Recording Video…';
+    $('vp-bar').style.width='40%';
 
-    // Combine canvas stream + AudioContext stream
+    // Build MediaStream: canvas video + AudioContext audio
     const canvasStream = cv.captureStream(30);
     const combined = new MediaStream([
       ...canvasStream.getVideoTracks(),
       ...audioDest.stream.getAudioTracks()
     ]);
 
-    // Choose best supported codec (must include opus for audio)
     const mimeType = [
       'video/webm;codecs=vp8,opus',
       'video/webm;codecs=vp9,opus',
+      'video/webm;codecs=h264,opus',
       'video/webm'
     ].find(m => MediaRecorder.isTypeSupported(m)) || 'video/webm';
+
+    console.log('Using mimeType:', mimeType);
 
     const recorder = new MediaRecorder(combined, {
       mimeType,
       videoBitsPerSecond: 5_000_000,
       audioBitsPerSecond: 128_000
     });
-    const chunks = [];
-    recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+    const chunks=[];
+    recorder.ondataavailable = e => { if (e.data.size>0) chunks.push(e.data); };
 
-    recorder.onstop = async () => {
-      silentOsc.stop(); await audioCtx.close();
+    recorder.onstop = () => {
+      silentOsc.stop();
       const blob = new Blob(chunks, { type:'video/webm' });
       const url  = URL.createObjectURL(blob);
-      $('vb-dl').href = url;
-      $('vb-dl').download = docTitle.replace(/[^a-z0-9]/gi,'_')+'_narrated.webm';
-      const hasAudio = audioBuffers.some(Boolean);
-      $('vb-msg').textContent = hasAudio
-        ? `Narrated video ready — ${slides.length} slides with voice audio`
-        : `Video ready — ${slides.length} slides (TTS unavailable, silent)`;
+      $('vb-dl').href=url;
+      $('vb-dl').download=docTitle.replace(/[^a-z0-9]/gi,'_')+'_narrated.webm';
+      $('vb-msg').textContent = audioOk
+        ? `✔ Narrated video — ${fetchedCount}/${slides.length} slides with voice audio`
+        : `Video ready — ${slides.length} slides (TTS blocked in this browser)`;
       $('video-banner').classList.add('show');
       $('vid-progress').classList.remove('show');
-      document.querySelectorAll('button').forEach(b => b.disabled = false);
+      document.querySelectorAll('button').forEach(b => b.disabled=false);
     };
 
     recorder.start(200);
 
-    const FADE = 20;
-    const baseProgress = 50; // first 50% was audio fetch
-
-    for (let i = 0; i < slides.length; i++) {
-      const s   = slides[i];
-      const pct = baseProgress + Math.round(((i+1)/slides.length)*50);
-      $('vp-bar').style.width = pct+'%';
-      $('vp-slide-msg').textContent = `Slide ${i+1} of ${slides.length} — "${s.heading||''}"`;
-      $('vp-narr-text').textContent = s.narration || '';
+    const FADE=20;
+    for (let i=0; i<slides.length; i++) {
+      const s=slides[i];
+      const pct=40+Math.round(((i+1)/slides.length)*58);
+      $('vp-bar').style.width=pct+'%';
+      $('vp-slide-msg').textContent=`Slide ${i+1} of ${slides.length} — "${s.heading||''}"`;
+      $('vp-narr-text').textContent=s.narration||'';
 
       // Fade IN
-      for (let f=0; f<=FADE; f++) {
-        renderSlide(ctx, s, W, H, i, slides.length);
+      for (let f=0;f<=FADE;f++){
+        renderSlide(ctx,s,W,H,i,slides.length);
         ctx.globalAlpha=1-f/FADE; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1;
         await sleep(14);
       }
-      renderSlide(ctx, s, W, H, i, slides.length);
+      renderSlide(ctx,s,W,H,i,slides.length);
 
-      // ── PLAY AUDIO through AudioContext (captured into MediaRecorder) ──
+      // ── PLAY AUDIO through AudioContext ──
       if (audioBuffers[i]) {
-        setVidStep('🔊 Playing narration audio…');
-        const src = audioCtx.createBufferSource();
-        src.buffer = audioBuffers[i];
-        src.connect(audioDest);          // → captured into WebM
-        src.connect(audioCtx.destination); // → user hears it too
-        src.start(audioCtx.currentTime);
-        const duration = audioBuffers[i].duration * 1000;
+        $('vp-step').textContent='🔊 '+audioSources[i];
+        $('vp-audio-log').textContent='Playing: '+s.narration.slice(0,60)+'…';
+        const src2 = audioCtx.createBufferSource();
+        src2.buffer = audioBuffers[i];
+        src2.connect(audioDest);            // → into MediaRecorder ✅
+        src2.connect(audioCtx.destination); // → speakers (user can hear)
+        src2.start(audioCtx.currentTime);
         await new Promise(resolve => {
-          src.onended = resolve;
-          setTimeout(resolve, duration + 600); // safety timeout
+          src2.onended = resolve;
+          setTimeout(resolve, (audioBuffers[i].duration*1000)+800);
         });
-        await sleep(300);
+        await sleep(250);
       } else {
-        // No TTS audio — hold slide for fixed duration
-        setVidStep('⏸ Holding slide (no audio)…');
-        await sleep(3800);
+        $('vp-step').textContent='⏸ No audio for this slide';
+        $('vp-audio-log').textContent='';
+        await sleep(3600);
       }
 
       // Fade OUT
-      for (let f=0; f<=FADE; f++) {
-        renderSlide(ctx, s, W, H, i, slides.length);
+      for (let f=0;f<=FADE;f++){
+        renderSlide(ctx,s,W,H,i,slides.length);
         ctx.globalAlpha=f/FADE; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1;
         await sleep(14);
       }
     }
 
     $('vp-bar').style.width='100%';
-    setVidStep('Finalising…');
+    $('vp-step').textContent='Finalising…';
+    await sleep(300);
     recorder.stop();
 
   } catch(err) {
     console.error('Video error:', err);
     $('vid-progress').classList.remove('show');
-    document.querySelectorAll('button').forEach(b => b.disabled = false);
+    document.querySelectorAll('button').forEach(b => b.disabled=false);
     showErrSlides('Video generation failed: '+err.message);
   }
 }
 
-function setVidStep(m) { $('vp-step').textContent = m; }
-
 // ── Canvas Rendering ──────────────────────────────────────────────
-function wrapText(ctx, text, x, y, maxW, lh) {
-  if (!text) return y;
-  const words = String(text).split(' ');
-  let line='', cy=y;
-  for (const w of words) {
-    const t=line+w+' ';
-    if (ctx.measureText(t).width>maxW&&line){ctx.fillText(line.trim(),x,cy);line=w+' ';cy+=lh;}
-    else line=t;
-  }
-  if (line.trim()) ctx.fillText(line.trim(),x,cy);
-  return cy+lh;
+function wrapText(ctx,text,x,y,maxW,lh){
+  if(!text)return y;
+  const words=String(text).split(' ');let line='',cy=y;
+  for(const w of words){const t=line+w+' ';if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line.trim(),x,cy);line=w+' ';cy+=lh;}else line=t;}
+  if(line.trim())ctx.fillText(line.trim(),x,cy);return cy+lh;
 }
 
-function renderSlide(ctx, slide, W, H, idx, total) {
+function renderSlide(ctx,slide,W,H,idx,total){
   ctx.clearRect(0,0,W,H);
   const bg=ctx.createLinearGradient(0,0,W,H);
   if(slide.type==='title'||slide.type==='closing'){bg.addColorStop(0,'#0c1520');bg.addColorStop(1,'#1a2d42');}
   else if(slide.type==='section'){bg.addColorStop(0,'#160f24');bg.addColorStop(1,'#0c1520');}
   else{bg.addColorStop(0,'#0e1823');bg.addColorStop(1,'#0a1218');}
-  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-
-  const G='#d4a843';
-  const isTit=slide.type==='title'||slide.type==='closing';
-  const isSec=slide.type==='section';
-
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  const G='#d4a843',isTit=slide.type==='title'||slide.type==='closing',isSec=slide.type==='section';
   if(isTit){
     [0.38,0.46,0.54].forEach((r,i)=>{ctx.save();ctx.strokeStyle=`rgba(212,168,67,${0.07-i*0.018})`;ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(W/2,H/2,r*H,0,Math.PI*2);ctx.stroke();ctx.restore();});
-    ctx.textAlign='center';ctx.fillStyle=G;
-    ctx.font=`bold ${Math.round(H*0.076)}px 'Playfair Display',Georgia,serif`;
-    const ty=wrapText(ctx,slide.heading||'Untitled',W/2,H*0.36,W-200,H*0.09)+H*0.022;
+    ctx.textAlign='center';ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.076)}px 'Playfair Display',Georgia,serif`;
+    const ty=wrapText(ctx,slide.heading||'',W/2,H*.36,W-200,H*.09)+H*.022;
     ctx.fillStyle=G;ctx.fillRect(W/2-60,ty,120,2);
-    if(slide.subheading){ctx.fillStyle='rgba(220,235,248,0.7)';ctx.font=`italic ${Math.round(H*0.032)}px 'Playfair Display',serif`;wrapText(ctx,slide.subheading,W/2,ty+H*0.04,W-200,H*0.042);}
-  } else if(isSec){
-    ctx.textAlign='center';ctx.fillStyle=G;ctx.font=`${Math.round(H*0.052)}px serif`;ctx.fillText('◆',W/2,H*0.41);
-    ctx.fillStyle='#e0eaf4';ctx.font=`bold ${Math.round(H*0.064)}px 'Playfair Display',serif`;
-    wrapText(ctx,slide.heading||'',W/2,H*0.49,W-200,H*0.076);
-    ctx.fillStyle='rgba(212,168,67,0.3)';ctx.fillRect(W/2-80,H*0.73,160,1);
-  } else {
-    const barG=ctx.createLinearGradient(0,H*0.12,0,H*0.88);
-    barG.addColorStop(0,G);barG.addColorStop(1,'rgba(212,168,67,0.1)');
-    ctx.fillStyle=barG;ctx.fillRect(Math.round(W*0.04),H*0.12,4,H*0.76);
-    ctx.fillStyle='rgba(212,168,67,0.18)';ctx.fillRect(W*0.058,H*0.1,W*0.9,1);
-    const lx=W*0.07;ctx.textAlign='left';
-    ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*0.056)}px 'Playfair Display',serif`;
-    let y=wrapText(ctx,slide.heading||'',lx,H*0.17,W-lx*2.4,H*0.068)+H*0.014;
-    if(slide.body){ctx.fillStyle='rgba(200,218,234,0.72)';ctx.font=`italic ${Math.round(H*0.032)}px 'Playfair Display',serif`;y=wrapText(ctx,slide.body,lx,y,W-lx*2.4,H*0.042)+H*0.016;}
+    if(slide.subheading){ctx.fillStyle='rgba(220,235,248,.7)';ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;wrapText(ctx,slide.subheading,W/2,ty+H*.04,W-200,H*.042);}
+  }else if(isSec){
+    ctx.textAlign='center';ctx.fillStyle=G;ctx.font=`${Math.round(H*.052)}px serif`;ctx.fillText('◆',W/2,H*.41);
+    ctx.fillStyle='#e0eaf4';ctx.font=`bold ${Math.round(H*.064)}px 'Playfair Display',serif`;
+    wrapText(ctx,slide.heading||'',W/2,H*.49,W-200,H*.076);
+    ctx.fillStyle='rgba(212,168,67,.3)';ctx.fillRect(W/2-80,H*.73,160,1);
+  }else{
+    const barG=ctx.createLinearGradient(0,H*.12,0,H*.88);barG.addColorStop(0,G);barG.addColorStop(1,'rgba(212,168,67,.1)');
+    ctx.fillStyle=barG;ctx.fillRect(Math.round(W*.04),H*.12,4,H*.76);
+    ctx.fillStyle='rgba(212,168,67,.18)';ctx.fillRect(W*.058,H*.1,W*.9,1);
+    const lx=W*.07;ctx.textAlign='left';
+    ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.056)}px 'Playfair Display',serif`;
+    let y=wrapText(ctx,slide.heading||'',lx,H*.17,W-lx*2.4,H*.068)+H*.014;
+    if(slide.body){ctx.fillStyle='rgba(200,218,234,.72)';ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;y=wrapText(ctx,slide.body,lx,y,W-lx*2.4,H*.042)+H*.016;}
     if(Array.isArray(slide.bullets)){
       slide.bullets.slice(0,5).forEach(b=>{
-        if(y>H*0.8)return;
-        ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*0.028)}px sans-serif`;ctx.fillText('▸',lx,y);
-        ctx.fillStyle='#dce9f5';ctx.font=`${Math.round(H*0.032)}px sans-serif`;
-        y=wrapText(ctx,String(b),lx+W*0.026,y,W-lx*2.4-W*0.026,H*0.042)+H*0.007;
+        if(y>H*.8)return;
+        ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.028)}px sans-serif`;ctx.fillText('▸',lx,y);
+        ctx.fillStyle='#dce9f5';ctx.font=`${Math.round(H*.032)}px sans-serif`;
+        y=wrapText(ctx,String(b),lx+W*.026,y,W-lx*2.4-W*.026,H*.042)+H*.007;
       });
     }
     if(slide.highlight){
-      const by=H*0.818,bh=H*0.082;
-      ctx.fillStyle='rgba(212,168,67,0.07)';ctx.strokeStyle='rgba(212,168,67,0.28)';ctx.lineWidth=1;
+      const by=H*.818,bh=H*.082;
+      ctx.fillStyle='rgba(212,168,67,.07)';ctx.strokeStyle='rgba(212,168,67,.28)';ctx.lineWidth=1;
       ctx.fillRect(lx,by,W-lx*2.4,bh);ctx.strokeRect(lx,by,W-lx*2.4,bh);
-      ctx.fillStyle=G;ctx.font=`italic ${Math.round(H*0.028)}px 'Playfair Display',serif`;
-      ctx.textAlign='center';ctx.fillText(`"${slide.highlight}"`,W/2,by+bh*0.58);
+      ctx.fillStyle=G;ctx.font=`italic ${Math.round(H*.028)}px 'Playfair Display',serif`;
+      ctx.textAlign='center';ctx.fillText(`"${slide.highlight}"`,W/2,by+bh*.58);
     }
   }
-
-  ctx.fillStyle='rgba(212,168,67,0.08)';ctx.fillRect(0,H*0.936,W,H*0.064);
-  ctx.fillStyle=G;ctx.fillRect(0,H*0.936,W*((idx+1)/total),2);
-  ctx.fillStyle='rgba(255,255,255,0.25)';
-  ctx.font=`${Math.round(H*0.022)}px 'Courier New',monospace`;ctx.textAlign='right';
-  ctx.fillText(String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0'),W-W*0.03,H*0.973);
+  ctx.fillStyle='rgba(212,168,67,.08)';ctx.fillRect(0,H*.936,W,H*.064);
+  ctx.fillStyle=G;ctx.fillRect(0,H*.936,W*((idx+1)/total),2);
+  ctx.fillStyle='rgba(255,255,255,.25)';ctx.font=`${Math.round(H*.022)}px 'Courier New',monospace`;ctx.textAlign='right';
+  ctx.fillText(String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0'),W-W*.03,H*.973);
 }
 
 // ── Display / Nav ─────────────────────────────────────────────────
-function renderCurrentSlide() {
-  const c=$('slide-canvas'), wrap=$('slide-wrap');
-  const W=wrap.clientWidth||640, H=Math.round(W*9/16);
-  c.width=W; c.height=H; c.style.width='100%'; c.style.height='100%';
-  if(slides[current]) renderSlide(c.getContext('2d'),slides[current],W,H,current,slides.length);
+function renderCurrentSlide(){
+  const c=$('slide-canvas'),wrap=$('slide-wrap');
+  const W=wrap.clientWidth||640,H=Math.round(W*9/16);
+  c.width=W;c.height=H;c.style.width='100%';c.style.height='100%';
+  if(slides[current])renderSlide(c.getContext('2d'),slides[current],W,H,current,slides.length);
   updateNav();
 }
-function buildDots() {
-  const d=$('dots'); d.innerHTML='';
+function buildDots(){
+  const d=$('dots');d.innerHTML='';
   slides.forEach((_,i)=>{
-    const b=document.createElement('button');
-    b.className='dot'+(i===current?' active':'');
-    b.onclick=()=>{current=i;renderCurrentSlide();showNarration();};
-    d.appendChild(b);
+    const b=document.createElement('button');b.className='dot'+(i===current?' active':'');
+    b.onclick=()=>{current=i;renderCurrentSlide();showNarration();};d.appendChild(b);
   });
 }
-function updateNav() {
-  $('btn-prev').disabled=current===0; $('btn-next').disabled=current===slides.length-1;
+function updateNav(){
+  $('btn-prev').disabled=current===0;$('btn-next').disabled=current===slides.length-1;
   document.querySelectorAll('.dot').forEach((d,i)=>{d.className='dot'+(i===current?' active':'');});
 }
-function navigate(dir) {
+function navigate(dir){
   current=Math.max(0,Math.min(slides.length-1,current+dir));
-  renderCurrentSlide(); showNarration();
+  renderCurrentSlide();showNarration();
 }
-window.addEventListener('resize',()=>{ if(slides.length) renderCurrentSlide(); });
+window.addEventListener('resize',()=>{if(slides.length)renderCurrentSlide();});
 
 // ── Export PDF ────────────────────────────────────────────────────
-async function exportPDF() {
+async function exportPDF(){
   if(!window.jspdf){showErrSlides('jsPDF not loaded yet.');return;}
-  clearErr();
-  const btn=$('btn-pdf'); btn.disabled=true; btn.textContent='⏳ Exporting…';
-  try {
-    const {jsPDF}=window.jspdf;
-    const W=1280,H=720,doc=new jsPDF({orientation:'l',unit:'px',format:[W,H]});
-    const cv=$('render-canvas'); cv.width=W; cv.height=H; const ctx=cv.getContext('2d');
+  clearErr();const btn=$('btn-pdf');btn.disabled=true;btn.textContent='⏳ Exporting…';
+  try{
+    const{jsPDF}=window.jspdf;const W=1280,H=720;
+    const doc=new jsPDF({orientation:'l',unit:'px',format:[W,H]});
+    const cv=$('render-canvas');cv.width=W;cv.height=H;const ctx=cv.getContext('2d');
     for(let i=0;i<slides.length;i++){
       btn.textContent=`⏳ ${i+1}/${slides.length}…`;
-      if(i>0) doc.addPage([W,H],'l');
+      if(i>0)doc.addPage([W,H],'l');
       renderSlide(ctx,slides[i],W,H,i,slides.length);
-      doc.addImage(cv.toDataURL('image/jpeg',0.93),'JPEG',0,0,W,H);
+      doc.addImage(cv.toDataURL('image/jpeg',.93),'JPEG',0,0,W,H);
     }
     doc.save(docTitle.replace(/[^a-z0-9]/gi,'_')+'_elegant.pdf');
-  } catch(e){showErrSlides('PDF export failed: '+e.message);}
-  btn.disabled=false; btn.textContent='⬇ Export PDF';
+  }catch(e){showErrSlides('PDF export failed: '+e.message);}
+  btn.disabled=false;btn.textContent='⬇ Export PDF';
 }
 </script>
 </body>
