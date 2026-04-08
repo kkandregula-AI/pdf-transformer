@@ -8,26 +8,24 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="PDF Transformer"/>
-<meta name="application-name" content="PDF Transformer"/>
 <title>PDF Transformer — Elegant Slides + Narrated Video</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<!-- PWA icons generated at runtime via JS below -->
 <link id="apple-touch-icon" rel="apple-touch-icon" href=""/>
-<link id="pwa-manifest"     rel="manifest"         href=""/>
-
+<link id="pwa-manifest" rel="manifest" href=""/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
 
+/* HEADER */
 #header{position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:12px;padding:13px 20px;background:#0a0b10;border-bottom:1px solid rgba(212,168,67,.22)}
 #logo-icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#d4a843,#f0c55a);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(212,168,67,.32);font-size:18px;flex-shrink:0}
 .logo-title{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;font-weight:700;line-height:1}
 .logo-sub{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);margin-top:3px}
 #btn-new{margin-left:auto;display:none;background:transparent;border:1px solid rgba(212,168,67,.28);color:#d4a843;padding:6px 13px;border-radius:5px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif}
 
+/* API BANNER */
 #api-banner{background:#0e1018;border-bottom:1px solid rgba(212,168,67,.15);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .ab-label{font-size:12px;color:#d4a843;font-weight:600;white-space:nowrap}
 #api-key-input{flex:1;min-width:180px;background:rgba(255,255,255,.05);border:1px solid rgba(212,168,67,.25);border-radius:6px;padding:8px 12px;color:#e4e4e4;font-size:12px;font-family:'Courier New',monospace;outline:none;transition:border .2s}
@@ -35,12 +33,14 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 #api-key-input::placeholder{color:rgba(255,255,255,.2)}
 #btn-save-key{background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:6px;color:#07080d;padding:8px 16px;cursor:pointer;font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif}
 #key-status{font-size:11px;white-space:nowrap}
-#key-status.ok{color:#6ee7a0} #key-status.bad{color:#ff8080}
+#key-status.ok{color:#6ee7a0}#key-status.bad{color:#ff8080}
 .api-note{width:100%;font-size:10px;color:rgba(255,255,255,.28);margin-top:2px;line-height:1.5}
 
+/* VIEWS */
 .view{display:none}
 .view.active{display:flex;flex-direction:column;align-items:center}
 
+/* UPLOAD */
 #upload-view{gap:22px;padding:28px 20px 36px}
 .hero{text-align:center;max-width:580px}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,36px);font-weight:400;color:#e4e4e4;line-height:1.3;margin-bottom:12px}
@@ -59,11 +59,13 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 .fc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:13px}
 .fc .fi{font-size:19px;margin-bottom:7px}.fc .ft{font-size:11px;color:#d4a843;font-weight:600;margin-bottom:3px}.fc .fd{font-size:10px;color:rgba(255,255,255,.32);line-height:1.5}
 
+/* PROCESSING */
 #processing-view{justify-content:center;gap:20px;padding:60px 20px;min-height:60vh}
 .spinner{width:76px;height:76px;border-radius:50%;border:2px solid rgba(212,168,67,.14);border-top-color:#d4a843;animation:spin 1.1s linear infinite}
 #proc-msg{font-family:'Playfair Display',serif;color:#d4a843;font-size:19px;text-align:center;animation:pulse 2s ease-in-out infinite}
 #proc-sub{color:rgba(255,255,255,.28);font-size:12px;text-align:center}
 
+/* SLIDES */
 #slides-view{display:none;flex-direction:column;align-items:center;gap:14px;padding:20px 16px 30px;max-width:960px;margin:0 auto;width:100%}
 #slides-view.active{display:flex}
 .smeta{display:flex;align-items:center;gap:10px;width:100%}
@@ -78,13 +80,17 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 #nb-status{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:.5px}
 #nb-status.ok   {background:rgba(110,231,160,.15);color:#6ee7a0;border:1px solid rgba(110,231,160,.2)}
 #nb-status.fetch{background:rgba(212,168,67,.15);color:#d4a843;border:1px solid rgba(212,168,67,.2)}
-#nb-status.fail {background:rgba(255,128,128,.12);color:#ff9090;border:1px solid rgba(255,128,128,.2)}
+#nb-status.synth{background:rgba(100,160,255,.15);color:#80b4ff;border:1px solid rgba(100,160,255,.2)}
+
+/* iOS info banner */
+#ios-banner{display:none;width:100%;background:rgba(100,160,255,.06);border:1px solid rgba(100,160,255,.2);border-radius:8px;padding:11px 15px;font-size:12px;color:rgba(160,200,255,.8);line-height:1.6}
+#ios-banner.show{display:block}
 
 #nav-row{display:flex;align-items:center;justify-content:center;gap:12px}
 .nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,168,67,.2);background:rgba(212,168,67,.08);color:#d4a843;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .nav-btn:disabled{opacity:.2;cursor:default}
 .nav-btn:not(:disabled):hover{background:rgba(212,168,67,.18)}
-#dots{display:flex;gap:5px;align-items:center}
+#dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:300px}
 .dot{height:6px;border-radius:3px;background:rgba(255,255,255,.12);border:none;cursor:pointer;padding:0;transition:all .2s}
 .dot.active{background:#d4a843;width:20px !important}.dot:not(.active){width:6px}
 
@@ -102,7 +108,37 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 #slides-error{display:none;color:#ff8080;font-size:12px;background:rgba(220,60,60,.07);border:1px solid rgba(220,60,60,.2);border-radius:7px;padding:9px 15px;width:100%;text-align:center}
 #slides-error.show{display:block}
 
-/* progress overlay */
+/* PRESENT MODE FULLSCREEN OVERLAY */
+#present-overlay{display:none;position:fixed;inset:0;z-index:500;background:#07080d;flex-direction:column}
+#present-overlay.show{display:flex}
+#present-canvas-wrap{flex:1;position:relative;overflow:hidden}
+#present-canvas{width:100%;height:100%;object-fit:contain}
+#present-caption{
+  padding:14px 20px 20px;
+  background:rgba(0,0,0,.6);
+  font-size:clamp(12px,2.5vw,16px);
+  color:rgba(220,235,250,.82);
+  font-style:italic;
+  text-align:center;
+  line-height:1.55;
+  min-height:60px;
+  border-top:1px solid rgba(212,168,67,.12);
+}
+#present-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;background:#0a0b10;gap:12px;
+  border-top:1px solid rgba(212,168,67,.1);
+}
+.pc-btn{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);color:#d4a843;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif}
+#pc-counter{color:rgba(255,255,255,.3);font-size:11px;font-family:'Courier New',monospace}
+#pc-status{font-size:11px;color:#d4a843;display:flex;align-items:center;gap:5px}
+#pc-wave{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
+#pc-wave span{width:3px;border-radius:2px;background:#d4a843;display:inline-block;animation:wave 1.1s ease-in-out infinite}
+#pc-wave span:nth-child(2){animation-delay:.15s}
+#pc-wave span:nth-child(3){animation-delay:.3s}
+#pc-wave.paused span{animation-play-state:paused}
+
+/* VIDEO PROGRESS OVERLAY */
 #vid-progress{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.92);backdrop-filter:blur(4px);align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:24px}
 #vid-progress.show{display:flex}
 .vp-spinner{width:58px;height:58px;border-radius:50%;border:2px solid rgba(212,168,67,.14);border-top-color:#d4a843;animation:spin 1s linear infinite}
@@ -116,6 +152,7 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes wave{0%,100%{height:4px}50%{height:14px}}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .fadein{animation:fadein .35s ease forwards}
 </style>
@@ -136,17 +173,14 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
   <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off"/>
   <button id="btn-save-key" onclick="saveKey()">Save Key</button>
   <span id="key-status"></span>
-  <div class="api-note">
-    Session-only · Get free key at
-    <a href="https://console.anthropic.com" target="_blank" style="color:#d4a843">console.anthropic.com</a>
-  </div>
+  <div class="api-note">Session-only · Get free key at <a href="https://console.anthropic.com" target="_blank" style="color:#d4a843">console.anthropic.com</a></div>
 </div>
 
 <div id="upload-view" class="view active fadein">
   <div class="hero">
-    <h1>Turn a Messy PDF into an<br><em>Elegant Narrated Video</em></h1>
+    <h1>Turn a Messy PDF into an<br><em>Elegant Narrated Presentation</em></h1>
     <p>Upload any noisy document — reports, research, textbooks.<br>
-    Claude extracts insights, builds polished slides &amp; generates a video with real voice narration.</p>
+    Claude extracts insights &amp; builds polished slides with voice narration.</p>
   </div>
   <div id="drop-zone"
     onclick="document.getElementById('file-input').click()"
@@ -159,9 +193,9 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
   <div id="upload-error"></div>
   <div class="feat-grid">
     <div class="fc"><div class="fi">🧹</div><div class="ft">Noise Removal</div><div class="fd">Strips headers, footers &amp; OCR noise</div></div>
-    <div class="fc"><div class="fi">🤖</div><div class="ft">AI Structuring</div><div class="fd">Claude distills content into clean slides</div></div>
-    <div class="fc"><div class="fi">📑</div><div class="ft">Elegant PDF</div><div class="fd">Dark luxury 1280×720 export</div></div>
-    <div class="fc"><div class="fi">🔊</div><div class="ft">Voice Narration</div><div class="fd">Real audio baked into WebM video</div></div>
+    <div class="fc"><div class="fi">🤖</div><div class="ft">AI Structuring</div><div class="fd">Claude distills into clean slides</div></div>
+    <div class="fc"><div class="fi">📱</div><div class="ft">Present Mode</div><div class="fd">Auto-play with voice narration on any device</div></div>
+    <div class="fc"><div class="fi">🎬</div><div class="ft">Video Export</div><div class="fd">WebM with audio on desktop Chrome</div></div>
   </div>
 </div>
 
@@ -177,31 +211,59 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
     <div id="slide-count-lbl">0 slides</div>
   </div>
   <div id="slide-wrap"><canvas id="slide-canvas"></canvas></div>
+
+  <div id="ios-banner">
+    📱 <strong>iPhone/iPad:</strong> Use <strong>▶ Present</strong> for a fullscreen auto-narrated slideshow with voice audio.
+    Video export (.webm) works on desktop Chrome.
+  </div>
+
   <div id="narration-box">
-    <div class="nb-label">
-      🔊 SLIDE NARRATION &nbsp;
-      <span id="nb-status" class="fetch">⏳ Fetching audio…</span>
-    </div>
+    <div class="nb-label">🔊 SLIDE NARRATION &nbsp;<span id="nb-status" class="fetch">⏳ loading…</span></div>
     <span id="narration-text"></span>
   </div>
+
   <div id="nav-row">
     <button class="nav-btn" id="btn-prev" onclick="navigate(-1)">&#8249;</button>
     <div id="dots"></div>
     <button class="nav-btn" id="btn-next" onclick="navigate(1)">&#8250;</button>
   </div>
+
   <div id="action-row">
     <button class="btn-outline" id="btn-pdf"     onclick="exportPDF()">⬇ Export PDF</button>
-    <button class="btn-outline" id="btn-preview" onclick="previewNarration()">▶ Preview Audio</button>
-    <button class="btn-gold"    id="btn-vid"     onclick="startVideo()">🎬 Generate Video</button>
+    <button class="btn-gold"    id="btn-present" onclick="startPresent()">▶ Present</button>
+    <button class="btn-outline" id="btn-vid"     onclick="startVideo()" id="btn-vid">🎬 Generate Video</button>
   </div>
+
   <div id="video-banner">
     <span style="color:#d4a843;font-size:16px">✔</span>
-    <span class="vbt" id="vb-msg">Narrated video ready</span>
+    <span class="vbt" id="vb-msg">Video ready</span>
     <a id="vb-dl" class="dl-btn" href="#" download="narrated.webm">⬇ Download .webm</a>
   </div>
   <div id="slides-error"></div>
 </div>
 
+<!-- PRESENT MODE OVERLAY -->
+<div id="present-overlay">
+  <div id="present-canvas-wrap">
+    <canvas id="present-canvas"></canvas>
+  </div>
+  <div id="present-caption"></div>
+  <div id="present-controls">
+    <button class="pc-btn" onclick="presentPrev()">&#8249; Prev</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <div id="pc-status">
+        <div id="pc-wave"><span></span><span></span><span></span></div>
+        <span id="pc-status-txt">Speaking…</span>
+      </div>
+      <div id="pc-counter">1 / 1</div>
+    </div>
+    <button class="pc-btn" onclick="presentNext()">Next &#8250;</button>
+    <button class="pc-btn" onclick="presentPauseToggle()" id="pc-pause-btn">⏸ Pause</button>
+    <button class="pc-btn" onclick="stopPresent()" style="color:#ff9090;border-color:rgba(255,100,100,.3)">✕ Exit</button>
+  </div>
+</div>
+
+<!-- VIDEO PROGRESS -->
 <div id="vid-progress">
   <div class="vp-spinner"></div>
   <div id="vp-title">Generating Narrated Video…</div>
@@ -219,538 +281,557 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+// ── Device detection ──────────────────────────────────────────────
+const isIOS    = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+const isMobile = isIOS || /android/i.test(navigator.userAgent);
+
 // ── State ─────────────────────────────────────────────────────────
-let slides = [], current = 0, docTitle = 'Presentation';
-let apiKey = sessionStorage.getItem('pdf_tf_key') || '';
-let audioBuffers = [];   // AudioBuffer per slide
-let audioLabels  = [];   // which source name succeeded
-let audioCtx     = null;
+let slides=[], current=0, docTitle='Presentation';
+let apiKey = sessionStorage.getItem('pdf_tf_key')||'';
+let audioBuffers=[], audioLabels=[];
+let audioCtx = null;
 
-// ── PWA Setup (runs on load) ──────────────────────────────────────
-(function setupPWA() {
-  // Draw icon on a canvas → data URI
-  const sz = 512;
-  const ic = document.createElement('canvas');
-  ic.width = ic.height = sz;
-  const cx = ic.getContext('2d');
+// Present mode state
+let presentIdx=0, presentPaused=false, presentRunning=false;
 
-  // Background
-  const bg = cx.createRadialGradient(sz/2,sz/2,sz*0.05, sz/2,sz/2,sz*0.52);
+// ── PWA ───────────────────────────────────────────────────────────
+(function setupPWA(){
+  const sz=512, ic=document.createElement('canvas');
+  ic.width=ic.height=sz; const cx=ic.getContext('2d');
+  const bg=cx.createRadialGradient(sz/2,sz/2,sz*.05,sz/2,sz/2,sz*.52);
   bg.addColorStop(0,'#1a2d42'); bg.addColorStop(1,'#07080d');
-  cx.fillStyle = bg; cx.fillRect(0,0,sz,sz);
-
-  // Outer ring
-  cx.strokeStyle='rgba(212,168,67,0.35)'; cx.lineWidth=4;
-  cx.beginPath(); cx.arc(sz/2,sz/2,sz*0.44,0,Math.PI*2); cx.stroke();
-
-  // Inner ring
-  cx.strokeStyle='rgba(212,168,67,0.15)'; cx.lineWidth=2;
-  cx.beginPath(); cx.arc(sz/2,sz/2,sz*0.36,0,Math.PI*2); cx.stroke();
-
-  // Diamond ✦
-  cx.fillStyle='#d4a843';
-  cx.font=`bold ${sz*0.46}px serif`;
-  cx.textAlign='center'; cx.textBaseline='middle';
-  cx.fillText('✦', sz/2, sz*0.48);
-
-  // "PDF" label
-  cx.fillStyle='rgba(212,168,67,0.7)';
-  cx.font=`600 ${sz*0.095}px 'DM Sans',sans-serif`;
-  cx.fillText('PDF TRANSFORMER', sz/2, sz*0.82);
-
-  const iconDataURL = ic.toDataURL('image/png');
-
-  // Apple touch icon
-  document.getElementById('apple-touch-icon').href = iconDataURL;
-
-  // Manifest via Blob URL
-  const manifest = {
-    name: 'PDF Transformer',
-    short_name: 'PDF Transformer',
-    description: 'Convert noisy PDFs into elegant narrated slide videos',
-    start_url: './',
-    display: 'standalone',
-    background_color: '#07080d',
-    theme_color: '#0a0b10',
-    orientation: 'any',
-    icons: [
-      { src: iconDataURL, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
-    ]
-  };
-
-  // 192px icon
-  const ic2 = document.createElement('canvas'); ic2.width=ic2.height=192;
-  const cx2 = ic2.getContext('2d');
-  cx2.drawImage(ic,0,0,192,192);
-  manifest.icons.unshift({ src: ic2.toDataURL('image/png'), sizes: '192x192', type: 'image/png', purpose: 'any maskable' });
-
-  const blob = new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'});
-  document.getElementById('pwa-manifest').href = URL.createObjectURL(blob);
-
-  // Register minimal service worker for offline/install
-  if ('serviceWorker' in navigator) {
-    const swCode = `
-      const CACHE='pdf-transformer-v1';
-      self.addEventListener('install', e=>{
-        self.skipWaiting();
-        e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./', './index.html'])));
-      });
-      self.addEventListener('activate', e=>{ e.waitUntil(self.clients.claim()); });
-      self.addEventListener('fetch', e=>{
-        if(e.request.url.includes('api.anthropic.com') ||
-           e.request.url.includes('tiktok-tts') ||
-           e.request.url.includes('streamelements')) return;
-        e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
-      });
-    `;
-    const swBlob = new Blob([swCode], {type:'application/javascript'});
-    navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(()=>{});
+  cx.fillStyle=bg; cx.fillRect(0,0,sz,sz);
+  cx.strokeStyle='rgba(212,168,67,.35)'; cx.lineWidth=4;
+  cx.beginPath(); cx.arc(sz/2,sz/2,sz*.44,0,Math.PI*2); cx.stroke();
+  cx.strokeStyle='rgba(212,168,67,.15)'; cx.lineWidth=2;
+  cx.beginPath(); cx.arc(sz/2,sz/2,sz*.36,0,Math.PI*2); cx.stroke();
+  cx.fillStyle='#d4a843'; cx.font=`bold ${sz*.46}px serif`;
+  cx.textAlign='center'; cx.textBaseline='middle'; cx.fillText('✦',sz/2,sz*.48);
+  cx.fillStyle='rgba(212,168,67,.6)'; cx.font=`600 ${sz*.08}px sans-serif`;
+  cx.fillText('PDF TRANSFORMER',sz/2,sz*.83);
+  const dataURL=ic.toDataURL('image/png');
+  document.getElementById('apple-touch-icon').href=dataURL;
+  const manifest={name:'PDF Transformer',short_name:'PDF Transformer',
+    description:'Convert noisy PDFs into elegant narrated slide presentations',
+    start_url:'./',display:'standalone',background_color:'#07080d',theme_color:'#0a0b10',
+    orientation:'any',
+    icons:[{src:dataURL,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
+  const blob=new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
+  document.getElementById('pwa-manifest').href=URL.createObjectURL(blob);
+  if('serviceWorker'in navigator){
+    const sw=`const C='pft-v2';self.addEventListener('install',e=>{self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});self.addEventListener('fetch',e=>{if(e.request.url.includes('api.anthropic.com')||e.request.url.includes('workers.dev')||e.request.url.includes('streamelements'))return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
+    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
   }
 })();
 
-// ── API Key ───────────────────────────────────────────────────────
-(function initKey() {
-  if (apiKey) { document.getElementById('api-key-input').value = apiKey; showKeyStatus(true); }
+// ── Init ──────────────────────────────────────────────────────────
+(function init(){
+  if(apiKey){document.getElementById('api-key-input').value=apiKey;showKeyStatus(true);}
 })();
 
-function saveKey() {
-  const v = document.getElementById('api-key-input').value.trim();
-  if (!v.startsWith('sk-ant-')) { showKeyStatus(false,'Must start with sk-ant-'); return; }
-  apiKey = v; sessionStorage.setItem('pdf_tf_key', apiKey); showKeyStatus(true);
+function saveKey(){
+  const v=document.getElementById('api-key-input').value.trim();
+  if(!v.startsWith('sk-ant-')){showKeyStatus(false,'Must start with sk-ant-');return;}
+  apiKey=v; sessionStorage.setItem('pdf_tf_key',apiKey); showKeyStatus(true);
 }
-function showKeyStatus(ok, msg) {
-  const el = document.getElementById('key-status');
-  el.className = ok ? 'ok' : 'bad';
-  el.textContent = ok ? '✔ Saved' : ('✘ '+(msg||'Invalid'));
+function showKeyStatus(ok,msg){
+  const el=document.getElementById('key-status');
+  el.className=ok?'ok':'bad';
+  el.textContent=ok?'✔ Saved':('✘ '+(msg||'Invalid'));
 }
 
-// ── Helpers ───────────────────────────────────────────────────────
-const $ = id => document.getElementById(id);
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const $=id=>document.getElementById(id);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
-function showErrUpload(m) { const e=$('upload-error'); e.innerHTML='⚠ '+m; e.classList.add('show'); }
-function showErrSlides(m) { const e=$('slides-error'); e.textContent='⚠ '+m; e.classList.add('show'); }
-function clearErr() { $('upload-error').classList.remove('show'); $('slides-error').classList.remove('show'); }
+function showErrUpload(m){const e=$('upload-error');e.innerHTML='⚠ '+m;e.classList.add('show');}
+function showErrSlides(m){const e=$('slides-error');e.textContent='⚠ '+m;e.classList.add('show');}
+function clearErr(){$('upload-error').classList.remove('show');$('slides-error').classList.remove('show');}
 
-function showView(name) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  $('slides-view').classList.remove('active'); $('btn-new').style.display='none';
-  if (name==='slides') { $('slides-view').classList.add('active'); $('btn-new').style.display='flex'; }
-  else { const el=$(name+'-view'); if(el){ el.classList.add('active'); el.classList.add('fadein'); } }
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $('slides-view').classList.remove('active');$('btn-new').style.display='none';
+  if(name==='slides'){$('slides-view').classList.add('active');$('btn-new').style.display='flex';}
+  else{const el=$(name+'-view');if(el){el.classList.add('active');el.classList.add('fadein');}}
 }
-function setProc(m) { $('proc-msg').textContent = m; }
-function resetApp() {
-  slides=[]; current=0; audioBuffers=[]; audioLabels=[];
-  if (audioCtx && audioCtx.state!=='closed') audioCtx.close().catch(()=>{});
-  audioCtx = null;
-  clearErr(); $('video-banner').classList.remove('show'); $('narration-box').classList.remove('show');
+function setProc(m){$('proc-msg').textContent=m;}
+function resetApp(){
+  slides=[];current=0;audioBuffers=[];audioLabels=[];
+  if(audioCtx&&audioCtx.state!=='closed')audioCtx.close().catch(()=>{});
+  audioCtx=null; stopPresent();
+  clearErr();$('video-banner').classList.remove('show');$('narration-box').classList.remove('show');
+  $('ios-banner').classList.remove('show');
   showView('upload');
 }
 
-// ── Drag/Drop ─────────────────────────────────────────────────────
-function onDragOver(e)  { e.preventDefault(); $('drop-zone').classList.add('over'); }
-function onDragLeave()  { $('drop-zone').classList.remove('over'); }
-function onDrop(e)      { e.preventDefault(); $('drop-zone').classList.remove('over'); processFile(e.dataTransfer.files[0]); }
-function handleFile(e)  { processFile(e.target.files[0]); e.target.value=''; }
+function onDragOver(e){e.preventDefault();$('drop-zone').classList.add('over');}
+function onDragLeave(){$('drop-zone').classList.remove('over');}
+function onDrop(e){e.preventDefault();$('drop-zone').classList.remove('over');processFile(e.dataTransfer.files[0]);}
+function handleFile(e){processFile(e.target.files[0]);e.target.value='';}
 
 // ── PDF Extract ───────────────────────────────────────────────────
-async function extractPDFText(file) {
-  const buf = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
-  let text = '';
-  for (let i=1; i<=Math.min(pdf.numPages,30); i++) {
-    const pg = await pdf.getPage(i);
-    const tc = await pg.getTextContent();
-    const pt = tc.items.map(it=>it.str||'').join(' ').replace(/\s+/g,' ').trim();
-    if (pt) text += '\n=== PAGE '+i+' ===\n'+pt;
+async function extractPDFText(file){
+  const buf=await file.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+  let text='';
+  for(let i=1;i<=Math.min(pdf.numPages,30);i++){
+    const pg=await pdf.getPage(i);
+    const tc=await pg.getTextContent();
+    const pt=tc.items.map(it=>it.str||'').join(' ').replace(/\s+/g,' ').trim();
+    if(pt)text+='\n=== PAGE '+i+' ===\n'+pt;
   }
   return text;
 }
 
 // ── JSON Extract ──────────────────────────────────────────────────
-function extractJSON(raw) {
-  if (!raw) throw new Error('Empty API response');
-  let s = raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-  try { return JSON.parse(s); } catch(_) {}
-  const a=s.indexOf('{'), b=s.lastIndexOf('}');
-  if (a!==-1 && b>a) { try { return JSON.parse(s.slice(a,b+1)); } catch(_) {} }
+function extractJSON(raw){
+  if(!raw)throw new Error('Empty API response');
+  let s=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+  try{return JSON.parse(s);}catch(_){}
+  const a=s.indexOf('{'),b=s.lastIndexOf('}');
+  if(a!==-1&&b>a){try{return JSON.parse(s.slice(a,b+1));}catch(_){}}
   throw new Error('Could not parse JSON: '+raw.substring(0,120));
 }
 
 // ── Claude API ────────────────────────────────────────────────────
-async function callClaude(rawText) {
-  if (!apiKey) throw new Error('Please enter and save your Anthropic API key.');
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+async function callClaude(rawText){
+  if(!apiKey)throw new Error('Please enter and save your Anthropic API key.');
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key': apiKey,
+    headers:{'Content-Type':'application/json','x-api-key':apiKey,
       'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body: JSON.stringify({
-      model:'claude-haiku-4-5-20251001',
-      max_tokens:5000,
-      system:`You are a presentation designer. Transform raw noisy PDF text into structured JSON for elegant slides with voice narration.
-OUTPUT ONLY VALID RAW JSON — no markdown fences, no explanation.
+      'anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({
+      model:'claude-haiku-4-5-20251001',max_tokens:5000,
+      system:`You are a presentation designer. Transform raw noisy PDF text into JSON for elegant slides with narration.
+OUTPUT ONLY VALID RAW JSON — no markdown, no explanation.
 
 Schema:
-{
-  "title":"string",
-  "subtitle":"string",
-  "slides":[{
-    "type":"title|section|content|closing",
-    "heading":"string",
-    "subheading":"string (title/closing only)",
-    "body":"string (one sentence, content only)",
-    "bullets":["max 10 words each, max 5 (content only)"],
-    "highlight":"string (optional powerful quote or stat)",
-    "narration":"string — exactly 1 to 2 short sentences, max 30 words, natural spoken voice-over, no slide numbers"
-  }]
-}
+{"title":"string","subtitle":"string","slides":[{
+  "type":"title|section|content|closing",
+  "heading":"string",
+  "subheading":"string (title/closing only)",
+  "body":"string (one sentence, content only)",
+  "bullets":["max 10 words, max 5 (content only)"],
+  "highlight":"string (optional)",
+  "narration":"1-2 short spoken sentences, max 25 words, clear voice-over style, no slide numbers"
+}]}
 
 Rules: 8-12 slides. First=title. Last=closing. section has no bullets.
-narration REQUIRED every slide. Keep narration very short (max 30 words) for reliable TTS.
-Strip all noise. Return ONLY the JSON object.`,
+narration REQUIRED on every slide. Very short (max 25 words). Strip all noise. Return ONLY JSON.`,
       messages:[{role:'user',content:'Transform this PDF into narrated presentation JSON:\n\n'+rawText.substring(0,8000)}]
     })
   });
-  if (!res.ok) {
+  if(!res.ok){
     let m='HTTP '+res.status;
-    try { const j=await res.json(); m=j.error?.message||JSON.stringify(j); } catch(_){}
+    try{const j=await res.json();m=j.error?.message||JSON.stringify(j);}catch(_){}
     throw new Error('API Error: '+m);
   }
   return res.json();
 }
 
-// ── TTS ENGINE ────────────────────────────────────────────────────
-// Strategy: try multiple sources, use the first that returns valid audio.
-// All sources are tried with a per-source timeout.
-
-async function tryFetch(url, opts, timeoutMs) {
-  const ctrl = new AbortController();
-  const tid  = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { ...opts, signal: ctrl.signal });
-    clearTimeout(tid);
-    return res;
-  } catch(e) {
-    clearTimeout(tid);
-    throw e;
-  }
+// ── TTS: SpeechSynthesis Promise ──────────────────────────────────
+// Works on ALL platforms including iPhone — used for Present Mode
+function speakUtterance(text, rate){
+  return new Promise(resolve=>{
+    speechSynthesis.cancel();
+    if(!text){setTimeout(resolve,100);return;}
+    const u=new SpeechSynthesisUtterance(text);
+    u.rate=rate||0.9; u.pitch=1.0; u.volume=1.0;
+    // Prefer English voices
+    const voices=speechSynthesis.getVoices();
+    const pref=voices.find(v=>/en[-_]?(GB|US|AU)/i.test(v.lang))||voices.find(v=>/en/i.test(v.lang));
+    if(pref)u.voice=pref;
+    u.onend=resolve; u.onerror=resolve;
+    speechSynthesis.speak(u);
+    // Safety timeout: 45s max per slide
+    setTimeout(resolve,45000);
+  });
 }
 
-async function fetchAudioBuffer(ctx, text) {
-  const t = text.slice(0, 300);
-  const enc = encodeURIComponent(t);
+// ── TTS: Fetch-based (for video audio capture on Desktop) ─────────
+async function tryFetch(url,opts,ms){
+  const ctrl=new AbortController();
+  const tid=setTimeout(()=>ctrl.abort(),ms);
+  try{const r=await fetch(url,{...opts,signal:ctrl.signal});clearTimeout(tid);return r;}
+  catch(e){clearTimeout(tid);throw e;}
+}
 
-  // ── Source 1: TikTok TTS via weilnet Cloudflare Worker (CORS enabled, returns base64 JSON) ──
-  try {
-    const res = await tryFetch('https://tiktok-tts.weilnet.workers.dev/api/generation', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ text: t, voice:'en_us_001' })
-    }, 10000);
-    if (res.ok) {
-      const json = await res.json();
-      if (json.status && json.data) {
-        const binary = atob(json.data);
-        const bytes  = new Uint8Array(binary.length);
-        for (let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
-        const buf = await ctx.decodeAudioData(bytes.buffer);
-        return { buf, label:'TikTok TTS (en_us_001)' };
+async function fetchAudioBuffer(ctx, text){
+  const t=text.slice(0,300), enc=encodeURIComponent(t);
+
+  // 1. TikTok TTS Worker (base64 JSON — most CORS-friendly)
+  for(const voice of['en_us_001','en_uk_001','en_male_narration','en_female_emotional']){
+    try{
+      const res=await tryFetch('https://tiktok-tts.weilnet.workers.dev/api/generation',
+        {method:'POST',headers:{'Content-Type':'application/json'},
+         body:JSON.stringify({text:t,voice})},10000);
+      if(res.ok){
+        const j=await res.json();
+        if(j.status&&j.data){
+          const bin=atob(j.data),bytes=new Uint8Array(bin.length);
+          for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+          const buf=await ctx.decodeAudioData(bytes.buffer);
+          return{buf,label:'TikTok TTS ('+voice+')'};
+        }
+      }
+    }catch(e){console.warn('TikTok TTS '+voice+' failed:',e.message);}
+  }
+
+  // 2. StreamElements — various voices
+  for(const voice of['Brian','Amy','Matthew','Joanna','Joey']){
+    try{
+      const res=await tryFetch(
+        `https://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${enc}`,
+        {headers:{'Accept':'audio/mpeg,audio/*,*/*'}},8000);
+      if(res.ok){
+        const blob=await res.blob();
+        if(blob.size>2000){
+          const buf=await ctx.decodeAudioData(await blob.arrayBuffer());
+          return{buf,label:'StreamElements ('+voice+')'};
+        }
+      }
+    }catch(e){console.warn('SE '+voice+' failed:',e.message);}
+  }
+
+  // 3. corsproxy.io + StreamElements
+  try{
+    const target=`https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${enc}`;
+    const res=await tryFetch(`https://corsproxy.io/?${encodeURIComponent(target)}`,{},9000);
+    if(res.ok){
+      const blob=await res.blob();
+      if(blob.size>2000){
+        const buf=await ctx.decodeAudioData(await blob.arrayBuffer());
+        return{buf,label:'corsproxy+StreamElements'};
       }
     }
-  } catch(e) { console.warn('TikTok TTS failed:', e.message); }
+  }catch(e){console.warn('corsproxy failed:',e.message);}
 
-  // ── Source 2: TikTok TTS — different voice ──
-  try {
-    const res = await tryFetch('https://tiktok-tts.weilnet.workers.dev/api/generation', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ text: t, voice:'en_uk_001' })
-    }, 10000);
-    if (res.ok) {
-      const json = await res.json();
-      if (json.status && json.data) {
-        const binary = atob(json.data);
-        const bytes  = new Uint8Array(binary.length);
-        for (let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
-        const buf = await ctx.decodeAudioData(bytes.buffer);
-        return { buf, label:'TikTok TTS (en_uk_001)' };
+  // 4. allorigins + StreamElements
+  try{
+    const target=`https://api.streamelements.com/kappa/v2/speech?voice=Matthew&text=${enc}`;
+    const res=await tryFetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`,{},9000);
+    if(res.ok){
+      const blob=await res.blob();
+      if(blob.size>2000){
+        const buf=await ctx.decodeAudioData(await blob.arrayBuffer());
+        return{buf,label:'allorigins+StreamElements'};
       }
     }
-  } catch(e) { console.warn('TikTok TTS UK failed:', e.message); }
+  }catch(e){console.warn('allorigins failed:',e.message);}
 
-  // ── Source 3: StreamElements Brian ──
-  try {
-    const res = await tryFetch(`https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${enc}`,
-      { headers:{'Accept':'audio/mpeg,audio/*,*/*'} }, 9000);
-    if (res.ok) {
-      const blob = await res.blob();
-      if (blob.size > 2000) {
-        const ab  = await blob.arrayBuffer();
-        const buf = await ctx.decodeAudioData(ab);
-        return { buf, label:'StreamElements (Brian)' };
-      }
-    }
-  } catch(e) { console.warn('StreamElements Brian failed:', e.message); }
-
-  // ── Source 4: StreamElements Amy ──
-  try {
-    const res = await tryFetch(`https://api.streamelements.com/kappa/v2/speech?voice=Amy&text=${enc}`,
-      { headers:{'Accept':'audio/mpeg,audio/*,*/*'} }, 9000);
-    if (res.ok) {
-      const blob = await res.blob();
-      if (blob.size > 2000) {
-        const ab  = await blob.arrayBuffer();
-        const buf = await ctx.decodeAudioData(ab);
-        return { buf, label:'StreamElements (Amy)' };
-      }
-    }
-  } catch(e) { console.warn('StreamElements Amy failed:', e.message); }
-
-  // ── Source 5: corsproxy.io + StreamElements ──
-  try {
-    const target = `https://api.streamelements.com/kappa/v2/speech?voice=Matthew&text=${enc}`;
-    const res = await tryFetch(`https://corsproxy.io/?${encodeURIComponent(target)}`, {}, 9000);
-    if (res.ok) {
-      const blob = await res.blob();
-      if (blob.size > 2000) {
-        const ab  = await blob.arrayBuffer();
-        const buf = await ctx.decodeAudioData(ab);
-        return { buf, label:'corsproxy.io + StreamElements' };
-      }
-    }
-  } catch(e) { console.warn('corsproxy+SE failed:', e.message); }
-
-  // ── Source 6: allorigins + StreamElements ──
-  try {
-    const target = `https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${enc}`;
-    const res = await tryFetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`, {}, 9000);
-    if (res.ok) {
-      const blob = await res.blob();
-      if (blob.size > 2000) {
-        const ab  = await blob.arrayBuffer();
-        const buf = await ctx.decodeAudioData(ab);
-        return { buf, label:'allorigins + StreamElements' };
-      }
-    }
-  } catch(e) { console.warn('allorigins+SE failed:', e.message); }
-
-  return null; // all sources failed
+  return null;
 }
 
 // ── Process File ──────────────────────────────────────────────────
-async function processFile(file) {
-  if (!file) return;
-  if (!apiKey) { showErrUpload('Please enter and save your Anthropic API key first.'); return; }
-  if (file.type!=='application/pdf') { showErrUpload('Please upload a valid PDF file.'); return; }
+async function processFile(file){
+  if(!file)return;
+  if(!apiKey){showErrUpload('Please enter and save your Anthropic API key first.');return;}
+  if(file.type!=='application/pdf'){showErrUpload('Please upload a valid PDF file.');return;}
   clearErr(); showView('processing');
-  try {
+  try{
     setProc('Reading PDF content…');
-    const rawText = await extractPDFText(file);
-    if (!rawText.trim()) throw new Error('Could not extract text — PDF may be image-based.');
+    const rawText=await extractPDFText(file);
+    if(!rawText.trim())throw new Error('Could not extract text — PDF may be image-based.');
     setProc('Claude AI is crafting slides & narration…');
-    const data = await callClaude(rawText);
-    if (data.error) throw new Error(data.error.message||JSON.stringify(data.error));
-    const rawJSON = data.content?.[0]?.text;
-    if (!rawJSON) throw new Error('No content in API response.');
-    const parsed = extractJSON(rawJSON);
-    if (!parsed.slides?.length) throw new Error('No slides generated — please try again.');
-    slides   = parsed.slides;
-    docTitle = parsed.title || file.name.replace(/\.pdf$/i,'');
-    current  = 0;
-    audioBuffers = new Array(slides.length).fill(null);
-    audioLabels  = new Array(slides.length).fill(null);
-    $('doc-title-lbl').textContent  = docTitle;
-    $('slide-count-lbl').textContent = slides.length+' slides';
+    const data=await callClaude(rawText);
+    if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
+    const rawJSON=data.content?.[0]?.text;
+    if(!rawJSON)throw new Error('No content in API response.');
+    const parsed=extractJSON(rawJSON);
+    if(!parsed.slides?.length)throw new Error('No slides generated — please try again.');
+    slides=parsed.slides;
+    docTitle=parsed.title||file.name.replace(/\.pdf$/i,'');
+    current=0;
+    audioBuffers=new Array(slides.length).fill(null);
+    audioLabels=new Array(slides.length).fill(null);
+    $('doc-title-lbl').textContent=docTitle;
+    $('slide-count-lbl').textContent=slides.length+' slides';
     buildDots(); renderCurrentSlide(); showNarration();
+    // Show iOS banner on mobile
+    if(isMobile)$('ios-banner').classList.add('show');
     showView('slides');
-    // Init AudioContext + start background prefetch
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    prefetchAllAudio();
-  } catch(err) {
-    console.error(err); showView('upload'); showErrUpload(err.message);
+    // Init AudioContext + background prefetch (desktop only)
+    if(!isMobile){
+      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      prefetchAllAudio();
+    }else{
+      // On iOS: mark all as "SpeechSynthesis" since we use it directly
+      slides.forEach((_,i)=>{audioLabels[i]='Browser TTS';audioBuffers[i]=true;});
+      showNarration();
+    }
+  }catch(err){
+    console.error(err);showView('upload');showErrUpload(err.message);
   }
 }
 
-// ── Background Audio Prefetch ─────────────────────────────────────
-async function prefetchAllAudio() {
-  for (let i=0; i<slides.length; i++) {
-    if (!slides[i].narration) continue;
-    try {
-      const result = await fetchAudioBuffer(audioCtx, slides[i].narration);
-      if (result) { audioBuffers[i]=result.buf; audioLabels[i]=result.label; }
-    } catch(_) {}
-    if (i===current) showNarration();
+// ── Background Audio Prefetch (desktop) ──────────────────────────
+async function prefetchAllAudio(){
+  for(let i=0;i<slides.length;i++){
+    if(!slides[i].narration)continue;
+    try{
+      const r=await fetchAudioBuffer(audioCtx,slides[i].narration);
+      if(r){audioBuffers[i]=r.buf;audioLabels[i]=r.label;}
+      else{audioLabels[i]='Browser TTS (fallback)';}
+    }catch(_){audioLabels[i]='Browser TTS (fallback)';}
+    if(i===current)showNarration();
   }
 }
 
 // ── Narration Display ─────────────────────────────────────────────
-function showNarration() {
-  const s = slides[current];
-  if (!s?.narration) { $('narration-box').classList.remove('show'); return; }
-  $('narration-text').textContent = s.narration;
+function showNarration(){
+  const s=slides[current];
+  if(!s?.narration){$('narration-box').classList.remove('show');return;}
+  $('narration-text').textContent=s.narration;
   $('narration-box').classList.add('show');
-  const st = $('nb-status');
-  if (audioBuffers[current]) {
-    st.className='ok'; st.textContent='✔ Audio ready · '+audioLabels[current];
-  } else {
-    st.className='fetch'; st.textContent='⏳ Fetching audio…';
+  const st=$('nb-status');
+  if(isMobile){st.className='synth';st.textContent='🗣 Browser TTS';}
+  else if(audioBuffers[current]&&audioBuffers[current]!==true){
+    st.className='ok';st.textContent='✔ '+audioLabels[current];
+  }else if(audioLabels[current]){
+    st.className='synth';st.textContent='🗣 '+audioLabels[current];
+  }else{
+    st.className='fetch';st.textContent='⏳ Fetching…';
   }
 }
 
-function previewNarration() {
-  const s = slides[current];
-  if (!s?.narration) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(s.narration);
-  u.rate=0.9; u.pitch=1.0; u.volume=1.0;
-  const voices = speechSynthesis.getVoices();
-  const pref = voices.find(v=>/en[-_]?(GB|US)/i.test(v.lang)) || voices.find(v=>/en/i.test(v.lang));
-  if (pref) u.voice=pref;
-  speechSynthesis.speak(u);
+// ── PRESENT MODE ─────────────────────────────────────────────────
+let presentTimer=null;
+
+function startPresent(){
+  if(!slides.length)return;
+  presentIdx=current; presentPaused=false; presentRunning=true;
+  $('present-overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderPresentSlide();
+  runPresentSlide();
 }
 
-// ── Generate Video ────────────────────────────────────────────────
-async function startVideo() {
+function stopPresent(){
+  presentRunning=false;
+  if(presentTimer){clearTimeout(presentTimer);presentTimer=null;}
+  speechSynthesis.cancel();
+  $('present-overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function presentPrev(){
+  speechSynthesis.cancel();
+  if(presentTimer){clearTimeout(presentTimer);presentTimer=null;}
+  presentIdx=Math.max(0,presentIdx-1);
+  renderPresentSlide(); runPresentSlide();
+}
+
+function presentNext(){
+  speechSynthesis.cancel();
+  if(presentTimer){clearTimeout(presentTimer);presentTimer=null;}
+  if(presentIdx<slides.length-1){presentIdx++;renderPresentSlide();runPresentSlide();}
+  else{stopPresent();}
+}
+
+function presentPauseToggle(){
+  presentPaused=!presentPaused;
+  const btn=$('pc-pause-btn');
+  const wave=$('pc-wave');
+  if(presentPaused){
+    speechSynthesis.pause();
+    btn.textContent='▶ Resume';
+    wave.classList.add('paused');
+    $('pc-status-txt').textContent='Paused';
+  }else{
+    speechSynthesis.resume();
+    btn.textContent='⏸ Pause';
+    wave.classList.remove('paused');
+    $('pc-status-txt').textContent='Speaking…';
+  }
+}
+
+function renderPresentSlide(){
+  const c=$('present-canvas');
+  const wrap=$('present-canvas-wrap');
+  const W=wrap.clientWidth||window.innerWidth;
+  const H=wrap.clientHeight||Math.round(W*9/16);
+  c.width=W; c.height=H;
+  c.style.width='100%'; c.style.height='100%';
+  if(slides[presentIdx]){
+    renderSlide(c.getContext('2d'),slides[presentIdx],W,H,presentIdx,slides.length);
+  }
+  $('present-caption').textContent=slides[presentIdx]?.narration||'';
+  $('pc-counter').textContent=(presentIdx+1)+' / '+slides.length;
+}
+
+async function runPresentSlide(){
+  if(!presentRunning)return;
+  const s=slides[presentIdx];
+  if(!s)return;
+  $('pc-status-txt').textContent='Speaking…';
+  $('pc-wave').classList.remove('paused');
+
+  // Speak narration using Web Speech API (works on ALL devices)
+  await speakUtterance(s.narration||s.heading||'', 0.88);
+
+  if(!presentRunning)return;
+  // Brief pause between slides
+  await sleep(600);
+  if(!presentRunning)return;
+  if(!presentPaused){
+    if(presentIdx<slides.length-1){presentNext();}
+    else{stopPresent();}
+  }
+}
+
+window.addEventListener('resize',()=>{
+  if($('present-overlay').classList.contains('show'))renderPresentSlide();
+});
+
+// ── VIDEO GENERATION (Desktop Chrome) ────────────────────────────
+async function startVideo(){
+  if(isMobile){
+    showErrSlides('Video export works best on desktop Chrome. Use ▶ Present for mobile narrated slideshows.');
+    return;
+  }
   clearErr(); $('video-banner').classList.remove('show');
   $('vid-progress').classList.add('show');
   document.querySelectorAll('button').forEach(b=>b.disabled=true);
 
-  try {
-    const W=1280, H=720;
-    const cv=$('render-canvas'); cv.width=W; cv.height=H;
-    const ctx = cv.getContext('2d');
+  try{
+    const W=1280,H=720;
+    const cv=$('render-canvas');cv.width=W;cv.height=H;
+    const ctx=cv.getContext('2d');
 
-    // Ensure AudioContext is running
-    if (!audioCtx || audioCtx.state==='closed')
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(!audioCtx||audioCtx.state==='closed')
+      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
     await audioCtx.resume();
+    const audioDest=audioCtx.createMediaStreamDestination();
+    const silGain=audioCtx.createGain();silGain.gain.value=0.00001;
+    const silOsc=audioCtx.createOscillator();
+    silOsc.connect(silGain);silGain.connect(audioDest);silOsc.start();
 
-    const audioDest = audioCtx.createMediaStreamDestination();
-    // Silent node keeps audio track alive
-    const silGain = audioCtx.createGain(); silGain.gain.value=0.0001;
-    const silOsc  = audioCtx.createOscillator();
-    silOsc.connect(silGain); silGain.connect(audioDest); silOsc.start();
-
-    // Fetch any still-missing audio
+    // Fetch missing audio
     $('vp-title').textContent='Fetching Narration Audio…';
-    let fetchOk=0, fetchFail=0;
-    for (let i=0; i<slides.length; i++) {
-      if (audioBuffers[i]) { fetchOk++; continue; }
-      if (!slides[i].narration) continue;
-      $('vp-slide-msg').textContent = `Fetching audio ${i+1} of ${slides.length}…`;
-      $('vp-narr-text').textContent = slides[i].narration;
-      $('vp-bar').style.width = Math.round((i/slides.length)*40)+'%';
-      const r = await fetchAudioBuffer(audioCtx, slides[i].narration);
-      if (r) {
-        audioBuffers[i]=r.buf; audioLabels[i]=r.label; fetchOk++;
-        $('vp-log').textContent='✔ '+r.label;
-      } else {
-        fetchFail++;
-        $('vp-log').textContent='✘ All TTS sources failed for slide '+(i+1)+' — will use timed hold';
-      }
+    let fetchOk=0;
+    for(let i=0;i<slides.length;i++){
+      // Already have a real AudioBuffer?
+      if(audioBuffers[i]&&audioBuffers[i]!==true){fetchOk++;continue;}
+      if(!slides[i].narration)continue;
+      $('vp-slide-msg').textContent=`Fetching audio ${i+1} of ${slides.length}…`;
+      $('vp-narr-text').textContent=slides[i].narration;
+      $('vp-bar').style.width=Math.round((i/slides.length)*40)+'%';
+      const r=await fetchAudioBuffer(audioCtx,slides[i].narration);
+      if(r){audioBuffers[i]=r.buf;audioLabels[i]=r.label;fetchOk++;$('vp-log').textContent='✔ '+r.label;}
+      else{$('vp-log').textContent='✘ Slide '+(i+1)+' — no audio (text overlay used)';}
     }
 
-    $('vp-log').textContent = fetchOk>0
-      ? `✔ ${fetchOk}/${slides.length} slides have voice audio`
-      : '⚠ TTS unavailable — generating silent video';
-    await sleep(600);
+    const hasAudio=fetchOk>0;
+    $('vp-log').textContent=hasAudio?`✔ ${fetchOk}/${slides.length} slides have audio`:'⚠ No TTS audio — using text overlay';
+    await sleep(500);
     $('vp-title').textContent='Recording Video…';
 
-    // Combined stream: canvas video + AudioContext audio
-    const combined = new MediaStream([
+    const combined=new MediaStream([
       ...cv.captureStream(30).getVideoTracks(),
       ...audioDest.stream.getAudioTracks()
     ]);
+    const mimeType=['video/webm;codecs=vp8,opus','video/webm;codecs=vp9,opus','video/webm']
+      .find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
 
-    const mimeType = [
-      'video/webm;codecs=vp8,opus',
-      'video/webm;codecs=vp9,opus',
-      'video/webm'
-    ].find(m=>MediaRecorder.isTypeSupported(m)) || 'video/webm';
-
-    const recorder = new MediaRecorder(combined,{
-      mimeType, videoBitsPerSecond:5_000_000, audioBitsPerSecond:128_000
-    });
+    const recorder=new MediaRecorder(combined,{mimeType,videoBitsPerSecond:5_000_000,audioBitsPerSecond:128_000});
     const chunks=[];
-    recorder.ondataavailable = e=>{ if(e.data.size>0) chunks.push(e.data); };
-
-    recorder.onstop = ()=>{
+    recorder.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+    recorder.onstop=()=>{
       silOsc.stop();
-      const url = URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
+      const url=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
       $('vb-dl').href=url;
       $('vb-dl').download=docTitle.replace(/[^a-z0-9]/gi,'_')+'_narrated.webm';
-      $('vb-msg').textContent = fetchOk>0
-        ? `✔ Narrated video — ${fetchOk}/${slides.length} slides with voice`
-        : `Video ready — ${slides.length} slides (silent — TTS blocked)`;
+      $('vb-msg').textContent=hasAudio
+        ?`✔ Narrated video — ${fetchOk}/${slides.length} slides with voice`
+        :`Video ready — ${slides.length} slides with text captions`;
       $('video-banner').classList.add('show');
       $('vid-progress').classList.remove('show');
       document.querySelectorAll('button').forEach(b=>b.disabled=false);
     };
-
     recorder.start(200);
 
     const FADE=20;
-    for (let i=0; i<slides.length; i++) {
+    for(let i=0;i<slides.length;i++){
       const s=slides[i];
       $('vp-bar').style.width=(40+Math.round(((i+1)/slides.length)*58))+'%';
       $('vp-slide-msg').textContent=`Slide ${i+1} of ${slides.length} — "${s.heading||''}"`;
       $('vp-narr-text').textContent=s.narration||'';
 
       // Fade in
-      for (let f=0;f<=FADE;f++){
+      for(let f=0;f<=FADE;f++){
         renderSlide(ctx,s,W,H,i,slides.length);
-        ctx.globalAlpha=1-f/FADE; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1;
+        ctx.globalAlpha=1-f/FADE;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;
         await sleep(14);
       }
       renderSlide(ctx,s,W,H,i,slides.length);
 
-      // Play audio (captured directly into MediaRecorder via AudioContext)
-      if (audioBuffers[i]) {
+      // Render narration text overlay when no audio
+      if(!audioBuffers[i]||audioBuffers[i]===true){
+        renderCaptionOverlay(ctx,s.narration||'',W,H);
+      }
+
+      if(audioBuffers[i]&&audioBuffers[i]!==true){
+        // Play fetched audio
         $('vp-step').textContent='🔊 '+audioLabels[i];
-        $('vp-log').textContent=s.narration.slice(0,70)+'…';
-        const src = audioCtx.createBufferSource();
-        src.buffer = audioBuffers[i];
-        src.connect(audioDest);             // → captured into WebM ✅
-        src.connect(audioCtx.destination);  // → user hears it live
+        const src=audioCtx.createBufferSource();
+        src.buffer=audioBuffers[i];
+        src.connect(audioDest); src.connect(audioCtx.destination);
         src.start();
-        await new Promise(resolve=>{
-          src.onended=resolve;
-          setTimeout(resolve, audioBuffers[i].duration*1000+500);
-        });
+        await new Promise(resolve=>{src.onended=resolve;setTimeout(resolve,audioBuffers[i].duration*1000+500);});
         await sleep(250);
-      } else {
-        $('vp-step').textContent='⏸ No audio — holding 4 seconds';
-        await sleep(4000);
+      }else{
+        // No audio — hold slide for 4.5s, caption visible
+        $('vp-step').textContent='📝 Text caption overlay';
+        await sleep(4500);
       }
 
       // Fade out
-      for (let f=0;f<=FADE;f++){
+      for(let f=0;f<=FADE;f++){
         renderSlide(ctx,s,W,H,i,slides.length);
-        ctx.globalAlpha=f/FADE; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1;
+        if(!audioBuffers[i]||audioBuffers[i]===true)renderCaptionOverlay(ctx,s.narration||'',W,H);
+        ctx.globalAlpha=f/FADE;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;
         await sleep(14);
       }
     }
-    $('vp-bar').style.width='100%'; $('vp-step').textContent='Finalising…';
-    await sleep(300);
+    $('vp-bar').style.width='100%';$('vp-step').textContent='Finalising…';await sleep(300);
     recorder.stop();
-
-  } catch(err) {
-    console.error(err);
-    $('vid-progress').classList.remove('show');
+  }catch(err){
+    console.error(err);$('vid-progress').classList.remove('show');
     document.querySelectorAll('button').forEach(b=>b.disabled=false);
     showErrSlides('Video generation failed: '+err.message);
   }
 }
 
+// ── Caption Overlay Renderer ──────────────────────────────────────
+function renderCaptionOverlay(ctx,text,W,H){
+  if(!text)return;
+  const pH=H*0.13, pY=H-pH-H*0.065;
+  ctx.fillStyle='rgba(5,8,14,0.82)';
+  ctx.fillRect(0,pY,W,pH);
+  ctx.fillStyle='rgba(220,235,250,0.85)';
+  ctx.font=`italic ${Math.round(H*0.031)}px 'Playfair Display',serif`;
+  ctx.textAlign='center';
+  wrapTextCenter(ctx,text,W/2,pY+H*0.038,W-120,H*0.038);
+}
+
+function wrapTextCenter(ctx,text,cx,y,maxW,lh){
+  const words=String(text).split(' ');let line='',lines=[];
+  for(const w of words){
+    const t=line+w+' ';
+    if(ctx.measureText(t).width>maxW&&line){lines.push(line.trim());line=w+' ';}
+    else line=t;
+  }
+  if(line.trim())lines.push(line.trim());
+  lines.forEach((l,i)=>ctx.fillText(l,cx,y+i*lh));
+}
+
 // ── Canvas Rendering ──────────────────────────────────────────────
 function wrapText(ctx,text,x,y,maxW,lh){
-  if(!text)return y; const words=String(text).split(' '); let line='',cy=y;
+  if(!text)return y;
+  const words=String(text).split(' ');let line='',cy=y;
   for(const w of words){const t=line+w+' ';if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line.trim(),x,cy);line=w+' ';cy+=lh;}else line=t;}
-  if(line.trim())ctx.fillText(line.trim(),x,cy); return cy+lh;
+  if(line.trim())ctx.fillText(line.trim(),x,cy);return cy+lh;
 }
 
 function renderSlide(ctx,slide,W,H,idx,total){
@@ -759,10 +840,10 @@ function renderSlide(ctx,slide,W,H,idx,total){
   if(slide.type==='title'||slide.type==='closing'){bg.addColorStop(0,'#0c1520');bg.addColorStop(1,'#1a2d42');}
   else if(slide.type==='section'){bg.addColorStop(0,'#160f24');bg.addColorStop(1,'#0c1520');}
   else{bg.addColorStop(0,'#0e1823');bg.addColorStop(1,'#0a1218');}
-  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-  const G='#d4a843', isTit=slide.type==='title'||slide.type==='closing', isSec=slide.type==='section';
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  const G='#d4a843',isTit=slide.type==='title'||slide.type==='closing',isSec=slide.type==='section';
   if(isTit){
-    [0.38,0.46,0.54].forEach((r,i)=>{ctx.save();ctx.strokeStyle=`rgba(212,168,67,${0.07-i*0.018})`;ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(W/2,H/2,r*H,0,Math.PI*2);ctx.stroke();ctx.restore();});
+    [.38,.46,.54].forEach((r,i)=>{ctx.save();ctx.strokeStyle=`rgba(212,168,67,${.07-i*.018})`;ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(W/2,H/2,r*H,0,Math.PI*2);ctx.stroke();ctx.restore();});
     ctx.textAlign='center';ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.076)}px 'Playfair Display',Georgia,serif`;
     const ty=wrapText(ctx,slide.heading||'',W/2,H*.36,W-200,H*.09)+H*.022;
     ctx.fillStyle=G;ctx.fillRect(W/2-60,ty,120,2);
