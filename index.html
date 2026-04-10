@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="PDF Transformer"/>
-<title>PDF Transformer — Elegant Slides + Narrated Video</title>
+<title>PDF Transformer</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -18,14 +18,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* HEADER */
+/* ── HEADER ── */
 #header{position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:12px;padding:13px 20px;background:#0a0b10;border-bottom:1px solid rgba(212,168,67,.22)}
 #logo-icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#d4a843,#f0c55a);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(212,168,67,.32);font-size:18px;flex-shrink:0}
 .logo-title{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;font-weight:700;line-height:1}
 .logo-sub{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);margin-top:3px}
 #btn-new{margin-left:auto;display:none;background:transparent;border:1px solid rgba(212,168,67,.28);color:#d4a843;padding:6px 13px;border-radius:5px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif}
 
-/* API BANNER */
+/* ── API BANNER ── */
 #api-banner{background:#0e1018;border-bottom:1px solid rgba(212,168,67,.15);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .ab-label{font-size:12px;color:#d4a843;font-weight:600;white-space:nowrap}
 #api-key-input{flex:1;min-width:180px;background:rgba(255,255,255,.05);border:1px solid rgba(212,168,67,.25);border-radius:6px;padding:8px 12px;color:#e4e4e4;font-size:12px;font-family:'Courier New',monospace;outline:none;transition:border .2s}
@@ -36,7 +36,7 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 #key-status.ok{color:#6ee7a0}#key-status.bad{color:#ff8080}
 .api-note{width:100%;font-size:10px;color:rgba(255,255,255,.28);margin-top:2px;line-height:1.5}
 
-/* VIEWS */
+/* ── VIEWS ── */
 .view{display:none}
 .view.active{display:flex;flex-direction:column;align-items:center}
 #upload-view{gap:22px;padding:28px 20px 36px}
@@ -57,38 +57,42 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 .fc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:13px}
 .fc .fi{font-size:19px;margin-bottom:7px}.fc .ft{font-size:11px;color:#d4a843;font-weight:600;margin-bottom:3px}.fc .fd{font-size:10px;color:rgba(255,255,255,.32);line-height:1.5}
 
-/* PROCESSING */
+/* ── PROCESSING ── */
 #processing-view{justify-content:center;gap:20px;padding:60px 20px;min-height:60vh}
 .spinner{width:76px;height:76px;border-radius:50%;border:2px solid rgba(212,168,67,.14);border-top-color:#d4a843;animation:spin 1.1s linear infinite}
 #proc-msg{font-family:'Playfair Display',serif;color:#d4a843;font-size:19px;text-align:center;animation:pulse 2s ease-in-out infinite}
 #proc-sub{color:rgba(255,255,255,.28);font-size:12px;text-align:center}
 
-/* SLIDES */
+/* ── SLIDES ── */
 #slides-view{display:none;flex-direction:column;align-items:center;gap:14px;padding:20px 16px 30px;max-width:960px;margin:0 auto;width:100%}
 #slides-view.active{display:flex}
 .smeta{display:flex;align-items:center;gap:10px;width:100%}
-#doc-title-lbl{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;font-weight:400;flex:1}
-#slide-count-lbl{color:rgba(255,255,255,.28);font-size:11px}
+#doc-title-lbl{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;font-weight:400;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#slide-count-lbl{color:rgba(255,255,255,.28);font-size:11px;flex-shrink:0}
 #slide-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;box-shadow:0 22px 56px rgba(0,0,0,.82),0 0 0 1px rgba(212,168,67,.12)}
 #slide-canvas{position:absolute;inset:0;width:100%;height:100%}
+
 #narration-box{display:none;width:100%;background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.18);border-radius:8px;padding:12px 16px;font-size:12px;color:rgba(220,230,240,.7);font-style:italic;line-height:1.6}
 #narration-box.show{display:block}
 .nb-label{font-size:10px;color:#d4a843;font-weight:600;letter-spacing:1px;margin-bottom:5px;font-style:normal}
 
+/* ── NAV ── */
 #nav-row{display:flex;align-items:center;justify-content:center;gap:12px}
 .nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,168,67,.2);background:rgba(212,168,67,.08);color:#d4a843;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .nav-btn:disabled{opacity:.2;cursor:default}
 .nav-btn:not(:disabled):hover{background:rgba(212,168,67,.18)}
-#dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:280px}
+#dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:260px}
 .dot{height:6px;border-radius:3px;background:rgba(255,255,255,.12);border:none;cursor:pointer;padding:0;transition:all .2s}
 .dot.active{background:#d4a843;width:20px !important}.dot:not(.active){width:6px}
 
+/* ── ACTION BUTTONS ── */
 #action-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;width:100%}
-.btn-outline{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.3);border-radius:7px;color:#d4a843;padding:10px 18px;cursor:pointer;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s}
+.btn-outline{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.3);border-radius:7px;color:#d4a843;padding:10px 18px;cursor:pointer;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
 .btn-outline:hover{background:rgba(212,168,67,.15)}
-.btn-gold{background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:7px;color:#080a0d;padding:10px 22px;cursor:pointer;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(212,168,67,.28);transition:all .15s}
+.btn-gold{background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:7px;color:#080a0d;padding:10px 22px;cursor:pointer;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(212,168,67,.28);transition:all .15s;white-space:nowrap}
 .btn-gold:hover{transform:translateY(-1px)}
 button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !important}
+
 #video-banner{display:none;width:100%;background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.26);border-radius:9px;padding:12px 18px;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
 #video-banner.show{display:flex}
 .vbt{color:#e0e0e0;font-size:13px}
@@ -96,22 +100,41 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 #slides-error{display:none;color:#ff8080;font-size:12px;background:rgba(220,60,60,.07);border:1px solid rgba(220,60,60,.2);border-radius:7px;padding:9px 15px;width:100%;text-align:center}
 #slides-error.show{display:block}
 
-/* PRESENT MODE */
+/* ── PRESENT OVERLAY ── */
 #present-overlay{display:none;position:fixed;inset:0;z-index:500;background:#07080d;flex-direction:column}
 #present-overlay.show{display:flex}
-#present-canvas-wrap{flex:1;position:relative;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#present-canvas-wrap{flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
 #present-canvas{max-width:100%;max-height:100%;display:block}
-#present-caption{padding:12px 20px 14px;background:rgba(0,0,0,.7);font-size:clamp(12px,2.2vw,15px);color:rgba(220,235,250,.82);font-style:italic;text-align:center;line-height:1.55;min-height:52px;border-top:1px solid rgba(212,168,67,.12)}
-#present-controls{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#0a0b10;gap:8px;border-top:1px solid rgba(212,168,67,.1);flex-wrap:wrap}
+#present-caption{padding:12px 20px 14px;background:rgba(0,0,0,.75);font-size:clamp(12px,2.2vw,15px);color:rgba(220,235,250,.85);font-style:italic;text-align:center;line-height:1.55;min-height:54px;border-top:1px solid rgba(212,168,67,.12)}
+#present-controls{display:flex;align-items:center;justify-content:space-around;padding:10px 14px;background:#0a0b10;gap:6px;border-top:1px solid rgba(212,168,67,.1);flex-wrap:wrap}
 .pc-btn{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);color:#d4a843;border-radius:6px;padding:8px 12px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;white-space:nowrap}
-#pc-info{font-size:11px;color:rgba(255,255,255,.28);font-family:'Courier New',monospace;text-align:center}
-#pc-speaking{font-size:11px;color:#d4a843;display:flex;align-items:center;gap:5px;white-space:nowrap}
+#pc-info{font-size:11px;color:rgba(255,255,255,.28);font-family:'Courier New',monospace;text-align:center;min-width:50px}
+#pc-spk{font-size:11px;color:#d4a843;display:flex;align-items:center;gap:5px}
 .wave{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
 .wave span{width:3px;border-radius:2px;background:#d4a843;display:inline-block;animation:wave 1s ease-in-out infinite}
 .wave span:nth-child(2){animation-delay:.16s}.wave span:nth-child(3){animation-delay:.32s}
-.wave.off span{animation-play-state:paused;height:4px!important}
+.wave.off span{animation-play-state:paused;height:3px!important}
 
-/* VIDEO PROGRESS */
+/* ── VIDEO MODAL (custom, not browser confirm) ── */
+#modal-bg{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+#modal-bg.show{display:flex}
+.modal{background:#0e111a;border:1px solid rgba(212,168,67,.3);border-radius:16px;padding:28px 24px;max-width:430px;width:100%;box-shadow:0 28px 60px rgba(0,0,0,.75)}
+.modal h3{font-family:'Playfair Display',serif;color:#d4a843;font-size:18px;margin-bottom:14px}
+.modal p{font-size:13px;color:rgba(220,230,240,.72);line-height:1.65;margin-bottom:14px}
+.modal-steps{background:rgba(212,168,67,.05);border:1px solid rgba(212,168,67,.14);border-radius:8px;padding:14px 16px;margin-bottom:20px}
+.step-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#dde8f4;margin-bottom:9px;line-height:1.5}
+.step-row:last-child{margin-bottom:0}
+.sn{background:#d4a843;color:#07080d;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.modal-btns{display:flex;gap:10px;flex-wrap:wrap}
+.mbtn-primary{flex:1;background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:8px;color:#07080d;padding:12px 14px;cursor:pointer;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;min-width:120px}
+.mbtn-secondary{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:rgba(255,255,255,.5);padding:12px 14px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif}
+.mbtn-secondary:hover{background:rgba(255,255,255,.08)}
+
+/* iOS-specific modal variant */
+.ios-note{background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.18);border-radius:8px;padding:12px 14px;font-size:12px;color:rgba(160,210,255,.85);line-height:1.6;margin-bottom:16px}
+.ios-note strong{color:#7dc8ff}
+
+/* ── VIDEO PROGRESS ── */
 #vid-progress{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.93);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:28px}
 #vid-progress.show{display:flex}
 .vp-spinner{width:56px;height:56px;border-radius:50%;border:2px solid rgba(212,168,67,.14);border-top-color:#d4a843;animation:spin 1s linear infinite}
@@ -121,20 +144,6 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 .vp-bar-wrap{width:100%;max-width:360px;background:rgba(212,168,67,.1);border-radius:4px;height:5px;overflow:hidden}
 #vp-bar{height:100%;background:#d4a843;transition:width .3s ease;width:0%}
 #vp-step{font-size:11px;color:rgba(255,255,255,.28);text-align:center}
-
-/* MODAL */
-#modal-bg{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
-#modal-bg.show{display:flex}
-.modal{background:#0e111a;border:1px solid rgba(212,168,67,.28);border-radius:14px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.7)}
-.modal h3{font-family:'Playfair Display',serif;color:#d4a843;font-size:18px;margin-bottom:14px}
-.modal p{font-size:13px;color:rgba(220,230,240,.7);line-height:1.65;margin-bottom:14px}
-.modal-steps{background:rgba(212,168,67,.05);border:1px solid rgba(212,168,67,.14);border-radius:8px;padding:14px 16px;margin-bottom:20px}
-.step-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#e0e0e0;margin-bottom:9px;line-height:1.5}
-.step-row:last-child{margin-bottom:0}
-.sn{background:#d4a843;color:#07080d;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.modal-btns{display:flex;gap:10px;flex-wrap:wrap}
-.modal-primary{flex:1;background:linear-gradient(135deg,#c49a35,#f0c55a);border:none;border-radius:7px;color:#07080d;padding:11px 16px;cursor:pointer;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif}
-.modal-secondary{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:rgba(255,255,255,.45);padding:11px 16px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif}
 
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
@@ -155,9 +164,9 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 </div>
 
 <div id="api-banner">
-  <div class="ab-label">🔑 Anthropic API Key</div>
+  <div class="ab-label">🔑 API Key</div>
   <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off"/>
-  <button id="btn-save-key" onclick="saveKey()">Save Key</button>
+  <button id="btn-save-key" onclick="saveKey()">Save</button>
   <span id="key-status"></span>
   <div class="api-note">Session-only · <a href="https://console.anthropic.com" target="_blank" style="color:#d4a843">console.anthropic.com</a></div>
 </div>
@@ -181,8 +190,8 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
   <div class="feat-grid">
     <div class="fc"><div class="fi">🧹</div><div class="ft">Noise Removal</div><div class="fd">Strips headers, footers &amp; OCR noise</div></div>
     <div class="fc"><div class="fi">🤖</div><div class="ft">AI Slides</div><div class="fd">Claude distills content into clean slides</div></div>
-    <div class="fc"><div class="fi">📱</div><div class="ft">Present Mode</div><div class="fd">Auto-play with live voice on any device</div></div>
-    <div class="fc"><div class="fi">🎬</div><div class="ft">Video + Audio</div><div class="fd">WebM with real narration audio baked in</div></div>
+    <div class="fc"><div class="fi">📱</div><div class="ft">Present Mode</div><div class="fd">Live voice narration on any device</div></div>
+    <div class="fc"><div class="fi">🎬</div><div class="ft">Video Export</div><div class="fd">Download slide video with captions</div></div>
   </div>
 </div>
 
@@ -210,14 +219,14 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
     <button class="nav-btn" id="btn-next" onclick="navigate(1)">&#8250;</button>
   </div>
   <div id="action-row">
-    <button class="btn-outline" id="btn-pdf"     onclick="exportPDF()">⬇ Export PDF</button>
-    <button class="btn-gold"    id="btn-present" onclick="startPresent()">▶ Present</button>
-    <button class="btn-outline" id="btn-vid"     onclick="showVideoModal()">🎬 Video + Audio</button>
+    <button class="btn-outline" id="btn-pdf" onclick="exportPDF()">⬇ Export PDF</button>
+    <button class="btn-gold"   id="btn-present" onclick="startPresent()">▶ Present</button>
+    <button class="btn-outline" id="btn-vid" onclick="openVideoModal()">🎬 Export Video</button>
   </div>
   <div id="video-banner">
     <span style="color:#d4a843;font-size:16px">✔</span>
     <span class="vbt" id="vb-msg">Video ready</span>
-    <a id="vb-dl" class="dl-btn" href="#" download="narrated.webm">⬇ Download .webm</a>
+    <a id="vb-dl" class="dl-btn" href="#" download="slides.webm">⬇ Download .webm</a>
   </div>
   <div id="slides-error"></div>
 </div>
@@ -230,55 +239,48 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
   <div id="present-caption"></div>
   <div id="present-controls">
     <button class="pc-btn" onclick="presentNav(-1)">&#8249; Prev</button>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
-      <div id="pc-speaking">
-        <div class="wave" id="pc-wave"><span></span><span></span><span></span></div>
-        <span id="pc-spk-txt">Speaking…</span>
-      </div>
-      <div id="pc-info">1 / 1</div>
+    <div id="pc-spk">
+      <div class="wave" id="pc-wave"><span></span><span></span><span></span></div>
+      <span id="pc-spk-txt">Speaking</span>
     </div>
-    <button class="pc-btn" onclick="presentNav(1)">Next &#8250;</button>
+    <div id="pc-info">1 / 1</div>
     <button class="pc-btn" id="pc-pause" onclick="presentPauseToggle()">⏸ Pause</button>
-    <button class="pc-btn" onclick="stopPresent()" style="color:#ff9090;border-color:rgba(255,100,100,.3)">✕ Exit</button>
+    <button class="pc-btn" onclick="presentNav(1)">Next &#8250;</button>
+    <button class="pc-btn" onclick="stopPresent()" style="color:#ff9090;border-color:rgba(255,100,100,.25)">✕ Exit</button>
   </div>
 </div>
 
 <!-- VIDEO MODAL -->
 <div id="modal-bg">
-  <div class="modal">
-    <h3>🎬 Record Narrated Video</h3>
-    <p>The voice narration (SpeechSynthesis) plays through your speakers. To capture it into the video, Chrome needs to capture this tab's audio.</p>
-    <div class="modal-steps">
-      <div class="step-row"><div class="sn">1</div><div>Click <strong style="color:#d4a843">Start Recording</strong> below</div></div>
-      <div class="step-row"><div class="sn">2</div><div>In Chrome's popup: pick <strong style="color:#d4a843">This Tab</strong> → tick <strong style="color:#d4a843">Share tab audio</strong> → click <strong style="color:#d4a843">Share</strong></div></div>
-      <div class="step-row"><div class="sn">3</div><div>Recording starts automatically — each slide narrates and advances. Don't switch tabs.</div></div>
-    </div>
-    <div class="modal-btns">
-      <button class="modal-primary" onclick="startVideoWithAudio()">🔊 Start Recording</button>
-      <button class="modal-secondary" onclick="startVideoSilent()">Silent video only</button>
-      <button class="modal-secondary" onclick="closeModal()">Cancel</button>
-    </div>
-  </div>
+  <div class="modal" id="modal-content"></div>
 </div>
 
 <!-- VIDEO PROGRESS -->
 <div id="vid-progress">
   <div class="vp-spinner"></div>
-  <div id="vp-title">Recording Video…</div>
-  <div id="vp-sub">Keep this tab active and do not switch windows</div>
+  <div id="vp-title">Generating Video…</div>
+  <div id="vp-sub">Please wait</div>
   <div id="vp-narr"></div>
   <div class="vp-bar-wrap"><div id="vp-bar"></div></div>
-  <div id="vp-step">Starting…</div>
+  <div id="vp-step"></div>
 </div>
 
 <canvas id="render-canvas" style="display:none"></canvas>
 
 <script>
-// ── PDF.js ──────────────────────────────────────────────────────
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+// ── Device Detection ────────────────────────────────────────────
+const ua = navigator.userAgent;
+const isIOS     = /iPhone|iPad|iPod/i.test(ua);
+const isAndroid = /android/i.test(ua);
+const isMobile  = isIOS || isAndroid;
+// Tab audio via getDisplayMedia only works on desktop Chrome/Edge
+const canCaptureTabAudio = !isMobile
+  && typeof navigator.mediaDevices?.getDisplayMedia === 'function'
+  && (/chrome/i.test(ua) || /edg/i.test(ua))
+  && !/opr\//i.test(ua); // exclude Opera
 
 // ── State ───────────────────────────────────────────────────────
 let slides = [], current = 0, docTitle = 'Presentation';
@@ -287,37 +289,41 @@ let presentIdx = 0, presentRunning = false, presentPaused = false;
 
 // ── PWA ─────────────────────────────────────────────────────────
 (function setupPWA() {
-  const sz = 512, cv = document.createElement('canvas');
-  cv.width = cv.height = sz;
-  const cx = cv.getContext('2d');
-  const bg = cx.createRadialGradient(sz/2,sz/2,sz*.05,sz/2,sz/2,sz*.52);
+  const sz=512, cv=document.createElement('canvas');
+  cv.width=cv.height=sz;
+  const cx=cv.getContext('2d');
+  const bg=cx.createRadialGradient(sz/2,sz/2,sz*.05,sz/2,sz/2,sz*.52);
   bg.addColorStop(0,'#1a2d42'); bg.addColorStop(1,'#07080d');
-  cx.fillStyle = bg; cx.fillRect(0,0,sz,sz);
-  cx.strokeStyle = 'rgba(212,168,67,.35)'; cx.lineWidth = 4;
+  cx.fillStyle=bg; cx.fillRect(0,0,sz,sz);
+  cx.strokeStyle='rgba(212,168,67,.35)'; cx.lineWidth=4;
   cx.beginPath(); cx.arc(sz/2,sz/2,sz*.44,0,Math.PI*2); cx.stroke();
-  cx.strokeStyle = 'rgba(212,168,67,.15)'; cx.lineWidth = 2;
+  cx.strokeStyle='rgba(212,168,67,.15)'; cx.lineWidth=2;
   cx.beginPath(); cx.arc(sz/2,sz/2,sz*.36,0,Math.PI*2); cx.stroke();
-  cx.fillStyle = '#d4a843';
-  cx.font = `bold ${sz*.46}px serif`;
-  cx.textAlign = 'center'; cx.textBaseline = 'middle';
-  cx.fillText('✦', sz/2, sz*.48);
-  cx.fillStyle = 'rgba(212,168,67,.6)';
-  cx.font = `600 ${sz*.08}px sans-serif`;
-  cx.fillText('PDF TRANSFORMER', sz/2, sz*.83);
-  const dataURL = cv.toDataURL('image/png');
-  document.getElementById('apple-touch-icon').href = dataURL;
-  const manifest = {
-    name:'PDF Transformer', short_name:'PDF Transformer',
+  cx.fillStyle='#d4a843';
+  cx.font=`bold ${sz*.46}px serif`;
+  cx.textAlign='center'; cx.textBaseline='middle';
+  cx.fillText('✦',sz/2,sz*.48);
+  cx.fillStyle='rgba(212,168,67,.6)';
+  cx.font=`600 ${sz*.08}px sans-serif`;
+  cx.fillText('PDF TRANSFORMER',sz/2,sz*.83);
+  const dataURL=cv.toDataURL('image/png');
+  document.getElementById('apple-touch-icon').href=dataURL;
+  const manifest={name:'PDF Transformer',short_name:'PDF Transformer',
     description:'Convert noisy PDFs into elegant narrated presentations',
-    start_url:'./', display:'standalone',
-    background_color:'#07080d', theme_color:'#0a0b10', orientation:'any',
-    icons:[{src:dataURL,sizes:'512x512',type:'image/png',purpose:'any maskable'}]
-  };
-  const blob = new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
-  document.getElementById('pwa-manifest').href = URL.createObjectURL(blob);
-  if ('serviceWorker' in navigator) {
-    const sw = `self.addEventListener('install',()=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>{if(e.request.url.includes('api.anthropic.com'))return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
-    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
+    start_url:'./',display:'standalone',
+    background_color:'#07080d',theme_color:'#0a0b10',orientation:'any',
+    icons:[{src:dataURL,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
+  const blob=new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
+  document.getElementById('pwa-manifest').href=URL.createObjectURL(blob);
+  if('serviceWorker'in navigator){
+    const sw=`self.addEventListener('install',()=>self.skipWaiting());
+self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
+self.addEventListener('fetch',e=>{
+  if(e.request.url.includes('api.anthropic.com'))return;
+  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
+});`;
+    navigator.serviceWorker.register(
+      URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
   }
 })();
 
@@ -326,7 +332,7 @@ let presentIdx = 0, presentRunning = false, presentPaused = false;
 function saveKey(){
   const v=document.getElementById('api-key-input').value.trim();
   if(!v.startsWith('sk-ant-')){showKeyStatus(false,'Must start with sk-ant-');return;}
-  apiKey=v;sessionStorage.setItem('pdf_tf_key',apiKey);showKeyStatus(true);
+  apiKey=v; sessionStorage.setItem('pdf_tf_key',apiKey); showKeyStatus(true);
 }
 function showKeyStatus(ok,msg){
   const el=document.getElementById('key-status');
@@ -342,14 +348,16 @@ function showErrSlides(m){const e=$('slides-error');e.textContent='⚠ '+m;e.cla
 function clearErr(){$('upload-error').classList.remove('show');$('slides-error').classList.remove('show');}
 function showView(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  $('slides-view').classList.remove('active');$('btn-new').style.display='none';
+  $('slides-view').classList.remove('active');
+  $('btn-new').style.display='none';
   if(name==='slides'){$('slides-view').classList.add('active');$('btn-new').style.display='flex';}
   else{const el=$(name+'-view');if(el){el.classList.add('active');el.classList.add('fadein');}}
 }
 function setProc(m){$('proc-msg').textContent=m;}
 function resetApp(){
   slides=[];current=0;stopPresent();clearErr();
-  $('video-banner').classList.remove('show');$('narration-box').classList.remove('show');
+  $('video-banner').classList.remove('show');
+  $('narration-box').classList.remove('show');
   showView('upload');
 }
 function onDragOver(e){e.preventDefault();$('drop-zone').classList.add('over');}
@@ -366,14 +374,14 @@ async function extractPDFText(file){
     const pg=await pdf.getPage(i);
     const tc=await pg.getTextContent();
     const pt=tc.items.map(it=>it.str||'').join(' ').replace(/\s+/g,' ').trim();
-    if(pt)text+='\n=== PAGE '+i+' ===\n'+pt;
+    if(pt) text+='\n=== PAGE '+i+' ===\n'+pt;
   }
   return text;
 }
 
 // ── JSON Extract ────────────────────────────────────────────────
 function extractJSON(raw){
-  if(!raw)throw new Error('Empty API response');
+  if(!raw) throw new Error('Empty API response');
   let s=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
   try{return JSON.parse(s);}catch(_){}
   const a=s.indexOf('{'),b=s.lastIndexOf('}');
@@ -383,7 +391,7 @@ function extractJSON(raw){
 
 // ── Claude API ──────────────────────────────────────────────────
 async function callClaude(rawText){
-  if(!apiKey)throw new Error('Please enter and save your Anthropic API key.');
+  if(!apiKey) throw new Error('Please enter and save your Anthropic API key.');
   const res=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{
@@ -405,11 +413,11 @@ Schema:
   "body":"string (one sentence, content only)",
   "bullets":["max 10 words, max 5 (content only)"],
   "highlight":"string (optional powerful stat or quote)",
-  "narration":"string — 1-2 natural spoken sentences, max 30 words. Clear and engaging. No slide numbers."
+  "narration":"1-2 natural spoken sentences, max 30 words, engaging voice-over. No slide numbers."
 }]}
 
 Rules: 8-12 slides. First=title. Last=closing. section has no bullets.
-narration REQUIRED on every slide. Strip all PDF noise. Return ONLY the JSON.`,
+narration REQUIRED on every slide. Strip all PDF noise. Return ONLY JSON.`,
       messages:[{role:'user',content:'Transform this PDF into narrated presentation JSON:\n\n'+rawText.substring(0,8000)}]
     })
   });
@@ -423,34 +431,34 @@ narration REQUIRED on every slide. Strip all PDF noise. Return ONLY the JSON.`,
 
 // ── Process File ────────────────────────────────────────────────
 async function processFile(file){
-  if(!file)return;
+  if(!file) return;
   if(!apiKey){showErrUpload('Please enter and save your Anthropic API key first.');return;}
   if(file.type!=='application/pdf'){showErrUpload('Please upload a valid PDF file.');return;}
-  clearErr();showView('processing');
+  clearErr(); showView('processing');
   try{
     setProc('Reading PDF content…');
     const rawText=await extractPDFText(file);
-    if(!rawText.trim())throw new Error('Could not extract text — PDF may be image-based.');
+    if(!rawText.trim()) throw new Error('Could not extract text — PDF may be image-based.');
     setProc('Claude AI is crafting slides & narration…');
     const data=await callClaude(rawText);
-    if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
+    if(data.error) throw new Error(data.error.message||JSON.stringify(data.error));
     const rawJSON=data.content?.[0]?.text;
-    if(!rawJSON)throw new Error('No content in API response.');
+    if(!rawJSON) throw new Error('No content in API response.');
     const parsed=extractJSON(rawJSON);
-    if(!parsed.slides?.length)throw new Error('No slides generated — please try again.');
+    if(!parsed.slides?.length) throw new Error('No slides generated — please try again.');
     slides=parsed.slides;
     docTitle=parsed.title||file.name.replace(/\.pdf$/i,'');
     current=0;
     $('doc-title-lbl').textContent=docTitle;
     $('slide-count-lbl').textContent=slides.length+' slides';
-    buildDots();renderCurrentSlide();showNarration();
+    buildDots(); renderCurrentSlide(); showNarration();
     showView('slides');
   }catch(err){
-    console.error(err);showView('upload');showErrUpload(err.message);
+    console.error(err); showView('upload'); showErrUpload(err.message);
   }
 }
 
-// ── Narration Display ────────────────────────────────────────────
+// ── Narration ───────────────────────────────────────────────────
 function showNarration(){
   const s=slides[current];
   if(!s?.narration){$('narration-box').classList.remove('show');return;}
@@ -458,40 +466,33 @@ function showNarration(){
   $('narration-box').classList.add('show');
 }
 
-// ── SpeechSynthesis ─────────────────────────────────────────────
-// The ONLY reliable cross-platform TTS. Works on iPhone, Android, Chrome, Safari.
+// ── SpeechSynthesis (works on ALL devices) ───────────────────────
 function getBestVoice(){
   const voices=speechSynthesis.getVoices();
   return voices.find(v=>/en[-_]?(GB|US|AU)/i.test(v.lang)&&!v.localService)
-    || voices.find(v=>/en[-_]?(GB|US)/i.test(v.lang))
-    || voices.find(v=>/en/i.test(v.lang))
-    || null;
+    ||voices.find(v=>/en[-_]?(GB|US)/i.test(v.lang))
+    ||voices.find(v=>/en/i.test(v.lang))||null;
 }
-
-function speakAndWait(text, rate){
+function speakAndWait(text,rate){
   return new Promise(resolve=>{
     speechSynthesis.cancel();
     if(!text){setTimeout(resolve,200);return;}
     const u=new SpeechSynthesisUtterance(text);
     u.rate=rate||0.88; u.pitch=1.0; u.volume=1.0;
-    const voice=getBestVoice();
-    if(voice)u.voice=voice;
-    u.onend=resolve;
-    u.onerror=()=>setTimeout(resolve,500);
+    const v=getBestVoice(); if(v) u.voice=v;
+    u.onend=resolve; u.onerror=()=>setTimeout(resolve,300);
     speechSynthesis.speak(u);
-    // Safety: max 40s per slide
-    setTimeout(resolve,40000);
+    setTimeout(resolve,40000); // safety
   });
 }
 
 // ── PRESENT MODE ────────────────────────────────────────────────
 function startPresent(){
-  if(!slides.length)return;
-  presentIdx=current;presentRunning=true;presentPaused=false;
+  if(!slides.length) return;
+  presentIdx=current; presentRunning=true; presentPaused=false;
   $('present-overlay').classList.add('show');
   document.body.style.overflow='hidden';
-  renderPresentSlide();
-  runPresent();
+  renderPresentSlide(); runPresent();
 }
 function stopPresent(){
   presentRunning=false;
@@ -503,135 +504,179 @@ function presentNav(dir){
   speechSynthesis.cancel();
   presentIdx=Math.max(0,Math.min(slides.length-1,presentIdx+dir));
   renderPresentSlide();
-  if(presentRunning)runPresent();
+  if(presentRunning) runPresent();
 }
 function presentPauseToggle(){
   presentPaused=!presentPaused;
   const btn=$('pc-pause'), wave=$('pc-wave');
   if(presentPaused){
     speechSynthesis.pause();
-    btn.textContent='▶ Resume';
-    wave.classList.add('off');
-    $('pc-spk-txt').textContent='Paused';
+    btn.textContent='▶ Resume'; wave.classList.add('off'); $('pc-spk-txt').textContent='Paused';
   }else{
     speechSynthesis.resume();
-    btn.textContent='⏸ Pause';
-    wave.classList.remove('off');
-    $('pc-spk-txt').textContent='Speaking…';
+    btn.textContent='⏸ Pause'; wave.classList.remove('off'); $('pc-spk-txt').textContent='Speaking';
   }
 }
 function renderPresentSlide(){
   const c=$('present-canvas'), wrap=$('present-canvas-wrap');
-  const maxW=wrap.clientWidth, maxH=wrap.clientHeight||Math.round(maxW*9/16);
-  const ratio=Math.min(maxW/(16),maxH/(9));
+  const maxW=wrap.clientWidth||window.innerWidth;
+  const maxH=wrap.clientHeight||Math.round(maxW*9/16);
+  const ratio=Math.min(maxW/16, maxH/9);
   const W=Math.round(16*ratio), H=Math.round(9*ratio);
-  c.width=W;c.height=H;c.style.width=W+'px';c.style.height=H+'px';
-  if(slides[presentIdx])renderSlide(c.getContext('2d'),slides[presentIdx],W,H,presentIdx,slides.length);
+  c.width=W; c.height=H; c.style.width=W+'px'; c.style.height=H+'px';
+  if(slides[presentIdx]) renderSlide(c.getContext('2d'),slides[presentIdx],W,H,presentIdx,slides.length);
   $('present-caption').textContent=slides[presentIdx]?.narration||slides[presentIdx]?.heading||'';
   $('pc-info').textContent=(presentIdx+1)+' / '+slides.length;
 }
 async function runPresent(){
-  if(!presentRunning)return;
+  if(!presentRunning) return;
   const s=slides[presentIdx];
-  $('pc-spk-txt').textContent='Speaking…';
-  $('pc-wave').classList.remove('off');
-  await speakAndWait(s.narration||s.heading||'', 0.88);
-  if(!presentRunning||presentPaused)return;
+  $('pc-spk-txt').textContent='Speaking'; $('pc-wave').classList.remove('off');
+  await speakAndWait(s.narration||s.heading||'',0.88);
+  if(!presentRunning||presentPaused) return;
   await sleep(500);
-  if(!presentRunning)return;
-  if(presentIdx<slides.length-1){presentIdx++;renderPresentSlide();runPresent();}
-  else{$('pc-spk-txt').textContent='Done';$('pc-wave').classList.add('off');}
+  if(!presentRunning) return;
+  if(presentIdx<slides.length-1){presentIdx++; renderPresentSlide(); runPresent();}
+  else{$('pc-spk-txt').textContent='Done'; $('pc-wave').classList.add('off');}
 }
-window.addEventListener('resize',()=>{if($('present-overlay').classList.contains('show'))renderPresentSlide();});
+window.addEventListener('resize',()=>{
+  if($('present-overlay').classList.contains('show')) renderPresentSlide();
+});
 
-// ── VIDEO MODAL ─────────────────────────────────────────────────
-function showVideoModal(){clearErr();$('modal-bg').classList.add('show');}
+// ── VIDEO MODAL ──────────────────────────────────────────────────
+function openVideoModal(){
+  clearErr();
+  const content=$('modal-content');
+
+  if(isIOS){
+    // iOS: getDisplayMedia not supported — offer silent video with captions only
+    content.innerHTML=`
+      <h3>🎬 Export Video</h3>
+      <div class="ios-note">
+        <strong>iPhone / iPad note:</strong> iOS does not support tab audio recording in the browser.
+        Use <strong>▶ Present</strong> for a live narrated slideshow with voice.<br><br>
+        The exported video will include <strong>narration text as captions</strong> burned onto each slide.
+      </div>
+      <p>Your slides will be exported as a 1280×720 WebM video with text captions. Duration ~4–5 seconds per slide.</p>
+      <div class="modal-btns">
+        <button class="mbtn-primary" onclick="closeModal();startVideoSilent()">📥 Export Video with Captions</button>
+        <button class="mbtn-secondary" onclick="closeModal()">Cancel</button>
+      </div>`;
+  } else if(!canCaptureTabAudio){
+    // Desktop but not Chrome/Edge — offer silent or explain requirement
+    content.innerHTML=`
+      <h3>🎬 Export Video</h3>
+      <div class="ios-note" style="border-color:rgba(255,200,80,.2);background:rgba(255,200,80,.05);color:rgba(255,220,120,.85)">
+        <strong>Browser note:</strong> Narrated video recording (with voice audio) requires <strong>Google Chrome or Microsoft Edge</strong> on desktop.
+        Your current browser does not support tab audio capture.
+      </div>
+      <p>You can still export a video with narration text burned as captions onto each slide.</p>
+      <div class="modal-btns">
+        <button class="mbtn-primary" onclick="closeModal();startVideoSilent()">📥 Export Video with Captions</button>
+        <button class="mbtn-secondary" onclick="closeModal()">Cancel</button>
+      </div>`;
+  } else {
+    // Desktop Chrome/Edge — full tab audio capture flow
+    content.innerHTML=`
+      <h3>🎬 Record Narrated Video</h3>
+      <p>Voice narration plays through your speakers. Chrome can capture this tab's audio and bake it into the video.</p>
+      <div class="modal-steps">
+        <div class="step-row"><div class="sn">1</div><div>Click <strong style="color:#d4a843">Start Recording</strong> — Chrome's share dialog will open</div></div>
+        <div class="step-row"><div class="sn">2</div><div>Select <strong style="color:#d4a843">This Tab</strong> → tick <strong style="color:#d4a843">Share tab audio</strong> at the bottom → click <strong style="color:#d4a843">Share</strong></div></div>
+        <div class="step-row"><div class="sn">3</div><div>Recording starts — slides auto-advance with narration. Do not switch tabs.</div></div>
+      </div>
+      <div class="modal-btns">
+        <button class="mbtn-primary"     onclick="closeModal();startVideoWithAudio()">🔊 Start Recording</button>
+        <button class="mbtn-secondary"   onclick="closeModal();startVideoSilent()">Video with captions only</button>
+        <button class="mbtn-secondary"   onclick="closeModal()">Cancel</button>
+      </div>`;
+  }
+
+  $('modal-bg').classList.add('show');
+}
 function closeModal(){$('modal-bg').classList.remove('show');}
 
-// ── VIDEO WITH AUDIO (Tab Audio Capture) ──────────────────────
-// speechSynthesis → plays through speakers → captured by getDisplayMedia tab audio
-// → MediaRecorder records canvas video + tab audio → real audio in WebM ✅
+// ── VIDEO WITH TAB AUDIO (Desktop Chrome) ────────────────────────
 async function startVideoWithAudio(){
-  closeModal();
-
-  let tabAudioTrack=null;
+  let audioTrack=null;
   try{
-    // Ask Chrome to share THIS tab's audio
-    const displayStream=await navigator.mediaDevices.getDisplayMedia({
+    const stream=await navigator.mediaDevices.getDisplayMedia({
       video:{displaySurface:'browser'},
       audio:{
-        suppressLocalAudioPlayback:false,  // MUST be false — we WANT audio to play locally so TTS works
+        suppressLocalAudioPlayback:false,
         echoCancellation:false,
         noiseSuppression:false,
         sampleRate:44100
       },
-      preferCurrentTab:true,          // Chrome hint: pre-select current tab
-      selfBrowserSurface:'include'     // Chrome hint: allow current tab
+      preferCurrentTab:true,
+      selfBrowserSurface:'include'
     });
-    // Stop the video capture track — we only need audio
-    displayStream.getVideoTracks().forEach(t=>t.stop());
-    tabAudioTrack=displayStream.getAudioTracks()[0]||null;
-    if(!tabAudioTrack)throw new Error('No audio track in display stream');
+    // Drop the video track — we only need audio
+    stream.getVideoTracks().forEach(t=>t.stop());
+    audioTrack=stream.getAudioTracks()[0]||null;
   }catch(e){
-    console.warn('Tab audio capture failed or cancelled:',e.message);
-    // User cancelled or browser not supported — fall back to silent
-    const doSilent=confirm('Could not capture tab audio.\n\nThis may be because:\n• "Share tab audio" was not checked\n• You cancelled the dialog\n• Your browser does not support tab audio capture\n\nGenerate a silent video with text captions instead?');
-    if(doSilent)startVideoSilent();
+    console.warn('Tab audio capture failed:',e.message);
+    // Show a clean in-app error modal — no browser confirm()
+    const content=$('modal-content');
+    content.innerHTML=`
+      <h3>⚠ Audio Capture Failed</h3>
+      <p style="margin-bottom:18px">${e.name==='NotAllowedError'
+        ?'You cancelled the dialog, or did not check <strong style="color:#d4a843">Share tab audio</strong>.'
+        :'Tab audio capture is not available in this browser or context.'}</p>
+      <p style="margin-bottom:20px">Would you like to generate a video with narration text captions instead?</p>
+      <div class="modal-btns">
+        <button class="mbtn-primary" onclick="closeModal();startVideoSilent()">📥 Video with Captions</button>
+        <button class="mbtn-secondary" onclick="closeModal()">Cancel</button>
+      </div>`;
+    $('modal-bg').classList.add('show');
     return;
   }
-
-  await renderVideo(tabAudioTrack, true);
+  await renderVideo(audioTrack, true);
 }
 
-// ── VIDEO SILENT (text captions, no audio) ───────────────────
+// ── VIDEO SILENT ─────────────────────────────────────────────────
 async function startVideoSilent(){
-  closeModal();
   await renderVideo(null, false);
 }
 
-// ── CORE VIDEO RENDERER ──────────────────────────────────────
+// ── CORE VIDEO RENDERER ──────────────────────────────────────────
 async function renderVideo(audioTrack, hasAudio){
   $('vid-progress').classList.add('show');
   document.querySelectorAll('button').forEach(b=>b.disabled=true);
   speechSynthesis.cancel();
 
   try{
-    const W=1280,H=720;
-    const cv=$('render-canvas');cv.width=W;cv.height=H;
+    const W=1280, H=720;
+    const cv=$('render-canvas'); cv.width=W; cv.height=H;
     const ctx=cv.getContext('2d');
 
-    // Build MediaStream: canvas video + optional tab audio
     const canvasStream=cv.captureStream(30);
     const tracks=[...canvasStream.getVideoTracks()];
-    if(audioTrack)tracks.push(audioTrack);
+    if(audioTrack) tracks.push(audioTrack);
     const combined=new MediaStream(tracks);
 
-    // Codec: must include 'opus' for audio to work in WebM
+    // Must use opus codec for audio
     const mimeType=[
       'video/webm;codecs=vp8,opus',
       'video/webm;codecs=vp9,opus',
-      'video/webm;codecs=h264,opus',
       'video/webm'
     ].find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
-
-    console.log('Recording with mimeType:', mimeType, '| audioTrack:', !!audioTrack);
 
     const recorder=new MediaRecorder(combined,{
       mimeType,
       videoBitsPerSecond:5_000_000,
-      audioBitsPerSecond: hasAudio?128_000:undefined
+      ...(hasAudio&&{audioBitsPerSecond:128_000})
     });
     const chunks=[];
     recorder.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
     recorder.onstop=()=>{
-      if(audioTrack)audioTrack.stop();
-      const blob=new Blob(chunks,{type:'video/webm'});
-      const url=URL.createObjectURL(blob);
+      if(audioTrack) audioTrack.stop();
+      const url=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
       $('vb-dl').href=url;
-      $('vb-dl').download=docTitle.replace(/[^a-z0-9]/gi,'_')+(hasAudio?'_narrated':'_silent')+'.webm';
+      $('vb-dl').download=docTitle.replace(/[^a-z0-9]/gi,'_')+(hasAudio?'_narrated':'_captions')+'.webm';
       $('vb-msg').textContent=hasAudio
         ?`✔ Narrated video — ${slides.length} slides with voice audio`
-        :`Video ready — ${slides.length} slides with text captions`;
+        :`✔ Video ready — ${slides.length} slides with text captions`;
       $('video-banner').classList.add('show');
       $('vid-progress').classList.remove('show');
       document.querySelectorAll('button').forEach(b=>b.disabled=false);
@@ -642,28 +687,24 @@ async function renderVideo(audioTrack, hasAudio){
     const FADE=20;
     for(let i=0;i<slides.length;i++){
       const s=slides[i];
-      $('vp-bar').style.width=Math.round(((i)/slides.length)*100)+'%';
+      $('vp-bar').style.width=Math.round((i/slides.length)*100)+'%';
       $('vp-step').textContent=`Slide ${i+1} of ${slides.length}`;
       $('vp-narr').textContent=s.narration||'';
-      if(hasAudio)$('vp-sub').textContent='🔊 Speaking: "'+s.heading+'"';
-      else $('vp-sub').textContent='Rendering slide '+( i+1)+' of '+slides.length+'…';
+      $('vp-sub').textContent=hasAudio?`🔊 Speaking: "${s.heading||''}"`:`Rendering slide ${i+1}…`;
 
       // Fade in
       for(let f=0;f<=FADE;f++){
         renderSlide(ctx,s,W,H,i,slides.length);
-        ctx.globalAlpha=1-f/FADE;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;
+        ctx.globalAlpha=1-f/FADE; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1;
         await sleep(14);
       }
       renderSlide(ctx,s,W,H,i,slides.length);
-
-      // When no audio, burn caption text onto the canvas
-      if(!hasAudio&&s.narration){
-        renderCaption(ctx,s.narration,W,H);
-      }
+      // Always burn captions for silent video
+      if(!hasAudio&&s.narration) renderCaption(ctx,s.narration,W,H);
 
       if(hasAudio){
-        // Speak using SpeechSynthesis — captured by tab audio track into MediaRecorder ✅
-        await speakAndWait(s.narration||s.heading||'',0.88);
+        // SpeechSynthesis → captured by tab audio track → in MediaRecorder ✅
+        await speakAndWait(s.narration||s.heading||'', 0.88);
         await sleep(350);
       }else{
         await sleep(4500);
@@ -672,12 +713,11 @@ async function renderVideo(audioTrack, hasAudio){
       // Fade out
       for(let f=0;f<=FADE;f++){
         renderSlide(ctx,s,W,H,i,slides.length);
-        if(!hasAudio&&s.narration)renderCaption(ctx,s.narration,W,H);
-        ctx.globalAlpha=f/FADE;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;
+        if(!hasAudio&&s.narration) renderCaption(ctx,s.narration,W,H);
+        ctx.globalAlpha=f/FADE; ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1;
         await sleep(14);
       }
     }
-
     $('vp-bar').style.width='100%';
     $('vp-step').textContent='Finalising…';
     await sleep(300);
@@ -685,44 +725,43 @@ async function renderVideo(audioTrack, hasAudio){
 
   }catch(err){
     console.error(err);
-    if(audioTrack)try{audioTrack.stop();}catch(_){}
+    if(audioTrack) try{audioTrack.stop();}catch(_){}
     $('vid-progress').classList.remove('show');
     document.querySelectorAll('button').forEach(b=>b.disabled=false);
     showErrSlides('Video generation failed: '+err.message);
   }
 }
 
-// ── Caption Overlay ──────────────────────────────────────────
+// ── Caption Overlay ───────────────────────────────────────────────
 function renderCaption(ctx,text,W,H){
-  if(!text)return;
+  if(!text) return;
   const pH=H*0.12, pY=H*(1-0.064)-pH;
-  ctx.fillStyle='rgba(4,7,12,0.84)';
+  ctx.fillStyle='rgba(4,7,12,0.85)';
   ctx.fillRect(0,pY,W,pH);
-  ctx.fillStyle='rgba(215,230,248,0.88)';
+  ctx.fillStyle='rgba(215,232,250,.9)';
   ctx.font=`italic ${Math.round(H*0.031)}px 'Playfair Display',serif`;
   ctx.textAlign='center';
-  // Wrap text centered
-  const words=text.split(' ');let line='',lines=[],maxW=W-100;
+  const words=text.split(' '); let line='',lines=[]; const maxW=W-100;
   for(const w of words){
     const t=line+w+' ';
     if(ctx.measureText(t).width>maxW&&line){lines.push(line.trim());line=w+' ';}
     else line=t;
   }
-  if(line.trim())lines.push(line.trim());
+  if(line.trim()) lines.push(line.trim());
   const lh=H*0.037, startY=pY+(pH-lh*(lines.length-1))/2;
   lines.forEach((l,i)=>ctx.fillText(l,W/2,startY+i*lh));
 }
 
-// ── Canvas Rendering ──────────────────────────────────────────
+// ── Canvas Rendering ──────────────────────────────────────────────
 function wrapText(ctx,text,x,y,maxW,lh){
-  if(!text)return y;
-  const words=String(text).split(' ');let line='',cy=y;
+  if(!text) return y;
+  const words=String(text).split(' '); let line='',cy=y;
   for(const w of words){
     const t=line+w+' ';
     if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line.trim(),x,cy);line=w+' ';cy+=lh;}
     else line=t;
   }
-  if(line.trim())ctx.fillText(line.trim(),x,cy);
+  if(line.trim()) ctx.fillText(line.trim(),x,cy);
   return cy+lh;
 }
 
@@ -732,36 +771,38 @@ function renderSlide(ctx,slide,W,H,idx,total){
   if(slide.type==='title'||slide.type==='closing'){bg.addColorStop(0,'#0c1520');bg.addColorStop(1,'#1a2d42');}
   else if(slide.type==='section'){bg.addColorStop(0,'#160f24');bg.addColorStop(1,'#0c1520');}
   else{bg.addColorStop(0,'#0e1823');bg.addColorStop(1,'#0a1218');}
-  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-  const G='#d4a843',isTit=slide.type==='title'||slide.type==='closing',isSec=slide.type==='section';
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  const G='#d4a843';
+  const isTit=slide.type==='title'||slide.type==='closing';
+  const isSec=slide.type==='section';
   if(isTit){
     [.38,.46,.54].forEach((r,i)=>{
       ctx.save();ctx.strokeStyle=`rgba(212,168,67,${.07-i*.018})`;ctx.lineWidth=1.2;
       ctx.beginPath();ctx.arc(W/2,H/2,r*H,0,Math.PI*2);ctx.stroke();ctx.restore();
     });
-    ctx.textAlign='center';ctx.fillStyle=G;
+    ctx.textAlign='center'; ctx.fillStyle=G;
     ctx.font=`bold ${Math.round(H*.076)}px 'Playfair Display',Georgia,serif`;
     const ty=wrapText(ctx,slide.heading||'',W/2,H*.36,W-200,H*.09)+H*.022;
-    ctx.fillStyle=G;ctx.fillRect(W/2-60,ty,120,2);
+    ctx.fillStyle=G; ctx.fillRect(W/2-60,ty,120,2);
     if(slide.subheading){
       ctx.fillStyle='rgba(220,235,248,.7)';
       ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;
       wrapText(ctx,slide.subheading,W/2,ty+H*.04,W-200,H*.042);
     }
   }else if(isSec){
-    ctx.textAlign='center';ctx.fillStyle=G;
-    ctx.font=`${Math.round(H*.052)}px serif`;ctx.fillText('◆',W/2,H*.41);
+    ctx.textAlign='center'; ctx.fillStyle=G;
+    ctx.font=`${Math.round(H*.052)}px serif`; ctx.fillText('◆',W/2,H*.41);
     ctx.fillStyle='#e0eaf4';
     ctx.font=`bold ${Math.round(H*.064)}px 'Playfair Display',serif`;
     wrapText(ctx,slide.heading||'',W/2,H*.49,W-200,H*.076);
-    ctx.fillStyle='rgba(212,168,67,.3)';ctx.fillRect(W/2-80,H*.73,160,1);
+    ctx.fillStyle='rgba(212,168,67,.3)'; ctx.fillRect(W/2-80,H*.73,160,1);
   }else{
     const bG=ctx.createLinearGradient(0,H*.12,0,H*.88);
-    bG.addColorStop(0,G);bG.addColorStop(1,'rgba(212,168,67,.1)');
-    ctx.fillStyle=bG;ctx.fillRect(Math.round(W*.04),H*.12,4,H*.76);
-    ctx.fillStyle='rgba(212,168,67,.18)';ctx.fillRect(W*.058,H*.1,W*.9,1);
-    const lx=W*.07;ctx.textAlign='left';
-    ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.056)}px 'Playfair Display',serif`;
+    bG.addColorStop(0,G); bG.addColorStop(1,'rgba(212,168,67,.1)');
+    ctx.fillStyle=bG; ctx.fillRect(Math.round(W*.04),H*.12,4,H*.76);
+    ctx.fillStyle='rgba(212,168,67,.18)'; ctx.fillRect(W*.058,H*.1,W*.9,1);
+    const lx=W*.07; ctx.textAlign='left';
+    ctx.fillStyle=G; ctx.font=`bold ${Math.round(H*.056)}px 'Playfair Display',serif`;
     let y=wrapText(ctx,slide.heading||'',lx,H*.17,W-lx*2.4,H*.068)+H*.014;
     if(slide.body){
       ctx.fillStyle='rgba(200,218,234,.72)';
@@ -770,37 +811,37 @@ function renderSlide(ctx,slide,W,H,idx,total){
     }
     if(Array.isArray(slide.bullets)){
       slide.bullets.slice(0,5).forEach(b=>{
-        if(y>H*.8)return;
-        ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.028)}px sans-serif`;ctx.fillText('▸',lx,y);
-        ctx.fillStyle='#dce9f5';ctx.font=`${Math.round(H*.032)}px sans-serif`;
+        if(y>H*.8) return;
+        ctx.fillStyle=G; ctx.font=`bold ${Math.round(H*.028)}px sans-serif`; ctx.fillText('▸',lx,y);
+        ctx.fillStyle='#dce9f5'; ctx.font=`${Math.round(H*.032)}px sans-serif`;
         y=wrapText(ctx,String(b),lx+W*.026,y,W-lx*2.4-W*.026,H*.042)+H*.007;
       });
     }
     if(slide.highlight){
       const by=H*.818,bh=H*.082;
-      ctx.fillStyle='rgba(212,168,67,.07)';ctx.strokeStyle='rgba(212,168,67,.28)';ctx.lineWidth=1;
-      ctx.fillRect(lx,by,W-lx*2.4,bh);ctx.strokeRect(lx,by,W-lx*2.4,bh);
-      ctx.fillStyle=G;ctx.font=`italic ${Math.round(H*.028)}px 'Playfair Display',serif`;
-      ctx.textAlign='center';ctx.fillText(`"${slide.highlight}"`,W/2,by+bh*.58);
+      ctx.fillStyle='rgba(212,168,67,.07)'; ctx.strokeStyle='rgba(212,168,67,.28)'; ctx.lineWidth=1;
+      ctx.fillRect(lx,by,W-lx*2.4,bh); ctx.strokeRect(lx,by,W-lx*2.4,bh);
+      ctx.fillStyle=G; ctx.font=`italic ${Math.round(H*.028)}px 'Playfair Display',serif`;
+      ctx.textAlign='center'; ctx.fillText(`"${slide.highlight}"`,W/2,by+bh*.58);
     }
   }
-  ctx.fillStyle='rgba(212,168,67,.08)';ctx.fillRect(0,H*.936,W,H*.064);
-  ctx.fillStyle=G;ctx.fillRect(0,H*.936,W*((idx+1)/total),2);
+  ctx.fillStyle='rgba(212,168,67,.08)'; ctx.fillRect(0,H*.936,W,H*.064);
+  ctx.fillStyle=G; ctx.fillRect(0,H*.936,W*((idx+1)/total),2);
   ctx.fillStyle='rgba(255,255,255,.25)';
-  ctx.font=`${Math.round(H*.022)}px 'Courier New',monospace`;ctx.textAlign='right';
+  ctx.font=`${Math.round(H*.022)}px 'Courier New',monospace`; ctx.textAlign='right';
   ctx.fillText(String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0'),W-W*.03,H*.973);
 }
 
-// ── Display / Nav ───────────────────────────────────────────────
+// ── Display / Nav ─────────────────────────────────────────────────
 function renderCurrentSlide(){
-  const c=$('slide-canvas'),wrap=$('slide-wrap');
-  const W=wrap.clientWidth||640,H=Math.round(W*9/16);
-  c.width=W;c.height=H;c.style.width='100%';c.style.height='100%';
-  if(slides[current])renderSlide(c.getContext('2d'),slides[current],W,H,current,slides.length);
+  const c=$('slide-canvas'), wrap=$('slide-wrap');
+  const W=wrap.clientWidth||640, H=Math.round(W*9/16);
+  c.width=W; c.height=H; c.style.width='100%'; c.style.height='100%';
+  if(slides[current]) renderSlide(c.getContext('2d'),slides[current],W,H,current,slides.length);
   updateNav();
 }
 function buildDots(){
-  const d=$('dots');d.innerHTML='';
+  const d=$('dots'); d.innerHTML='';
   slides.forEach((_,i)=>{
     const b=document.createElement('button');
     b.className='dot'+(i===current?' active':'');
@@ -815,27 +856,28 @@ function updateNav(){
 }
 function navigate(dir){
   current=Math.max(0,Math.min(slides.length-1,current+dir));
-  renderCurrentSlide();showNarration();
+  renderCurrentSlide(); showNarration();
 }
-window.addEventListener('resize',()=>{if(slides.length)renderCurrentSlide();});
+window.addEventListener('resize',()=>{if(slides.length) renderCurrentSlide();});
 
-// ── Export PDF ──────────────────────────────────────────────────
+// ── Export PDF ─────────────────────────────────────────────────────
 async function exportPDF(){
   if(!window.jspdf){showErrSlides('jsPDF not loaded yet.');return;}
-  clearErr();const btn=$('btn-pdf');btn.disabled=true;btn.textContent='⏳ Exporting…';
+  clearErr(); const btn=$('btn-pdf'); btn.disabled=true; btn.textContent='⏳ Exporting…';
   try{
     const{jsPDF}=window.jspdf;
-    const W=1280,H=720,doc=new jsPDF({orientation:'l',unit:'px',format:[W,H]});
-    const cv=$('render-canvas');cv.width=W;cv.height=H;const ctx=cv.getContext('2d');
+    const W=1280,H=720;
+    const doc=new jsPDF({orientation:'l',unit:'px',format:[W,H]});
+    const cv=$('render-canvas'); cv.width=W; cv.height=H; const ctx=cv.getContext('2d');
     for(let i=0;i<slides.length;i++){
       btn.textContent=`⏳ ${i+1}/${slides.length}…`;
-      if(i>0)doc.addPage([W,H],'l');
+      if(i>0) doc.addPage([W,H],'l');
       renderSlide(ctx,slides[i],W,H,i,slides.length);
       doc.addImage(cv.toDataURL('image/jpeg',.93),'JPEG',0,0,W,H);
     }
     doc.save(docTitle.replace(/[^a-z0-9]/gi,'_')+'_elegant.pdf');
   }catch(e){showErrSlides('PDF export failed: '+e.message);}
-  btn.disabled=false;btn.textContent='⬇ Export PDF';
+  btn.disabled=false; btn.textContent='⬇ Export PDF';
 }
 </script>
 </body>
