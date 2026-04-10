@@ -96,82 +96,132 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 #slides-error{display:none;color:#ff8080;font-size:12px;background:rgba(220,60,60,.07);border:1px solid rgba(220,60,60,.2);border-radius:7px;padding:9px 15px;width:100%;text-align:center}
 #slides-error.show{display:block}
 
-/* ══ PRESENT OVERLAY ══════════════════════════════════════════════ */
-#present-overlay{display:none;position:fixed;inset:0;z-index:500;background:#07080d;flex-direction:column}
+/* ══════════════════════════════════════════════════════════════
+   PRESENT OVERLAY  — strict 50 / 50 split
+   ══════════════════════════════════════════════════════════════ */
+#present-overlay{
+  display:none;position:fixed;inset:0;z-index:500;background:#07080d;
+  flex-direction:column;
+}
 #present-overlay.show{display:flex}
 
-/* Slide canvas area — 16:9 */
-#present-canvas-wrap{flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
-#present-canvas{max-width:100%;display:block}
+/* The two equal halves live inside this row */
+#present-body{
+  flex:1;min-height:0;
+  display:flex;
+  flex-direction:column; /* stack vertically on all screens */
+}
 
-/* ── EXPLANATION PANEL ── */
+/* ── TOP HALF: slide canvas ── */
+#present-canvas-wrap{
+  flex:1;               /* exactly half */
+  min-height:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+  overflow:hidden;
+}
+#present-canvas{
+  /* Fill the half-height box maintaining 16:9 */
+  max-width:100%;
+  max-height:100%;
+  display:block;
+  object-fit:contain;
+}
+
+/* ── BOTTOM HALF: explanation panel ── */
 #explain-panel{
-  flex:1; min-height:0; overflow:hidden;
-  display:flex; flex-direction:column;
+  flex:1;               /* exactly half */
+  min-height:0;
+  display:flex;
+  flex-direction:column;
   background:#0a0d14;
-  border-top:2px solid rgba(212,168,67,.2);
+  border-top:2px solid rgba(212,168,67,.25);
+  overflow:hidden;
 }
+
+/* Scrollable inner area */
 #explain-inner{
-  flex:1; overflow:hidden;
-  padding:12px 16px 6px;
-  display:flex; flex-direction:column; gap:6px;
+  flex:1;min-height:0;
+  overflow-y:auto;
+  padding:12px 16px 10px;
+  display:flex;flex-direction:column;gap:8px;
+  /* hide scrollbar visually but keep scroll */
+  scrollbar-width:thin;
+  scrollbar-color:rgba(212,168,67,.2) transparent;
 }
-/* Current line being read */
+#explain-inner::-webkit-scrollbar{width:3px}
+#explain-inner::-webkit-scrollbar-thumb{background:rgba(212,168,67,.2);border-radius:4px}
+
+/* Header row inside panel */
+#ex-header{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;margin-bottom:2px;
+}
+#ex-label{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+#ex-dots{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.ex-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .25s}
+.ex-dot.done{background:rgba(212,168,67,.45)}
+.ex-dot.active{background:#d4a843;transform:scale(1.5)}
+
+/* Current line (highlighted, large) */
 #ex-line{
-  font-size:clamp(12px,2.8vw,14px);
-  color:#e4e4e4; font-weight:600; line-height:1.4;
-  padding:6px 10px;
-  background:rgba(212,168,67,.1);
+  font-size:clamp(13px,3.2vw,17px);
+  font-weight:700;
+  color:#f0e8d0;
+  line-height:1.4;
+  padding:8px 12px;
+  background:rgba(212,168,67,.12);
   border-left:3px solid #d4a843;
-  border-radius:0 5px 5px 0;
-  min-height:24px;
+  border-radius:0 6px 6px 0;
   transition:opacity .3s;
+  flex-shrink:0;
 }
-#ex-line.empty{opacity:0}
-/* Explanation of that line */
+#ex-line.hidden{opacity:0;height:0;padding:0;overflow:hidden;}
+
+/* Explanation text */
 #ex-explain{
-  font-size:clamp(11px,2.5vw,13px);
-  color:rgba(200,220,240,.8);
+  font-size:clamp(12px,2.8vw,15px);
+  color:rgba(200,225,245,.85);
   font-style:italic;
-  line-height:1.55;
-  padding:4px 10px;
-  min-height:18px;
+  line-height:1.65;
+  padding:2px 6px;
   transition:opacity .3s;
+  flex-shrink:0;
 }
-#ex-explain.empty{opacity:0}
-/* Summary — stays at bottom of slide */
+#ex-explain.hidden{opacity:0;height:0;padding:0;overflow:hidden;}
+
+/* Summary — shown at end of slide, stays */
 #ex-summary{
-  font-size:clamp(11px,2.5vw,13px);
-  color:rgba(110,231,160,.85);
-  background:rgba(110,231,160,.07);
-  border:1px solid rgba(110,231,160,.18);
-  border-radius:6px;
-  padding:7px 10px;
-  line-height:1.5;
   display:none;
+  background:rgba(110,231,160,.07);
+  border:1px solid rgba(110,231,160,.2);
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:clamp(12px,2.8vw,14px);
+  color:rgba(110,231,160,.9);
+  line-height:1.6;
+  flex-shrink:0;
 }
 #ex-summary.show{display:block}
-#ex-label{font-size:9px;color:rgba(255,255,255,.25);letter-spacing:1px;margin-bottom:2px}
-
-/* Progress dots */
-#ex-dots{display:flex;gap:4px;align-items:center;flex-wrap:wrap;padding:4px 0}
-.ex-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .2s}
-.ex-dot.done{background:rgba(212,168,67,.5)}
-.ex-dot.active{background:#d4a843;transform:scale(1.4)}
+.sum-label{font-size:9px;letter-spacing:1.2px;color:rgba(110,231,160,.55);font-weight:700;margin-bottom:4px;font-style:normal}
 
 /* Controls bar */
 #present-controls{
   display:flex;align-items:center;justify-content:space-between;
   padding:8px 14px;background:#0a0b10;gap:6px;
-  border-top:1px solid rgba(212,168,67,.1);flex-wrap:wrap;flex-shrink:0;
+  border-top:1px solid rgba(212,168,67,.12);flex-wrap:wrap;flex-shrink:0;
 }
-.pc-btn{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);color:#d4a843;border-radius:6px;padding:7px 11px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;white-space:nowrap}
-#pc-info{font-size:10px;color:rgba(255,255,255,.28);font-family:'Courier New',monospace;text-align:center}
+.pc-btn{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);color:#d4a843;border-radius:6px;padding:8px 12px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background .15s}
+.pc-btn:hover{background:rgba(212,168,67,.2)}
+#pc-center{display:flex;flex-direction:column;align-items:center;gap:3px}
+#pc-info{font-size:10px;color:rgba(255,255,255,.28);font-family:'Courier New',monospace}
+#pc-spk{font-size:10px;color:#d4a843;display:flex;align-items:center;gap:4px}
 .wave{display:inline-flex;gap:2px;align-items:flex-end;height:11px}
 .wave span{width:3px;border-radius:2px;background:#d4a843;display:inline-block;animation:wave 1s ease-in-out infinite}
-.wave span:nth-child(2){animation-delay:.16s}.wave span:nth-child(3){animation-delay:.32s}
+.wave span:nth-child(2){animation-delay:.18s}.wave span:nth-child(3){animation-delay:.36s}
 .wave.off span{animation-play-state:paused;height:3px!important}
-#pc-spk{font-size:10px;color:#d4a843;display:flex;align-items:center;gap:4px}
 
 /* VIDEO MODAL */
 #modal-bg{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
@@ -203,8 +253,8 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 @keyframes wave{0%,100%{height:3px}50%{height:12px}}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .fadein{animation:fadein .35s ease forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .25s ease forwards}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.slide-in{animation:slideIn .3s ease forwards}
 </style>
 </head>
 <body>
@@ -245,7 +295,7 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
   <div class="feat-grid">
     <div class="fc"><div class="fi">🧹</div><div class="ft">Noise Removal</div><div class="fd">Strips headers, footers &amp; OCR noise</div></div>
     <div class="fc"><div class="fi">🤖</div><div class="ft">AI Slides</div><div class="fd">Claude distills content into clean slides</div></div>
-    <div class="fc"><div class="fi">📖</div><div class="ft">Line Explanation</div><div class="fd">Each bullet explained simply with voice</div></div>
+    <div class="fc"><div class="fi">📖</div><div class="ft">Line Explanation</div><div class="fd">Each bullet explained in simple language</div></div>
     <div class="fc"><div class="fi">📝</div><div class="ft">Notes Download</div><div class="fd">Full explanation notes saved as .txt</div></div>
   </div>
 </div>
@@ -278,7 +328,6 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
     <button class="btn-gold"    id="btn-present" onclick="startPresent()">▶ Present</button>
     <button class="btn-outline" id="btn-vid"     onclick="openVideoModal()">🎬 Export Video</button>
   </div>
-  <!-- Download row — shown after a presentation session ends -->
   <div id="download-row">
     <button class="btn-outline" id="btn-dl-notes" onclick="downloadNotes()" style="color:#6ee7a0;border-color:rgba(110,231,160,.3)">📝 Download Notes</button>
     <button class="btn-outline" onclick="exportPDF()">⬇ Slides PDF</button>
@@ -293,38 +342,56 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 
 <!-- ══ PRESENT OVERLAY ══════════════════════════════════════════ -->
 <div id="present-overlay">
-  <!-- Slide canvas (smaller on mobile to leave room for explanation) -->
-  <div id="present-canvas-wrap">
-    <canvas id="present-canvas"></canvas>
-  </div>
 
-  <!-- Live explanation panel -->
-  <div id="explain-panel">
-    <div id="explain-inner">
-      <div id="ex-label">READING NOW</div>
-      <div id="ex-line" class="empty"></div>
-      <div id="ex-explain" class="empty"></div>
-      <div id="ex-dots"></div>
-      <div id="ex-summary">
-        <div style="font-size:9px;color:rgba(110,231,160,.6);letter-spacing:1px;margin-bottom:3px">📋 SLIDE SUMMARY</div>
-        <span id="ex-summary-text"></span>
+  <div id="present-body">
+
+    <!-- TOP HALF: slide -->
+    <div id="present-canvas-wrap">
+      <canvas id="present-canvas"></canvas>
+    </div>
+
+    <!-- BOTTOM HALF: explanation -->
+    <div id="explain-panel">
+      <div id="explain-inner">
+
+        <div id="ex-header">
+          <span id="ex-label">SLIDE OVERVIEW</span>
+          <div id="ex-dots"></div>
+        </div>
+
+        <!-- Current line being narrated (cleared before next line) -->
+        <div id="ex-line" class="hidden"></div>
+
+        <!-- Explanation of that line (cleared before next line) -->
+        <div id="ex-explain" class="hidden"></div>
+
+        <!-- Summary — stays for whole slide -->
+        <div id="ex-summary">
+          <div class="sum-label">📋 SLIDE SUMMARY</div>
+          <span id="ex-summary-text"></span>
+        </div>
+
       </div>
     </div>
-  </div>
+
+  </div><!-- /present-body -->
 
   <!-- Controls -->
   <div id="present-controls">
     <button class="pc-btn" onclick="presentSkipBack()">&#8249; Back</button>
-    <div id="pc-spk">
-      <div class="wave" id="pc-wave"><span></span><span></span><span></span></div>
-      <span id="pc-spk-txt">Speaking</span>
+    <div id="pc-center">
+      <div id="pc-spk">
+        <div class="wave" id="pc-wave"><span></span><span></span><span></span></div>
+        <span id="pc-spk-txt">Speaking</span>
+      </div>
+      <div id="pc-info">1 / 1</div>
     </div>
-    <div id="pc-info">1 / 1</div>
-    <button class="pc-btn" id="pc-pause" onclick="presentPauseToggle()">⏸</button>
+    <button class="pc-btn" id="pc-pause" onclick="presentPauseToggle()">⏸ Pause</button>
     <button class="pc-btn" onclick="presentSkipForward()">Skip &#8250;</button>
-    <button class="pc-btn" onclick="stopPresent()" style="color:#ff9090;border-color:rgba(255,100,100,.25)">✕ Exit</button>
+    <button class="pc-btn" onclick="stopPresent()" style="color:#ff9090;border-color:rgba(255,100,100,.22)">✕ Exit</button>
   </div>
-</div>
+
+</div><!-- /present-overlay -->
 
 <!-- VIDEO MODAL -->
 <div id="modal-bg">
@@ -346,35 +413,27 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-// ── Device Detection ─────────────────────────────────────────
 const ua = navigator.userAgent;
 const isIOS  = /iPhone|iPad|iPod/i.test(ua);
 const isMob  = isIOS || /android/i.test(ua);
-const isChrome = /chrome/i.test(ua) && !/opr\//i.test(ua) && !/edg\//i.test(ua);
+const isChrome = /chrome/i.test(ua) && !/opr\//i.test(ua);
 const isEdge   = /edg\//i.test(ua);
 const canTabAudio = !isMob
   && typeof navigator.mediaDevices?.getDisplayMedia === 'function'
   && (isChrome || isEdge);
 
-// ── State ────────────────────────────────────────────────────
 let slides = [], current = 0, docTitle = 'Presentation';
 let apiKey = sessionStorage.getItem('pdf_tf_key') || '';
 
-// Present mode state
-let pRunning = false, pPaused = false, pIdx = 0;
-let pLineIdx = -1;          // which bullet/line we are on (-1 = heading)
-let pPhase = 'idle';        // 'heading'|'line'|'explain'|'summary'
-let pStopFlag = false;      // set true to break out of async loop
-let pResumeResolve = null;  // resume from pause
+// Present state
+let pRunning=false, pPaused=false, pIdx=0, pStopFlag=false, pResumeResolve=null;
 
-// Notes accumulator — builds full explanation notes during presentation
-let sessionNotes = '';
-let sessionStarted = false;
+// Notes
+let sessionNotes='', sessionStarted=false;
 
 // ── PWA ──────────────────────────────────────────────────────
 (function setupPWA(){
-  const sz=512, cv=document.createElement('canvas');
-  cv.width=cv.height=sz;
+  const sz=512, cv=document.createElement('canvas'); cv.width=cv.height=sz;
   const cx=cv.getContext('2d');
   const bg=cx.createRadialGradient(sz/2,sz/2,sz*.05,sz/2,sz/2,sz*.52);
   bg.addColorStop(0,'#1a2d42'); bg.addColorStop(1,'#07080d');
@@ -383,12 +442,9 @@ let sessionStarted = false;
   cx.beginPath(); cx.arc(sz/2,sz/2,sz*.44,0,Math.PI*2); cx.stroke();
   cx.strokeStyle='rgba(212,168,67,.15)'; cx.lineWidth=2;
   cx.beginPath(); cx.arc(sz/2,sz/2,sz*.36,0,Math.PI*2); cx.stroke();
-  cx.fillStyle='#d4a843';
-  cx.font=`bold ${sz*.46}px serif`;
-  cx.textAlign='center'; cx.textBaseline='middle';
-  cx.fillText('✦',sz/2,sz*.48);
-  cx.fillStyle='rgba(212,168,67,.6)';
-  cx.font=`600 ${sz*.08}px sans-serif`;
+  cx.fillStyle='#d4a843'; cx.font=`bold ${sz*.46}px serif`;
+  cx.textAlign='center'; cx.textBaseline='middle'; cx.fillText('✦',sz/2,sz*.48);
+  cx.fillStyle='rgba(212,168,67,.6)'; cx.font=`600 ${sz*.08}px sans-serif`;
   cx.fillText('PDF TRANSFORMER',sz/2,sz*.83);
   const durl=cv.toDataURL('image/png');
   document.getElementById('apple-touch-icon').href=durl;
@@ -409,7 +465,6 @@ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
   }
 })();
 
-// ── API Key ──────────────────────────────────────────────────
 (function(){if(apiKey){document.getElementById('api-key-input').value=apiKey;showKeyStatus(true);}})();
 function saveKey(){
   const v=document.getElementById('api-key-input').value.trim();
@@ -422,16 +477,15 @@ function showKeyStatus(ok,msg){
   el.textContent=ok?'✔ Saved':('✘ '+(msg||'Invalid'));
 }
 
-// ── Helpers ──────────────────────────────────────────────────
 const $=id=>document.getElementById(id);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
 function showErrUpload(m){const e=$('upload-error');e.innerHTML='⚠ '+m;e.classList.add('show');}
 function showErrSlides(m){const e=$('slides-error');e.textContent='⚠ '+m;e.classList.add('show');}
 function clearErr(){$('upload-error').classList.remove('show');$('slides-error').classList.remove('show');}
 function showView(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  $('slides-view').classList.remove('active');
-  $('btn-new').style.display='none';
+  $('slides-view').classList.remove('active'); $('btn-new').style.display='none';
   if(name==='slides'){$('slides-view').classList.add('active');$('btn-new').style.display='flex';}
   else{const el=$(name+'-view');if(el){el.classList.add('active');el.classList.add('fadein');}}
 }
@@ -462,17 +516,15 @@ async function extractPDFText(file){
   return text;
 }
 
-// ── JSON Extract ─────────────────────────────────────────────
 function extractJSON(raw){
   if(!raw)throw new Error('Empty API response');
   let s=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
   try{return JSON.parse(s);}catch(_){}
   const a=s.indexOf('{'),b=s.lastIndexOf('}');
   if(a!==-1&&b>a){try{return JSON.parse(s.slice(a,b+1));}catch(_){}}
-  throw new Error('Could not parse JSON from response');
+  throw new Error('Could not parse JSON');
 }
 
-// ── Claude API ───────────────────────────────────────────────
 async function callClaude(rawText){
   if(!apiKey)throw new Error('Please enter and save your Anthropic API key.');
   const res=await fetch('https://api.anthropic.com/v1/messages',{
@@ -490,30 +542,27 @@ OUTPUT ONLY VALID RAW JSON — no markdown fences, no explanation.
 
 Schema:
 {
-  "title": "string",
-  "subtitle": "string",
-  "slides": [{
-    "type": "title|section|content|closing",
-    "heading": "string",
-    "subheading": "string (title/closing only)",
-    "body": "string (one sentence intro, content only)",
-    "bullets": ["concise point max 10 words"],
-    "bulletExplanations": ["simple plain-English explanation of corresponding bullet, 1-2 sentences max 30 words each"],
-    "highlight": "string (optional powerful stat or quote)",
-    "slideSummary": "string — 1-2 sentence summary of the whole slide, 25 words max, what the listener should take away",
-    "narration": "string — 1-2 natural spoken sentences introducing this slide, max 25 words"
+  "title":"string","subtitle":"string",
+  "slides":[{
+    "type":"title|section|content|closing",
+    "heading":"string",
+    "subheading":"string (title/closing only)",
+    "body":"string (one sentence intro, content only)",
+    "bullets":["concise point max 10 words"],
+    "bulletExplanations":["simple plain-English teacher explanation of corresponding bullet, 1-2 sentences max 35 words. Use everyday language and analogies. Imagine explaining to a curious student."],
+    "highlight":"string (optional powerful stat or quote)",
+    "slideSummary":"string — 1-2 sentence takeaway from the whole slide, 25 words max",
+    "narration":"string — 1-2 spoken sentences introducing this slide, max 25 words"
   }]
 }
 
 Rules:
-- 8-12 slides. First = title type. Last = closing type.
-- section type: heading only, no bullets, no bulletExplanations
-- content type: max 5 bullets; bulletExplanations array MUST have same length as bullets array
-- Each bulletExplanation must be simple enough for a non-expert — use everyday language, analogies if helpful
-- slideSummary REQUIRED on every slide — what the listener should remember
-- narration REQUIRED on every slide
-- Strip all PDF noise (page numbers, headers, footers, broken words)
-- Return ONLY the JSON object`,
+- 8-12 slides. First=title. Last=closing. section: heading only.
+- content: max 5 bullets; bulletExplanations array MUST have same length as bullets.
+- Each bulletExplanation: simple, friendly, teacher tone — everyday language, analogies welcome.
+- slideSummary REQUIRED on every slide.
+- narration REQUIRED on every slide.
+- Strip all PDF noise. Return ONLY the JSON object.`,
       messages:[{role:'user',content:'Transform this PDF into a deep narrated presentation JSON:\n\n'+rawText.substring(0,8000)}]
     })
   });
@@ -525,7 +574,6 @@ Rules:
   return res.json();
 }
 
-// ── Process File ─────────────────────────────────────────────
 async function processFile(file){
   if(!file)return;
   if(!apiKey){showErrUpload('Please enter and save your Anthropic API key first.');return;}
@@ -547,7 +595,7 @@ async function processFile(file){
     current=0; sessionNotes=''; sessionStarted=false;
     $('doc-title-lbl').textContent=docTitle;
     $('slide-count-lbl').textContent=slides.length+' slides';
-    buildDots(); renderCurrentSlide(); showNarration();
+    buildDots();renderCurrentSlide();showNarration();
     showView('slides');
   }catch(err){
     console.error(err);showView('upload');showErrUpload(err.message);
@@ -561,64 +609,103 @@ function showNarration(){
   $('narration-box').classList.add('show');
 }
 
-// ── Speech Synthesis ─────────────────────────────────────────
-function getBestVoice(){
-  const vs=speechSynthesis.getVoices();
-  return vs.find(v=>/en[-_]?(GB|US|AU)/i.test(v.lang)&&!v.localService)
-    ||vs.find(v=>/en[-_]?(GB|US)/i.test(v.lang))
-    ||vs.find(v=>/en/i.test(v.lang))||null;
+// ═══════════════════════════════════════════════════════════════
+//  SPEECH ENGINE — teacher-like, natural pacing with real pauses
+// ═══════════════════════════════════════════════════════════════
+let _voices = [];
+function getVoices(){
+  if(_voices.length) return _voices;
+  _voices = speechSynthesis.getVoices();
+  return _voices;
+}
+// Load voices async (Chrome fires event)
+if(typeof speechSynthesis!=='undefined'){
+  speechSynthesis.onvoiceschanged=()=>{ _voices=speechSynthesis.getVoices(); };
 }
 
-function speakAndWait(text,rate){
+function pickVoice(){
+  const vs = getVoices();
+  // Prefer natural-sounding online voices
+  const prefs = [
+    v => /Google UK English Female/i.test(v.name),
+    v => /Google UK English Male/i.test(v.name),
+    v => /Google US English/i.test(v.name),
+    v => /Samantha/i.test(v.name),          // macOS/iOS
+    v => /Karen/i.test(v.name),             // macOS Australian
+    v => /Daniel/i.test(v.name),            // macOS UK Male
+    v => /en[-_]?(GB|US|AU)/i.test(v.lang) && !v.localService,
+    v => /en[-_]?(GB|US)/i.test(v.lang),
+    v => /en/i.test(v.lang)
+  ];
+  for(const test of prefs){
+    const found = vs.find(test);
+    if(found) return found;
+  }
+  return null;
+}
+
+// Speak text with specific rate/pitch and wait for it to finish
+function speakRaw(text, rate, pitch){
   return new Promise(resolve=>{
     speechSynthesis.cancel();
-    if(!text||pStopFlag){setTimeout(resolve,100);return;}
-    const u=new SpeechSynthesisUtterance(text);
-    u.rate=rate||0.88; u.pitch=1.0; u.volume=1.0;
-    const v=getBestVoice(); if(v)u.voice=v;
-    u.onend=resolve;
-    u.onerror=()=>setTimeout(resolve,200);
+    if(!text||pStopFlag){setTimeout(resolve,80);return;}
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate  = rate  || 0.87;
+    u.pitch = pitch || 1.05;
+    u.volume = 1.0;
+    const v = pickVoice(); if(v) u.voice=v;
+    u.onend  = resolve;
+    u.onerror = () => setTimeout(resolve,200);
     speechSynthesis.speak(u);
-    setTimeout(resolve,45000);
+    setTimeout(resolve, 50000); // safety
   });
 }
 
-// Pause-aware speak: waits while paused
-async function pSpeak(text,rate){
-  if(pStopFlag)return;
-  // Wait if paused before speaking
-  if(pPaused)await waitForResume();
-  if(pStopFlag)return;
-  await speakAndWait(text,rate);
-  // After speech ends, check pause again before continuing
-  if(pPaused)await waitForResume();
+// Pause-aware speak: halts while paused
+async function pSpeak(text, rate, pitch){
+  if(pStopFlag) return;
+  if(pPaused) await waitForResume();
+  if(pStopFlag) return;
+  await speakRaw(text, rate, pitch);
+  if(pPaused) await waitForResume();
 }
 
 function waitForResume(){
-  return new Promise(resolve=>{pResumeResolve=resolve;});
+  return new Promise(r=>{ pResumeResolve=r; });
 }
 
-// ── Explain Panel Helpers ─────────────────────────────────────
+// Natural pause (silence) — teacher pauses before next thought
+async function teacherPause(ms){
+  if(pStopFlag) return;
+  if(pPaused){ await waitForResume(); return; }
+  await sleep(ms);
+}
+
+// ── Explanation Panel Helpers ─────────────────────────────────
 function exSetLine(text){
   const el=$('ex-line');
-  el.classList.remove('fade-up');
-  void el.offsetWidth;
-  el.textContent=text||'';
-  el.className=text?'fade-up':'empty';
+  if(text){
+    el.textContent='▸ '+text;
+    el.className='slide-in';
+  }else{
+    el.className='hidden';
+  }
 }
 function exSetExplain(text){
   const el=$('ex-explain');
-  el.classList.remove('fade-up');
-  void el.offsetWidth;
-  el.textContent=text||'';
-  el.className=text?'fade-up':'empty';
+  if(text){
+    el.textContent=text;
+    el.className='slide-in';
+  }else{
+    el.className='hidden';
+  }
 }
-function exSetLabel(t){$('ex-label').textContent=t||'READING NOW';}
+function exSetLabel(t){ $('ex-label').textContent=t||'READING NOW'; }
 function exShowSummary(text){
   $('ex-summary-text').textContent=text||'';
   $('ex-summary').classList.toggle('show',!!text);
 }
-function exHideSummary(){$('ex-summary').classList.remove('show');}
+function exHideSummary(){ $('ex-summary').classList.remove('show'); }
 function exBuildDots(count,activeIdx){
   const d=$('ex-dots'); d.innerHTML='';
   for(let i=0;i<count;i++){
@@ -628,33 +715,35 @@ function exBuildDots(count,activeIdx){
   }
 }
 function exClearAll(){
-  exSetLine(''); exSetExplain(''); exHideSummary();
-  $('ex-dots').innerHTML=''; exSetLabel('READING NOW');
+  exSetLine('');exSetExplain('');exHideSummary();
+  $('ex-dots').innerHTML='';exSetLabel('SLIDE OVERVIEW');
+}
+function scrollExplainToBottom(){
+  const el=$('explain-inner');
+  el.scrollTop=el.scrollHeight;
 }
 
-// ── Notes Builder ─────────────────────────────────────────────
-function notesAppendSlide(s, explanations){
-  sessionNotes += `\n${'═'.repeat(50)}\n`;
-  sessionNotes += `📌 ${s.heading||''}`;
-  if(s.subheading) sessionNotes += ` — ${s.subheading}`;
-  sessionNotes += '\n';
-  if(s.body) sessionNotes += `   ${s.body}\n`;
-  sessionNotes += '\n';
+// ── Notes ───────────────────────────────────────────────────────
+function notesAppendSlide(s,expls){
+  sessionNotes+=`\n${'═'.repeat(48)}\n`;
+  sessionNotes+=`📌 ${s.heading||''}`;
+  if(s.subheading) sessionNotes+=` — ${s.subheading}`;
+  sessionNotes+='\n';
+  if(s.body) sessionNotes+=`   ${s.body}\n`;
+  sessionNotes+='\n';
   if(Array.isArray(s.bullets)){
     s.bullets.forEach((b,i)=>{
-      sessionNotes += `  ▸ ${b}\n`;
-      const exp=explanations?.[i]||(s.bulletExplanations?.[i]||'');
-      if(exp) sessionNotes += `    💡 ${exp}\n`;
-      sessionNotes += '\n';
+      sessionNotes+=`  ▸ ${b}\n`;
+      const exp=expls?.[i]||(s.bulletExplanations?.[i]||'');
+      if(exp) sessionNotes+=`    💡 ${exp}\n`;
+      sessionNotes+='\n';
     });
   }
-  if(s.slideSummary){
-    sessionNotes += `📋 Summary: ${s.slideSummary}\n`;
-  }
+  if(s.slideSummary) sessionNotes+=`📋 Summary: ${s.slideSummary}\n`;
 }
 function downloadNotes(){
   if(!sessionNotes.trim()){showErrSlides('No notes yet — run a presentation first.');return;}
-  const header=`PDF TRANSFORMER — PRESENTATION NOTES\n${'═'.repeat(50)}\n📄 Document: ${docTitle}\n📅 Date: ${new Date().toLocaleString()}\n${'═'.repeat(50)}\n`;
+  const header=`PDF TRANSFORMER — PRESENTATION NOTES\n${'═'.repeat(48)}\n📄 Document: ${docTitle}\n📅 Date: ${new Date().toLocaleString()}\n${'═'.repeat(48)}\n`;
   const blob=new Blob([header+sessionNotes],{type:'text/plain'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -662,18 +751,19 @@ function downloadNotes(){
   a.click();
 }
 
-// ── PRESENT MODE ─────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+//  PRESENT MODE
+// ══════════════════════════════════════════════════════════════
 function startPresent(){
-  if(!slides.length)return;
+  if(!slides.length) return;
   pIdx=current; pRunning=true; pPaused=false; pStopFlag=false;
   if(!sessionStarted){
     sessionNotes=''; sessionStarted=true;
-    sessionNotes+=`PRESENTATION: ${docTitle}\n`;
-    sessionNotes+=`STARTED: ${new Date().toLocaleString()}\n`;
+    sessionNotes+=`PRESENTATION: ${docTitle}\nSTARTED: ${new Date().toLocaleString()}\n`;
   }
   $('present-overlay').classList.add('show');
   document.body.style.overflow='hidden';
-  sizeCanvas();
+  sizePresent();
   renderPresentSlide();
   exClearAll();
   runSlide(pIdx);
@@ -685,155 +775,192 @@ function stopPresent(){
   if(pResumeResolve){pResumeResolve();pResumeResolve=null;}
   $('present-overlay').classList.remove('show');
   document.body.style.overflow='';
-  // Show download buttons after session
-  if(sessionStarted&&slides.length){
-    $('download-row').classList.add('show');
-  }
+  if(sessionStarted&&slides.length) $('download-row').classList.add('show');
 }
 
 function presentPauseToggle(){
   pPaused=!pPaused;
-  const btn=$('pc-pause'),wave=$('pc-wave');
+  const btn=$('pc-pause'), wave=$('pc-wave');
   if(pPaused){
     speechSynthesis.pause();
-    btn.textContent='▶'; wave.classList.add('off'); $('pc-spk-txt').textContent='Paused';
+    btn.textContent='▶ Resume'; wave.classList.add('off'); $('pc-spk-txt').textContent='Paused';
   }else{
     speechSynthesis.resume();
-    btn.textContent='⏸'; wave.classList.remove('off'); $('pc-spk-txt').textContent='Speaking';
+    btn.textContent='⏸ Pause'; wave.classList.remove('off'); $('pc-spk-txt').textContent='Speaking';
     if(pResumeResolve){pResumeResolve();pResumeResolve=null;}
   }
 }
 
 function presentSkipBack(){
-  if(pIdx>0){pStopFlag=true;speechSynthesis.cancel();
+  if(pIdx>0){
+    pStopFlag=true; speechSynthesis.cancel();
     if(pResumeResolve){pResumeResolve();pResumeResolve=null;}
-    setTimeout(()=>{pStopFlag=false;pIdx--;renderPresentSlide();exClearAll();runSlide(pIdx);},120);}
+    setTimeout(()=>{ pStopFlag=false; pIdx--; renderPresentSlide(); exClearAll(); runSlide(pIdx); },120);
+  }
 }
-
 function presentSkipForward(){
-  if(pIdx<slides.length-1){pStopFlag=true;speechSynthesis.cancel();
-    if(pResumeResolve){pResumeResolve();pResumeResolve=null;}
-    setTimeout(()=>{pStopFlag=false;pIdx++;renderPresentSlide();exClearAll();runSlide(pIdx);},120);}
-  else{stopPresent();}
+  pStopFlag=true; speechSynthesis.cancel();
+  if(pResumeResolve){pResumeResolve();pResumeResolve=null;}
+  if(pIdx<slides.length-1){
+    setTimeout(()=>{ pStopFlag=false; pIdx++; renderPresentSlide(); exClearAll(); runSlide(pIdx); },120);
+  }else{ stopPresent(); }
 }
 
-// ── Layout: fit 16:9 canvas above explanation panel ───────────
-function sizeCanvas(){
-  const wrap=$('present-canvas-wrap');
-  const c=$('present-canvas');
-  // On mobile: give 42% of viewport height to canvas, rest to explanation
-  const vh=window.innerHeight;
-  const ctrlH=46; // controls bar approx height
-  const canvasH=Math.round(vh*0.42);
-  const canvasW=Math.round(canvasH*16/9);
-  const maxW=window.innerWidth;
-  const W=Math.min(canvasW,maxW);
-  const H=Math.round(W*9/16);
-  wrap.style.height=H+'px';
-  c.width=W; c.height=H;
-  c.style.width=W+'px'; c.style.height=H+'px';
+// ── Size canvas to exactly half the available height ──────────
+function sizePresent(){
+  const overlay = $('present-overlay');
+  const ctrlH   = $('present-controls').offsetHeight || 50;
+  const bodyH   = overlay.clientHeight - ctrlH;  // height of #present-body
+  const halfH   = Math.floor(bodyH / 2);          // each section gets half
+
+  // Each flex child gets flex:1 — browser handles 50/50.
+  // We just need to ensure the canvas fills its half at 16:9.
+  const wrap = $('present-canvas-wrap');
+  const c    = $('present-canvas');
+  const halfW = wrap.clientWidth || window.innerWidth;
+
+  // Fit 16:9 inside the half-height box
+  let W = halfW;
+  let H = Math.round(W * 9 / 16);
+  if(H > halfH){
+    H = halfH;
+    W = Math.round(H * 16 / 9);
+  }
+  c.width = W; c.height = H;
+  c.style.width  = W + 'px';
+  c.style.height = H + 'px';
 }
 
-function renderPresentSlide(highlightLineIdx){
-  const c=$('present-canvas'), s=slides[pIdx];
-  if(!s)return;
-  const W=c.width||640, H=c.height||Math.round(W*9/16);
-  renderSlide(c.getContext('2d'),s,W,H,pIdx,slides.length,highlightLineIdx);
-  $('pc-info').textContent=(pIdx+1)+' / '+slides.length;
+function renderPresentSlide(hlIdx){
+  const c = $('present-canvas'), s = slides[pIdx];
+  if(!s) return;
+  renderSlide(c.getContext('2d'), s, c.width||640, c.height||360, pIdx, slides.length, hlIdx);
+  $('pc-info').textContent = (pIdx+1)+' / '+slides.length;
 }
 
-// ── Core: run a single slide narration ───────────────────────
+// ── Core slide runner — teacher-like pacing ───────────────────
 async function runSlide(idx){
-  if(pStopFlag)return;
-  const s=slides[idx];
-  if(!s)return;
-  exHideSummary();
-  const bullets=Array.isArray(s.bullets)?s.bullets:[];
-  const expls=Array.isArray(s.bulletExplanations)?s.bulletExplanations:[];
-  const totalLines=bullets.length;
+  if(pStopFlag) return;
+  const s = slides[idx];
+  if(!s) return;
 
-  // Announce heading
-  exSetLabel('SLIDE TITLE');
-  exSetLine(s.heading||'');
-  exSetExplain(s.body||'');
-  exBuildDots(totalLines,0);
+  const bullets = Array.isArray(s.bullets) ? s.bullets : [];
+  const expls   = Array.isArray(s.bulletExplanations) ? s.bulletExplanations : [];
+
+  exHideSummary();
+  exBuildDots(bullets.length, -1);
+  exSetLabel('INTRODUCING SLIDE');
   $('pc-spk-txt').textContent='Speaking'; $('pc-wave').classList.remove('off');
 
-  // Narrate intro
-  await pSpeak(s.narration||s.heading||'', 0.88);
-  if(pStopFlag)return;
-  if(s.body) await pSpeak(s.body, 0.9);
-  if(pStopFlag)return;
+  // ── 1. Intro narration — slightly slower, deliberate ────────
+  exSetLine(s.heading||'');
+  exSetExplain(s.body||'');
+  await pSpeak(s.narration || s.heading || '', 0.84, 1.05);
+  if(pStopFlag) return;
+  await teacherPause(600);  // brief breath after intro
 
-  // Line-by-line bullets
-  for(let i=0;i<bullets.length;i++){
-    if(pStopFlag)return;
-    exSetLabel('READING LINE '+(i+1)+' / '+totalLines);
-    exSetLine('▸ '+bullets[i]);
+  if(s.body && s.type==='content'){
+    await pSpeak(s.body, 0.86, 1.05);
+    if(pStopFlag) return;
+    await teacherPause(500);
+  }
+
+  // ── 2. Line by line ─────────────────────────────────────────
+  for(let i=0; i<bullets.length; i++){
+    if(pStopFlag) return;
+
+    exSetLabel(`POINT ${i+1} OF ${bullets.length}`);
+    exSetLine(bullets[i]);
     exSetExplain('');
-    exBuildDots(totalLines,i);
-    renderPresentSlide(i); // highlight this bullet in canvas
+    exBuildDots(bullets.length, i);
+    renderPresentSlide(i); // highlight in canvas
+    scrollExplainToBottom();
 
-    // Read the bullet
-    await pSpeak(bullets[i], 0.88);
-    if(pStopFlag)return;
+    // Read the bullet — slightly slower so it lands
+    await pSpeak(bullets[i], 0.82, 1.05);
+    if(pStopFlag) return;
 
-    // Show and speak explanation
-    const exp=expls[i]||'';
+    // Natural pause — like a teacher pausing before explaining
+    await teacherPause(900);
+    if(pStopFlag) return;
+
+    // Explanation — warmer, slightly faster (conversational teacher)
+    const exp = expls[i] || '';
     if(exp){
-      exSetLabel('EXPLANATION');
-      exSetExplain('💡 '+exp);
-      await pSpeak(exp, 0.86);
-      if(pStopFlag)return;
+      exSetLabel(`EXPLANATION — POINT ${i+1}`);
+      exSetExplain('💡 ' + exp);
+      scrollExplainToBottom();
+
+      // Break explanation into sentences for more natural delivery
+      const sentences = exp.match(/[^.!?]+[.!?]+/g) || [exp];
+      for(let si=0; si<sentences.length; si++){
+        if(pStopFlag) return;
+        const sent = sentences[si].trim();
+        if(!sent) continue;
+        await pSpeak(sent, 0.90, 1.08);
+        if(pStopFlag) return;
+        // Short pause between explanation sentences
+        if(si < sentences.length-1) await teacherPause(350);
+      }
+      if(pStopFlag) return;
     }
 
-    await sleep(200);
-    // Clear line + explanation before next one
+    // Longer pause after each complete point — let it sink in
+    await teacherPause(1100);
+    if(pStopFlag) return;
+
+    // Clear line + explanation — screen stays clean for next point
     exSetLine('');
     exSetExplain('');
-    await sleep(100);
+    await sleep(150);
   }
 
-  // Done bullets — show and speak summary
-  if(pStopFlag)return;
-  renderPresentSlide(-1); // no highlight
-  exBuildDots(totalLines,totalLines); // all done
+  // ── 3. Slide summary ───────────────────────────────────────
+  if(pStopFlag) return;
+  renderPresentSlide(-1);
+  exBuildDots(bullets.length, bullets.length); // all done
   exSetLabel('SLIDE SUMMARY');
-  exSetLine('');
-  const summary=s.slideSummary||s.narration||'';
+
+  const summary = s.slideSummary || '';
   if(summary){
     exShowSummary(summary);
-    await pSpeak('In summary. '+summary, 0.87);
-    if(pStopFlag)return;
+    scrollExplainToBottom();
+    // Small pause before summary — signals transition
+    await teacherPause(700);
+    if(pStopFlag) return;
+    // Speak summary with slightly slower, emphatic delivery
+    await pSpeak('So to summarise this slide,', 0.82, 1.0);
+    if(pStopFlag) return;
+    await teacherPause(400);
+    await pSpeak(summary, 0.84, 1.0);
+    if(pStopFlag) return;
   }
 
-  // Append to notes
+  // Notes
   notesAppendSlide(s, expls);
 
-  await sleep(700);
-  if(pStopFlag)return;
+  // Pause before moving to next slide
+  await teacherPause(1000);
+  if(pStopFlag) return;
 
-  // Auto-advance
-  if(pIdx<slides.length-1){
+  // ── Auto-advance ───────────────────────────────────────────
+  if(pIdx < slides.length-1){
     pIdx++;
     renderPresentSlide();
     exClearAll();
     await sleep(300);
     runSlide(pIdx);
   }else{
-    // End of presentation
-    $('pc-spk-txt').textContent='Done ✔';
-    $('pc-wave').classList.add('off');
+    $('pc-spk-txt').textContent='Done ✔'; $('pc-wave').classList.add('off');
     exSetLabel('PRESENTATION COMPLETE');
-    exSetLine('');
-    exSetExplain('');
-    await pSpeak('Presentation complete. Your notes are ready to download.',0.9);
+    await teacherPause(600);
+    await pSpeak('That completes the presentation. Your notes are ready to download.', 0.84, 1.0);
     stopPresent();
   }
 }
 
 window.addEventListener('resize',()=>{
-  if($('present-overlay').classList.contains('show')){sizeCanvas();renderPresentSlide();}
+  if($('present-overlay').classList.contains('show')){ sizePresent(); renderPresentSlide(); }
 });
 
 // ── VIDEO MODAL ──────────────────────────────────────────────
@@ -842,15 +969,15 @@ function openVideoModal(){
   const content=$('modal-content');
   if(isIOS){
     content.innerHTML=`<h3>🎬 Export Video</h3>
-<div class="ios-note"><strong>iPhone / iPad:</strong> iOS doesn't support in-browser audio recording.<br>Use <strong>▶ Present</strong> for the full live narrated experience.<br>The video will include narration text captions on each slide.</div>
-<p>Download a 1280×720 WebM video with text captions baked in.</p>
+<div class="ios-note"><strong>iPhone / iPad:</strong> iOS doesn't support in-browser audio recording. Use <strong>▶ Present</strong> for the full live narrated experience.<br>The video will include text captions on each slide.</div>
+<p>Download a 1280×720 WebM video with narration text baked in.</p>
 <div class="modal-btns">
 <button class="mbtn-primary" onclick="closeModal();startVideoSilent()">📥 Export with Captions</button>
 <button class="mbtn-secondary" onclick="closeModal()">Cancel</button>
 </div>`;
   }else if(!canTabAudio){
     content.innerHTML=`<h3>🎬 Export Video</h3>
-<div class="ios-note" style="border-color:rgba(255,200,80,.2);background:rgba(255,200,80,.04);color:rgba(255,220,120,.9)"><strong>Browser note:</strong> Narrated video recording requires <strong>Chrome or Edge</strong> on desktop.</div>
+<div class="ios-note" style="border-color:rgba(255,200,80,.2);background:rgba(255,200,80,.04);color:rgba(255,220,120,.9)"><strong>Note:</strong> Narrated video requires <strong>Chrome or Edge</strong> on desktop.</div>
 <p>Exporting a video with narration text captions instead.</p>
 <div class="modal-btns">
 <button class="mbtn-primary" onclick="closeModal();startVideoSilent()">📥 Export with Captions</button>
@@ -898,7 +1025,6 @@ async function startVideoWithAudio(){
   }
   await renderVideo(audioTrack,true);
 }
-
 async function startVideoSilent(){await renderVideo(null,false);}
 
 async function renderVideo(audioTrack,hasAudio){
@@ -939,10 +1065,9 @@ async function renderVideo(audioTrack,hasAudio){
       renderSlide(ctx,s,W,H,i,slides.length);
       if(!hasAudio&&s.narration)renderCaption(ctx,s.narration,W,H);
       if(hasAudio){
-        // Narration only (not full line-by-line for video — keeps it concise)
         const txt=(s.narration||s.heading||'')+'. '+(s.slideSummary||'');
-        await speakAndWait(txt,0.88);
-        await sleep(350);
+        await speakRaw(txt,0.84,1.05);
+        await sleep(400);
       }else{await sleep(4500);}
       for(let f=0;f<=FADE;f++){renderSlide(ctx,s,W,H,i,slides.length);if(!hasAudio&&s.narration)renderCaption(ctx,s.narration,W,H);ctx.globalAlpha=f/FADE;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;await sleep(14);}
     }
@@ -963,11 +1088,11 @@ function renderCaption(ctx,text,W,H){
   ctx.fillStyle='rgba(215,232,250,.9)';
   ctx.font=`italic ${Math.round(H*0.031)}px 'Playfair Display',serif`;
   ctx.textAlign='center';
-  const words=text.split(' ');let line='',lines=[],maxW=W-100;
-  for(const w of words){const t=line+w+' ';if(ctx.measureText(t).width>maxW&&line){lines.push(line.trim());line=w+' ';}else line=t;}
+  const words=text.split(' ');let line='',lines=[],mxW=W-100;
+  for(const w of words){const t=line+w+' ';if(ctx.measureText(t).width>mxW&&line){lines.push(line.trim());line=w+' ';}else line=t;}
   if(line.trim())lines.push(line.trim());
-  const lh=H*0.037,startY=pY+(pH-lh*(lines.length-1))/2;
-  lines.forEach((l,i)=>ctx.fillText(l,W/2,startY+i*lh));
+  const lh=H*0.037,sY=pY+(pH-lh*(lines.length-1))/2;
+  lines.forEach((l,i)=>ctx.fillText(l,W/2,sY+i*lh));
 }
 
 // ── Canvas Rendering ──────────────────────────────────────────
@@ -978,8 +1103,7 @@ function wrapText(ctx,text,x,y,maxW,lh){
   if(line.trim())ctx.fillText(line.trim(),x,cy);return cy+lh;
 }
 
-// highlightLineIdx: which bullet to visually highlight (-1 = none, undefined = none)
-function renderSlide(ctx,slide,W,H,idx,total,highlightLineIdx){
+function renderSlide(ctx,slide,W,H,idx,total,hlIdx){
   ctx.clearRect(0,0,W,H);
   const bg=ctx.createLinearGradient(0,0,W,H);
   if(slide.type==='title'||slide.type==='closing'){bg.addColorStop(0,'#0c1520');bg.addColorStop(1,'#1a2d42');}
@@ -1012,19 +1136,12 @@ function renderSlide(ctx,slide,W,H,idx,total,highlightLineIdx){
     if(Array.isArray(slide.bullets)){
       slide.bullets.slice(0,5).forEach((b,i)=>{
         if(y>H*.82)return;
-        const isActive=(i===highlightLineIdx);
-        // Highlight row background
-        if(isActive){
-          ctx.save();
-          ctx.fillStyle='rgba(212,168,67,0.12)';
-          ctx.fillRect(lx-4,y-H*.028,W-lx*2.4+8,H*.048);
-          ctx.restore();
-        }
-        ctx.fillStyle=isActive?'#f0c55a':G;
-        ctx.font=`bold ${Math.round(H*.028)}px sans-serif`;
-        ctx.fillText('▸',lx,y);
-        ctx.fillStyle=isActive?'#ffffff':'#dce9f5';
-        ctx.font=`${isActive?'600 ':''}${Math.round(H*.032)}px sans-serif`;
+        const isA=(i===hlIdx);
+        if(isA){ctx.save();ctx.fillStyle='rgba(212,168,67,0.14)';ctx.fillRect(lx-6,y-H*.03,W-lx*2.4+12,H*.052);ctx.restore();}
+        ctx.fillStyle=isA?'#f0c55a':G;
+        ctx.font=`bold ${Math.round(H*.028)}px sans-serif`;ctx.fillText('▸',lx,y);
+        ctx.fillStyle=isA?'#ffffff':'#dce9f5';
+        ctx.font=`${isA?'600 ':''}${Math.round(H*.032)}px sans-serif`;
         y=wrapText(ctx,String(b),lx+W*.026,y,W-lx*2.4-W*.026,H*.042)+H*.007;
       });
     }
@@ -1043,7 +1160,7 @@ function renderSlide(ctx,slide,W,H,idx,total,highlightLineIdx){
   ctx.fillText(String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0'),W-W*.03,H*.973);
 }
 
-// ── Slide View Display / Nav ──────────────────────────────────
+// ── Slide View / Nav ─────────────────────────────────────────
 function renderCurrentSlide(){
   const c=$('slide-canvas'),wrap=$('slide-wrap');
   const W=wrap.clientWidth||640,H=Math.round(W*9/16);
