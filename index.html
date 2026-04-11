@@ -70,7 +70,7 @@ html,body{background:#07080d;color:#e4e4e4;font-family:'DM Sans',sans-serif;min-
 #doc-title-lbl{font-family:'Playfair Display',serif;color:#d4a843;font-size:16px;font-weight:400;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #slide-count-lbl{color:rgba(255,255,255,.28);font-size:11px;flex-shrink:0}
 #slide-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;box-shadow:0 22px 56px rgba(0,0,0,.82),0 0 0 1px rgba(212,168,67,.12)}
-#slide-canvas{position:absolute;inset:0;width:100%;height:100%}
+#slide-canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;}
 #narration-box{display:none;width:100%;background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.18);border-radius:8px;padding:12px 16px;font-size:12px;color:rgba(220,230,240,.7);font-style:italic;line-height:1.6}
 #narration-box.show{display:block}
 .nb-label{font-size:10px;color:#d4a843;font-weight:600;letter-spacing:1px;margin-bottom:5px;font-style:normal}
@@ -128,6 +128,9 @@ button:disabled{opacity:.4 !important;cursor:wait !important;transform:none !imp
   max-height:100%;
   display:block;
   object-fit:contain;
+  /* Prevent browser downsampling blur on retina */
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:crisp-edges;
 }
 
 /* ── BOTTOM HALF: explanation panel ── */
@@ -806,35 +809,48 @@ function presentSkipForward(){
   }else{ stopPresent(); }
 }
 
-// ── Size canvas to exactly half the available height ──────────
+// ── Size canvas at full device pixel density (retina-sharp) ───
 function sizePresent(){
+  const dpr     = window.devicePixelRatio || 1;
   const overlay = $('present-overlay');
   const ctrlH   = $('present-controls').offsetHeight || 50;
-  const bodyH   = overlay.clientHeight - ctrlH;  // height of #present-body
-  const halfH   = Math.floor(bodyH / 2);          // each section gets half
+  const bodyH   = overlay.clientHeight - ctrlH;
+  const halfH   = Math.floor(bodyH / 2);   // CSS px available for canvas half
 
-  // Each flex child gets flex:1 — browser handles 50/50.
-  // We just need to ensure the canvas fills its half at 16:9.
-  const wrap = $('present-canvas-wrap');
-  const c    = $('present-canvas');
-  const halfW = wrap.clientWidth || window.innerWidth;
+  const wrap  = $('present-canvas-wrap');
+  const c     = $('present-canvas');
+  const cssW  = wrap.clientWidth || window.innerWidth;
 
-  // Fit 16:9 inside the half-height box
-  let W = halfW;
-  let H = Math.round(W * 9 / 16);
-  if(H > halfH){
-    H = halfH;
-    W = Math.round(H * 16 / 9);
+  // Fit 16:9 into the half-height box (CSS pixels)
+  let cssCanvasW = cssW;
+  let cssCanvasH = Math.round(cssCanvasW * 9 / 16);
+  if(cssCanvasH > halfH){
+    cssCanvasH = halfH;
+    cssCanvasW = Math.round(cssCanvasH * 16 / 9);
   }
-  c.width = W; c.height = H;
-  c.style.width  = W + 'px';
-  c.style.height = H + 'px';
+
+  // Render at full device resolution → scale down via CSS → crisp on retina
+  c.width  = Math.round(cssCanvasW * dpr);
+  c.height = Math.round(cssCanvasH * dpr);
+  c.style.width  = cssCanvasW + 'px';
+  c.style.height = cssCanvasH + 'px';
+
+  // Scale context so renderSlide() can use CSS-pixel coordinates
+  const ctx = c.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
 function renderPresentSlide(hlIdx){
-  const c = $('present-canvas'), s = slides[pIdx];
+  const c   = $('present-canvas'), s = slides[pIdx];
   if(!s) return;
-  renderSlide(c.getContext('2d'), s, c.width||640, c.height||360, pIdx, slides.length, hlIdx);
+  const dpr = window.devicePixelRatio || 1;
+  // Logical (CSS) dimensions for the render functions
+  const logW = Math.round(c.width  / dpr);
+  const logH = Math.round(c.height / dpr);
+  const ctx  = c.getContext('2d');
+  // Ensure transform is set (in case called before sizePresent)
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  renderSlide(ctx, s, logW || 640, logH || 360, pIdx, slides.length, hlIdx);
   $('pc-info').textContent = (pIdx+1)+' / '+slides.length;
 }
 
@@ -1104,13 +1120,15 @@ function wrapText(ctx,text,x,y,maxW,lh){
 }
 
 function renderSlide(ctx,slide,W,H,idx,total,hlIdx){
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality='high';
   ctx.clearRect(0,0,W,H);
   const bg=ctx.createLinearGradient(0,0,W,H);
-  if(slide.type==='title'||slide.type==='closing'){bg.addColorStop(0,'#0c1520');bg.addColorStop(1,'#1a2d42');}
-  else if(slide.type==='section'){bg.addColorStop(0,'#160f24');bg.addColorStop(1,'#0c1520');}
-  else{bg.addColorStop(0,'#0e1823');bg.addColorStop(1,'#0a1218');}
+  if(slide.type==='title'||slide.type==='closing'){bg.addColorStop(0,'#0f1e30');bg.addColorStop(1,'#1e3a56');}
+  else if(slide.type==='section'){bg.addColorStop(0,'#1e1030');bg.addColorStop(1,'#0f1e30');}
+  else{bg.addColorStop(0,'#111e2b');bg.addColorStop(1,'#0d1820');}
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-  const G='#d4a843';
+  const G='#e8b94a';  // brighter gold — pops on retina screens
   const isTit=slide.type==='title'||slide.type==='closing';
   const isSec=slide.type==='section';
   if(isTit){
@@ -1119,10 +1137,10 @@ function renderSlide(ctx,slide,W,H,idx,total,hlIdx){
     ctx.font=`bold ${Math.round(H*.076)}px 'Playfair Display',Georgia,serif`;
     const ty=wrapText(ctx,slide.heading||'',W/2,H*.36,W-200,H*.09)+H*.022;
     ctx.fillStyle=G;ctx.fillRect(W/2-60,ty,120,2);
-    if(slide.subheading){ctx.fillStyle='rgba(220,235,248,.7)';ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;wrapText(ctx,slide.subheading,W/2,ty+H*.04,W-200,H*.042);}
+    if(slide.subheading){ctx.fillStyle='rgba(230,242,255,.85)';ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;wrapText(ctx,slide.subheading,W/2,ty+H*.04,W-200,H*.042);}
   }else if(isSec){
     ctx.textAlign='center';ctx.fillStyle=G;ctx.font=`${Math.round(H*.052)}px serif`;ctx.fillText('◆',W/2,H*.41);
-    ctx.fillStyle='#e0eaf4';ctx.font=`bold ${Math.round(H*.064)}px 'Playfair Display',serif`;
+    ctx.fillStyle='#edf4ff';ctx.font=`bold ${Math.round(H*.064)}px 'Playfair Display',serif`;
     wrapText(ctx,slide.heading||'',W/2,H*.49,W-200,H*.076);
     ctx.fillStyle='rgba(212,168,67,.3)';ctx.fillRect(W/2-80,H*.73,160,1);
   }else{
@@ -1132,7 +1150,7 @@ function renderSlide(ctx,slide,W,H,idx,total,hlIdx){
     const lx=W*.07;ctx.textAlign='left';
     ctx.fillStyle=G;ctx.font=`bold ${Math.round(H*.056)}px 'Playfair Display',serif`;
     let y=wrapText(ctx,slide.heading||'',lx,H*.17,W-lx*2.4,H*.068)+H*.014;
-    if(slide.body){ctx.fillStyle='rgba(200,218,234,.72)';ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;y=wrapText(ctx,slide.body,lx,y,W-lx*2.4,H*.042)+H*.016;}
+    if(slide.body){ctx.fillStyle='rgba(210,230,252,.9)';ctx.font=`italic ${Math.round(H*.032)}px 'Playfair Display',serif`;y=wrapText(ctx,slide.body,lx,y,W-lx*2.4,H*.042)+H*.016;}
     if(Array.isArray(slide.bullets)){
       slide.bullets.slice(0,5).forEach((b,i)=>{
         if(y>H*.82)return;
@@ -1140,7 +1158,7 @@ function renderSlide(ctx,slide,W,H,idx,total,hlIdx){
         if(isA){ctx.save();ctx.fillStyle='rgba(212,168,67,0.14)';ctx.fillRect(lx-6,y-H*.03,W-lx*2.4+12,H*.052);ctx.restore();}
         ctx.fillStyle=isA?'#f0c55a':G;
         ctx.font=`bold ${Math.round(H*.028)}px sans-serif`;ctx.fillText('▸',lx,y);
-        ctx.fillStyle=isA?'#ffffff':'#dce9f5';
+        ctx.fillStyle=isA?'#ffffff':'#edf4ff';
         ctx.font=`${isA?'600 ':''}${Math.round(H*.032)}px sans-serif`;
         y=wrapText(ctx,String(b),lx+W*.026,y,W-lx*2.4-W*.026,H*.042)+H*.007;
       });
@@ -1162,10 +1180,16 @@ function renderSlide(ctx,slide,W,H,idx,total,hlIdx){
 
 // ── Slide View / Nav ─────────────────────────────────────────
 function renderCurrentSlide(){
+  const dpr=window.devicePixelRatio||1;
   const c=$('slide-canvas'),wrap=$('slide-wrap');
-  const W=wrap.clientWidth||640,H=Math.round(W*9/16);
-  c.width=W;c.height=H;c.style.width='100%';c.style.height='100%';
-  if(slides[current])renderSlide(c.getContext('2d'),slides[current],W,H,current,slides.length);
+  const cssW=wrap.clientWidth||640, cssH=Math.round(cssW*9/16);
+  c.width=Math.round(cssW*dpr); c.height=Math.round(cssH*dpr);
+  c.style.width='100%'; c.style.height='100%';
+  if(slides[current]){
+    const ctx=c.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    renderSlide(ctx,slides[current],cssW,cssH,current,slides.length);
+  }
   updateNav();
 }
 function buildDots(){
